@@ -9,7 +9,7 @@
 class TestSolution : public CPPUNIT_NS::TestCase
 {
   CPPUNIT_TEST_SUITE(TestSolution);
-  CPPUNIT_TEST(testEquationSolution);
+  CPPUNIT_TEST(calculate);
   CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -17,12 +17,21 @@ public:
   void tearDown(void){}
 
 protected:
-  void testEquationSolution(void) {
-    system("0");
-  }
+  void calculate();
+//  void noRoot();
+//  void oneRoot();
+//  void twoRoot();
+//  void firstCoef();
+//  void inPutCorrect();
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION(TestSolution);
+
+void TestSolution::calculate()
+{
+  CPPUNIT_ASSERT_EQUAL();
+}
+
 
 int main()
 {
