@@ -25,7 +25,7 @@ CPPUNIT_TEST_SUITE_REGISTRATION(Test);
 
 int main()
 {
-  CPPUNIT_NS::TestResult controller;
+  CPPUNIT_NS::TestResult result;
   controller.addListener(&result);
 
 CPPUNIT_NS::BriefTestProgressListener progress;
