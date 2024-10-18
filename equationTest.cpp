@@ -40,7 +40,7 @@ protected:
 }
   void twoRoot()
 {
-  double d = discr(1, 0, -1)
+  double d = discr(1, 0, -1);
   CPPUNIT_ASSERT_MESSAGE(std::string("Два вещественных корня"), abs(d) > e);
 }
 };
