@@ -18,7 +18,7 @@ public:
 
 protected:
   void calculate();
-//  void noRoot();
+//  void noRoot(); //
 //  void oneRoot();
 //  void twoRoot();
 //  void firstCoef();
