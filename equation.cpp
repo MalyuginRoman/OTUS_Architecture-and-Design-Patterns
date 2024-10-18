@@ -1,6 +1,6 @@
 #include <iostream>
 #include "math.h"
-#include "config.h'
+#include "config.h"
 
 int main(int ac, char **av)
 {
