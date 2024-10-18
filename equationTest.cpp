@@ -4,6 +4,7 @@
 #include <cppunit/TestResultCollector.h>
 #include <cppunit/BriefTestProgressListener.h>
 #include <cppunit/extensions/TestFactoryRegistry.h>
+#include <cppunit/extensions/HelperMacros.h>
 
 class TestSolution : public CPPUNIT_NS::TestCase
 {
