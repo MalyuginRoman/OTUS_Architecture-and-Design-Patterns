@@ -18,7 +18,7 @@ public:
 
 protected:
   void calculate(void){
-    system("0");
+    system("");
   }
 //  void noRoot();
 //  void oneRoot();
