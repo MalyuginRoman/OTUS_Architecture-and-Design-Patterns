@@ -29,7 +29,7 @@ CPPUNIT_TEST_SUITE_REGISTRATION(TestSolution);
 
 void TestSolution::calculate()
 {
-  CPPUNIT_ASSERT_EQUAL(1,1);
+//  CPPUNIT_ASSERT_EQUAL(1,1);
 }
 
 
