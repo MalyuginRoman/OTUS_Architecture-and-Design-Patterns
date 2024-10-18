@@ -37,5 +37,5 @@ int main()
   runner.addTest(CPPUNIT_NS::TestFactoryRegistry::getRegistry().makeTest());
   runner.run(controller);
 
-  return result.wasSuccesfull() ? 0 : 1;
+  return result.wasSuccessfull() ? 0 : 1;
 }
