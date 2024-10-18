@@ -17,7 +17,7 @@ public:
 
 protected:
   void testEquationSolution(void) {
-    system(0, 0 ,0)
+    system("0")
   }
 };
 
