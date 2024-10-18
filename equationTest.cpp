@@ -30,9 +30,8 @@ protected:
 }
   void noRoot()
 {
-  double d = discr(1, 0, -);
-  CPPUNIT_ASSERT_MESSAGE(abs(a) > e, "Вещественных корней нет");
-  CPPUNIT_ASSERT_MESSAGE(d < 0, "Корней нет");
+  double d = discr(1, 0, 1);
+  CPPUNIT_ASSERT_MESSAGE(d < 0, "Вещественных корней нет");
 }
   void oneRoot()
 {
