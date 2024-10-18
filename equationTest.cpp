@@ -31,17 +31,17 @@ protected:
   void noRoot()
 {
   double d = discr(1, 0, 1);
-  CPPUNIT_ASSERT_MESSAGE(d < 0, "Вещественных корней нет");
+  CPPUNIT_ASSERT_MESSAGE(std::string("Вещественных корней нет"), d < 0);
 }
   void oneRoot()
 {
   double d = discr(1, 0, -1);
-  CPPUNIT_ASSERT_MESSAGE(abs(d) < e, "Один вещественный корень");
+  CPPUNIT_ASSERT_MESSAGE(std::string("Один вещественный корень"), abs(d) < e);
 }
   void twoRoot()
 {
   double d = discr(1, 2, 1)
-  CPPUNIT_ASSERT_MESSAGE(abs(d) > e, "Два вещественных корня");
+  CPPUNIT_ASSERT_MESSAGE(std::string("Два вещественных корня"), abs(d) > e);
 }
 };
 
