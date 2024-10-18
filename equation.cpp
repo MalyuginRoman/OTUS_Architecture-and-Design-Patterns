@@ -1,5 +1,6 @@
 #include <iostream>
 #include "math.h"
+#include "cppunit.h"
 
 const double e = 1E-07;
 
