@@ -6,8 +6,7 @@
 #include <cppunit/BriefTestProgressListener.h>
 #include <cppunit/extensions/TestFactoryRegistry.h>
 #include <cppunit/extensions/HelperMacros.h>
-
-const double e = 1E-07;
+#include "config.h"
 
 class TestSolution : public CPPUNIT_NS::TestCase
 {
