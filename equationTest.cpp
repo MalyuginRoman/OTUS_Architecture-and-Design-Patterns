@@ -7,7 +7,7 @@
 
 class TestSolution : public CPPUNIT_NS::TestCase
 {
-  CPPUNIT_TEST_SUITE(Test);
+  CPPUNIT_TEST_SUITE(TestSolution);
   CPPUNIT_TEST(testEquationSolution);
   CPPUNIT_TEST_SUITE_END();
 
@@ -16,12 +16,12 @@ public:
   void tearDown(void){}
 
 protected:
-  void testHelloWord(void) {
+  void testEquationSolution(void) {
     system(0, 0 ,0)
   }
 };
 
-CPPUNIT_TEST_SUITE_REGISTRATION(Test);
+CPPUNIT_TEST_SUITE_REGISTRATION(TestSolution);
 
 int main()
 {
