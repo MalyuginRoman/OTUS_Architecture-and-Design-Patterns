@@ -1,6 +1,6 @@
 #include <iostream>
 #include "math.h"
-
+/*
 const double e = 1E-07;
 
 int main(int ac, char **av)
@@ -40,4 +40,9 @@ int main(int ac, char **av)
             }
         }
     }
+}*/
+
+int main()
+{
+    std::cout << "Hello, World!" << std::endl;
 }
