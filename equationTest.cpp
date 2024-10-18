@@ -17,8 +17,10 @@ public:
   void tearDown(void){}
 
 protected:
-  void calculate();
-//  void noRoot(); //
+  void calculate(void){
+    system("0");
+  }
+//  void noRoot();
 //  void oneRoot();
 //  void twoRoot();
 //  void firstCoef();
@@ -27,11 +29,10 @@ protected:
 
 CPPUNIT_TEST_SUITE_REGISTRATION(TestSolution);
 
-void TestSolution::calculate()
-{
+//void TestSolution::calculate()
+//{
 //  CPPUNIT_ASSERT_EQUAL(1,1);
-}
-
+//}
 
 int main()
 {
