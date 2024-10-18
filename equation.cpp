@@ -14,11 +14,6 @@ int main(int ac, char **av)
     std::cin >> b;
     std::cin >> c;
 
-    calc(a, b, c);
-}
-
-void calc(double a, double b, double c)
-{
     if(abs(a) < e)
         std::cout << "The equation is not quadratic." << std::endl;
     else
