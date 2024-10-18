@@ -6,10 +6,10 @@
 #include <cppunit/extensions/TestFactoryRegistry.h>
 #include <cppunit/extensions/HelperMacros.h>
 
-class TestSolution : public CPPUNIT_NS::TestCase
+class Test : public CPPUNIT_NS::TestCase
 {
-  CPPUNIT_TEST_SUITE(TestSolution);
-  CPPUNIT_TEST(calculate);
+  CPPUNIT_TEST_SUITE(Test);
+  CPPUNIT_TEST(testHelloWorld);
   CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -17,7 +17,7 @@ public:
   void tearDown(void){}
 
 protected:
-  void calculate(void){
+  void testHelloWorld(void){
     system("./hello >nul 2>nul");
   }
 //  void noRoot();
@@ -27,7 +27,7 @@ protected:
 //  void inPutCorrect();
 };
 
-CPPUNIT_TEST_SUITE_REGISTRATION(TestSolution);
+CPPUNIT_TEST_SUITE_REGISTRATION(Test);
 
 //void TestSolution::calculate()
 //{
