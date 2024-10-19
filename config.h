@@ -11,7 +11,7 @@ double discr(double a, double b, double c)
     return b * b - 4.0 * a * c;
 }
 
-root solve(double a, double b, double d)
+root solve(double a, double b, double c)
 {
     root x;
     x.x1 = 0;
