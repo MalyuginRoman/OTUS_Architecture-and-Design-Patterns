@@ -30,15 +30,15 @@ root solve(double a, double b, double c)
             {
                 std::cout << "The equation has one real roots:" << std::endl;
                 x.x1 = -b + sqrt(d) / (2 * a);
-                std::cout << x << std::endl;
+                std::cout << x.x1 << std::endl;
             }
             else
             {
                 std::cout << "The equation has two real roots:" << std::endl;
                 x.x1 = -b + sqrt(d) / (2 * a);
-                std::cout << x << ", ";
+                std::cout << x.x1 << ", ";
                 x.x2 = -b - sqrt(d) / (2 * a);
-                std::cout << x << std::endl;
+                std::cout << x.x2 << std::endl;
             }
         }
     }
