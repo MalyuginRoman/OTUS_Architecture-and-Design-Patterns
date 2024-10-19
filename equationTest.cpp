@@ -31,8 +31,11 @@ protected:
 }
   void correctA()
 {
-  root x = solve(0, 2, 1);
+  double a = 0.;
+  double b = 0.;
+  double c = 0.;
   CPPUNIT_ASSERT_MESSAGE(std::string("Уравнение не является квадратным"), abs(a) < e);
+  root x = solve(a, b, c);
 }
   void noRoot()
 {
