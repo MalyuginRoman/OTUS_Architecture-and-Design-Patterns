@@ -12,6 +12,7 @@ class TestSolution : public CPPUNIT_NS::TestCase
 {
 CPPUNIT_TEST_SUITE(TestSolution);
   CPPUNIT_TEST(testEquationSolution);
+  CPPUNIT_TEST(correctA);
   CPPUNIT_TEST(noRoot);
   CPPUNIT_TEST(oneRoot);
   CPPUNIT_TEST(twoRoot);
@@ -27,6 +28,11 @@ protected:
   root x = solve(1, 2, 1);
   double result = 1.;
   CPPUNIT_ASSERT((x.x1 - result) < e);
+}
+  void correctA()
+{
+  root x = solve(0, 2, 1);
+  CPPUNIT_ASSERT_MESSAGE(std::string("Уравнение не является квадратным"), abs(a) < e);
 }
   void noRoot()
 {
