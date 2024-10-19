@@ -28,17 +28,17 @@ root solve(double a, double b, double c)
         {
             if(abs(d) < e)
             {
-                std::cout << "The equation has one real roots:" << std::endl;
+                std::cout << "The equation has one real roots:";
                 x.x1 = -b + sqrt(d) / (2 * a);
-                std::cout << x.x1 << std::endl;
+                std::cout << x.x1;
             }
             else
             {
-                std::cout << "The equation has two real roots:" << std::endl;
+                std::cout << "The equation has two real roots:";
                 x.x1 = -b + sqrt(d) / (2 * a);
                 std::cout << x.x1 << ", ";
                 x.x2 = -b - sqrt(d) / (2 * a);
-                std::cout << x.x2 << std::endl;
+                std::cout << x.x2;
             }
         }
     }
