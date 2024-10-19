@@ -26,7 +26,6 @@ root solve(double a, double b, double c)
             std::cout << "The equation has no real roots." << std::endl;
         else
         {
-            double x;
             if(abs(d) < e)
             {
                 std::cout << "The equation has one real roots:" << std::endl;
