@@ -2,6 +2,12 @@
 #include "math.h"
 #include "config.h"
 
+struct root
+{
+    double x1;
+    double x2;
+}
+
 int main(int ac, char **av)
 {
     std::cout << "Solution of a quadratic equation" << std::endl;
@@ -12,31 +18,5 @@ int main(int ac, char **av)
     std::cin >> b;
     std::cin >> c;
 
-    if(abs(a) < e)
-        std::cout << "The equation is not quadratic." << std::endl;
-    else
-    {
-        double d = discr(a, b, c);
-        std::cout << "d = " << d << std::endl;
-        if(d < 0.0)
-            std::cout << "The equation has no real roots." << std::endl;
-        else
-        {
-            double x;
-            if(abs(d) < e)
-            {
-                std::cout << "The equation has one real roots:" << std::endl;
-                x = root(a, b, d, false);
-                std::cout << x << std::endl;
-            }
-            else
-            {
-                std::cout << "The equation has two real roots:" << std::endl;
-                x = root(a, b, d, false);
-                std::cout << x << ", ";
-                x = root(a, b, d, true);
-                std::cout << x << std::endl;
-            }
-        }
-    }
+    solve(a, b, c);
 }
