@@ -4,7 +4,7 @@ struct root
 {
     double x1;
     double x2;
-}
+};
 
 double discr(double a, double b, double c)
 {
