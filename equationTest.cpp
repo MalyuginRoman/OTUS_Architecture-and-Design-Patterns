@@ -24,9 +24,9 @@ void tearDown(void){}
 protected:
   void testEquationSolution(void)
 {
-  double x = root(1, 2, 1, false);
+  double x = solve(1, 2, 1);
   double result = 1.;
-  CPPUNIT_ASSERT((x - result) < e);
+  CPPUNIT_ASSERT((x.x1 - result) < e);
 }
   void noRoot()
 {
