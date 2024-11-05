@@ -1,8 +1,8 @@
 all:
-	g++ -std=c++17 equation.cpp -o equation
-	g++ -std=c++17 equationTest.cpp -lcppunit -o equationTest
+	g++ -std=c++17 moving.cpp object.cpp IRotable.cpp IMovable.cpp EventManager.cpp -o moving
+	g++ -std=c++17 movingTest.cpp -lcppunit -o movingTest
 test:
-	chmod +x equation
-	./equationTest
+	chmod +x moving
+	./movingTest
 clean:
-	$(RM) equation equationTest
+	$(RM) moving movingTest
