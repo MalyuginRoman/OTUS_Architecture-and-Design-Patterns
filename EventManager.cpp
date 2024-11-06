@@ -61,14 +61,14 @@ public:
             object *obj = n; //starship->list().at(i);
             if(obj->velocity() != 0)
             {
-                IMovable *mov = new IMovable(obj->placeX(), obj->placeY(),
-                                             obj->velocity(), obj->angular(), dt);
+                MoveCommand *mov = new MoveCommand(obj->placeX(), obj->placeY(), obj->velocity(),
+                                                   obj->angular(), obj->angularVelocity(), dt);
                 mov->getPosition(obj, dt);
             }
             if(obj->angular() != 0)
             {
-                IRotable *rot = new IRotable(obj->placeX(), obj->placeY(),
-                                             obj->angular());
+                MoveCommand *rot = new MoveCommand(obj->placeX(), obj->placeY(), obj->velocity(),
+                                                   obj->angular(), obj->angularVelocity(), dt);
                 rot->getAngular(obj, 15);
             }
         }
