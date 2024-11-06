@@ -1,16 +1,16 @@
 #include <iostream>
 #include <list>
 #include "EventManager.h"
-#include "IMovable.h"
-#include "IRotable.h"
+#include "MoveCommand.h"
+#include "MoveCommand.h"
 
 const int Xmax = 100;
 const int Ymax = 100;
 const int Tmax = 100;
 const int dt = 1;
 
-class IMovable;
-class IRotable;
+class MoveCommand;
+class MoveCommand;
 
 class EventManagerP
 {
