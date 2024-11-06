@@ -6,20 +6,22 @@ public:
     int id;
     int velocity;
     double angular;
+    double angularVelocity;
     int placeX;
     int placeY;
-    objectP(int id, int velocity, double angular, int placeX, int placeY) :
+    objectP(int id, int velocity, double angular, double angularVelocity, int placeX, int placeY) :
         id(id),
         velocity(velocity),
         angular(angular),
+        angularVelocity(angularVelocity),
         placeX(placeX),
         placeY(placeY)
     {
     }
 };
 
-object::object(int id, int velocity, double angular, int placeX, int placeY) :
-    imp(new objectP(id, velocity, angular, placeX, placeY))
+object::object(int id, int velocity, double angular, double angularVelocity, int placeX, int placeY) :
+    imp(new objectP(id, velocity, angular, angularVelocity, placeX, placeY))
 {
 }
 object::~object()
@@ -38,6 +40,10 @@ double object::angular() const
 {
     return imp->angular;
 }
+double object::angularVelocity() const
+{
+    return imp->angularVelocity;
+}
 int object::placeX() const
 {
     return imp->placeX;
@@ -54,6 +60,10 @@ void object::setAngular(double value)
 {
     imp->angular = value;
 }
+void object::setAngularVelocity(double value)
+{
+    imp->angularVelocity = value;
+}
 void object::setPlaceX(int value)
 {
     imp->placeX = value;
@@ -69,12 +79,14 @@ public:
     std::list<object*> list;
     int defaultVelocity;
     double defaultAngular;
+    double defaultAngularVelocity;
     int defaultPlaceX;
     int defaultPlaceY;
 
     objectListP():
         defaultVelocity(0),
         defaultAngular(0.),
+        defaultAngularVelocity(0.),
         defaultPlaceX(0),
         defaultPlaceY(0)
     {
@@ -87,9 +99,9 @@ public:
     {
         list.clear();
     }
-    object *add(int id, int velocity, double angular, int placeX, int placeY)
+    object *add(int id, int velocity, double angular, double angularVelocity, int placeX, int placeY)
     {
-        object* spaceship = new object(id, velocity, angular, placeX, placeY);
+        object* spaceship = new object(id, velocity, angular, angularVelocity, placeX, placeY);
         list.push_back(spaceship);
         return spaceship;
     }
@@ -113,6 +125,10 @@ double objectList::defaultAngular() const
 {
     return imp->defaultAngular;
 }
+double objectList::defaultAngularVelocity() const
+{
+    return imp->defaultAngularVelocity;
+}
 int objectList::defaultPlaceX() const
 {
     return imp->defaultPlaceX;
@@ -129,6 +145,10 @@ void objectList::setDefaultAngular(double value)
 {
     imp->defaultAngular = value;
 }
+void objectList::setDefaultAngularVelocity(double value)
+{
+    imp->defaultAngularVelocity = value;
+}
 void objectList::setDefaultPlaceX(int value)
 {
     imp->defaultPlaceX = value;
@@ -137,9 +157,9 @@ void objectList::setDefaultPlaceY(int value)
 {
     imp->defaultPlaceY = value;
 }
-object *objectList::add(int id, int velocity, double angular, int placeX, int placeY)
+object *objectList::add(int id, int velocity, double angular, double angularVelocity, int placeX, int placeY)
 {
-    return imp->add(id, velocity, angular, placeX, placeY);
+    return imp->add(id, velocity, angular, angularVelocity, placeX, placeY);
 }
 bool objectList::isEmpty() const
 {
