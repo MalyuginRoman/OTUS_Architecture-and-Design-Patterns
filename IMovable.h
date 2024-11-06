@@ -5,11 +5,8 @@
 class IMovable
 {
 public:
-    IMovable(int x, int y, double a, int v, int dt);
-    ~IMovable();
-    void getPosition(object *obj, int dt);
-    void getVelocity(object *obj, int value);
-
-private:
-    class IMovableP *imp;
+    virtual bool getPosition(object *obj, int dt) = 0;
+    virtual bool setPosition(object *obj) = 0;
+    virtual bool getVelocity(object *obj, int du) = 0;
+    virtual bool setVelocity(object *obj) = 0;
 };
