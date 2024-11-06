@@ -10,7 +10,7 @@ const int Tmax = 100;
 const int dt = 1;
 
 class MoveCommand;
-class MoveCommand;
+class RotateCommand;
 
 class EventManagerP
 {
