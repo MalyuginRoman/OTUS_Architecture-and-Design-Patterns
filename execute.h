@@ -12,7 +12,7 @@ void execute_moving()
     EventManager* manager = new EventManager;
 
     int i = 2;
-    list->add(i, 10 * i, 45 * i, 0, 0);
+    list->add(i, 10 * i, 45 * i, 0, 0, 0);
 
     bool isOk = manager->init(list);
     //if(!isOk) return false;
