@@ -67,8 +67,8 @@ public:
             }
             if(obj->angular() != 0)
             {
-                MoveCommand *rot = new MoveCommand(obj->placeX(), obj->placeY(), obj->velocity(),
-                                                   obj->angular(), obj->angularVelocity(), dt);
+                RotateCommand  *rot = new RotateCommand (obj->placeX(), obj->placeY(), obj->velocity(),
+                                                         obj->angular(), obj->angularVelocity(), dt);
                 rot->getAngular(obj, 15);
             }
         }
