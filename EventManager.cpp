@@ -2,7 +2,7 @@
 #include <list>
 #include "EventManager.h"
 #include "MoveCommand.h"
-#include "MoveCommand.h"
+#include "RotateCommand.h"
 
 const int Xmax = 100;
 const int Ymax = 100;
