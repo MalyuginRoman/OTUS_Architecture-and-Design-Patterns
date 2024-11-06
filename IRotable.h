@@ -5,10 +5,8 @@
 class IRotable
 {
 public:
-    IRotable(int x, int y, double a);
-    ~IRotable();
-    void getAngular(object *obj, int value);
-
-private:
-    class IRotableP *imp;
+    virtual bool getAngular(object *obj, int dt) = 0;
+    virtual bool setAngular(object *obj) = 0;
+    virtual bool getAngularVelocity(object *obj, int dv) = 0;
+    virtual bool setAngularVelocity(object *obj) = 0;
 };
