@@ -1,3 +1,6 @@
+#include "math.h"
+#include "MoveCommand.h"
+#include "RotateCommand.h"
 #include "object.h"
 
 class objectP
@@ -172,4 +175,100 @@ int objectList::count() const
 const std::list<object *> &objectList::list() const
 {
     return imp->list;
+}
+
+const double TR = 0.01745329252;
+
+class MoveCommandP
+{
+public:
+    int x;
+    int y;
+    int v;
+    double a1;
+    double a2;
+    int dt;
+    MoveCommandP(int x, int y, double a1, double a2, int v, int dt) :
+        x(x),
+        y(y),
+        a1(a1),
+        a2(a2),
+        v(v),
+        dt(dt)
+    {
+    }
+};
+
+MoveCommand::MoveCommand(int x, int y, double a1, double a2, int v, int dt) :
+                         imp(new MoveCommandP(x, y, a1, a2, v, dt))
+{ }
+
+bool MoveCommand::getPosition(object *obj, int dt)
+{
+    obj->setPlaceX(obj->velocity() * cos(obj->angular()*TR) * dt);
+    obj->setPlaceY(obj->velocity() * sin(obj->angular()*TR) * dt);
+    return true;
+}
+
+bool MoveCommand::setPosition(object *obj)
+{
+    obj->placeX();
+    obj->placeY();
+    return true;
+}
+bool MoveCommand::getVelocity(object *obj, int du)
+{
+    obj->setVelocity(obj->velocity() + du);
+    return true;
+}
+bool MoveCommand::setVelocity(object *obj)
+{
+    obj->velocity();
+    return true;
+}
+
+class RotateCommandP
+{
+public:
+    int x;
+    int y;
+    int v;
+    double a1;
+    double a2;
+    int dt;
+    RotateCommandP(int x, int y, double a1, double a2, int v, int dt) :
+        x(x),
+        y(y),
+        a1(a1),
+        a2(a2),
+        v(v),
+        dt(dt)
+    {
+    }
+};
+
+RotateCommand::RotateCommand(int x, int y, double a1, double a2, int v, int dt) :
+    imp(new RotateCommandP(x, y, a1, a2, v, dt))
+{ }
+
+bool RotateCommand::getAngular(object *obj, int dt)
+{
+    obj->setAngular(obj->angular() * obj->angularVelocity() * dt);
+    return true;
+}
+
+bool RotateCommand::setAngular(object *obj)
+{
+    obj->angular();
+    return true;
+}
+bool RotateCommand::getAngularVelocity(object *obj, int dv)
+{
+    obj->setAngularVelocity(obj->angularVelocity() + dv);
+    return true;
+}
+bool RotateCommand::setAngularVelocity(object *obj)
+{
+    obj->angularVelocity();
+    return true;
 }
