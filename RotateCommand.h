@@ -4,7 +4,7 @@
 
 class object;
 
-class RotateCommand : public IRotable
+class RotateCommand
 {
 public:
     RotateCommand(int x, int y, double a1, double a2, int v, int dt);
