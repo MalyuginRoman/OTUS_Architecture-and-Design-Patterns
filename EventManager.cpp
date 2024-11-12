@@ -80,7 +80,7 @@ public:
         }
         return true;
     }
-    bool execute(objectList* starship)
+    bool execute(objectList* starship, int timeStep)
     {
         std::cout << "Start moving objects" << std::endl;
         int count = starship->count();
@@ -112,12 +112,12 @@ public:
                     }
                     catch(Exception::UnknownTimeStep)
                     {
-                        qDebug() << QObject::tr("Ошибка");
-                        QString text;
+                        //qDebug() << QObject::tr("Ошибка");
+                        std::string text;
                         if(currentAction == 0)
-                            text = QString("It is impossible to move the object with id: %1").arg(obj->id());
+                            text = std::string("It is impossible to move the object with id: %1").arg(obj->id());
                         else
-                            text = QString("It is impossible to rotate the object with id: %1").arg(obj->id());
+                            text = std::string("It is impossible to rotate the object with id: %1").arg(obj->id());
                         new LogeCommand(currentAction, text);
 
                     }
