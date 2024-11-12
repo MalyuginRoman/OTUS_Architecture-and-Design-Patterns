@@ -25,7 +25,6 @@ void execute_moving()
     }
 
     bool isOk = manager->init(list);
-    if(!isOk) return false;
 
     int timeStep = 1;
 
