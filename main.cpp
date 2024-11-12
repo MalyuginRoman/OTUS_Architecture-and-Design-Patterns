@@ -31,13 +31,13 @@ void execute_moving()
 
     // start timestep
     isOk = manager->appendCommand(list, timeStep);
-    if(!isOk) return false;
+    //if(!isOk) return false;
 
     // release timestep
     isOk = manager->execute(list, timeStep);
-    if(!isOk) return false;
+    //if(!isOk) return false;
 
     // end timestep
     isOk = manager->removeCommand(list, timeStep);
-    if(!isOk) return false;
+    //if(!isOk) return false;
 }
