@@ -21,8 +21,8 @@ void execute_moving()
         int placeX = list->defaultPlaceX();
         int placeY = list->defaultPlaceY();
         list->add(id, velocity, angular, angularVelocity, placeX, placeY);
-        qDebug() << "addObject:" << list->count();
-        qDebug() << id << "," << velocity << "," << angular << "," << angularVelocity<< "," << placeX<< "," << placeY;
+        //qDebug() << "addObject:" << list->count();
+        //qDebug() << id << "," << velocity << "," << angular << "," << angularVelocity<< "," << placeX<< "," << placeY;
     }
 
     bool isOk = manager->init(list);
