@@ -26,7 +26,7 @@ public:
     }
     ~objectP()
     {
-        list.clear()
+        list.clear();
     }
     void reset()
     {
@@ -98,17 +98,17 @@ action *object::add(int actionID, int timeStep)
 }
 void object::remove(int index)
 {
-    delete imp->list.takeAt(index);
+    delete imp->list.erase(index);
 }
 bool object::isEmpty() const
 {
-    return imp->list.isEmpty();
+    return imp->list.empty();
 }
 int object::count() const
 {
     return imp->list.size();
 }
-const QList<action *> &object::list() const
+const std::list<action *> &object::list() const
 {
     return imp->list;
 }
@@ -343,14 +343,14 @@ class LogeCommandP
 {
 public:
     int actionID;
-    QString text;
-    LogeCommandP(int actionID, QString text) :
+    std::string text;
+    LogeCommandP(int actionID, std::string text) :
         actionID(actionID),
         text(text)
     {
     }
 };
 
-LogeCommand::LogeCommand(int actionID, QString text) :
+LogeCommand::LogeCommand(int actionID, std::string text) :
                          imp(new LogeCommandP(actionID, text))
 { }
