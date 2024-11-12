@@ -1,4 +1,3 @@
-#pragma once
 #include <iostream>
 #include "EventManager.h"
 #include "object.h"
