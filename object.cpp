@@ -25,11 +25,10 @@ public:
     }
     ~objectP()
     {
-        deleteAll(list);
+        list.clear()
     }
     void reset()
     {
-        deleteAll(list);
         list.clear();
     }
     action *add(int actionId, int timeStep)
@@ -106,7 +105,7 @@ bool object::isEmpty() const
 }
 int object::count() const
 {
-    return imp->list.count();
+    return imp->list.size();
 }
 const QList<action *> &object::list() const
 {
