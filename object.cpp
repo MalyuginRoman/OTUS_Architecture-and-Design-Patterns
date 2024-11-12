@@ -8,6 +8,7 @@
 class objectP
 {
 public:
+    std::list<action*> list;
     int id;
     int velocity;
     double angular;
