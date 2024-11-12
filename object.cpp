@@ -25,7 +25,7 @@ public:
     }
     ~objectP()
     {
-        qDeleteAll(list);
+        deleteAll(list);
     }
     void reset()
     {
