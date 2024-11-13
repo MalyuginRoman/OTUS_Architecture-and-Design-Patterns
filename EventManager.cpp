@@ -119,9 +119,9 @@ public:
                     {
                         //qDebug() << QObject::tr("Ошибка");
                         if(currentAction == 0)
-                            std::string text = format("It is impossible to move the object with id: %d", obj->id());
+                            std::string text = "It is impossible to move the object";
                         else
-                            std::string text = format("It is impossible to rotate the object with id: %d", obj->id());
+                            std::string text = "It is impossible to rotate the object";
                         new LogeCommand(currentAction, text);
 
                     }
