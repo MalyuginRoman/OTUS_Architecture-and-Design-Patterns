@@ -35,6 +35,7 @@ public:
         std::list<object*> list1 = starship->list();
         for(object* n : list1) //(int i = 0; i < count; i ++)
         {
+            object *obj = n; 
 //if(i==1) obj->setPlaceX(-3);
             if(!checkPlaceObject(obj))
             {
