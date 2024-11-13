@@ -131,13 +131,16 @@ public:
     {
         std::cout << "Start remove command for objects" << std::endl;
         int count = starship->count();
-        for(int i = 0; i < count; i ++)
+        std::list<object*> list1 = starship->list();
+        for(object* n : list1) //(int i = 0; i < count; i ++)
         {
-            object *obj = starship->list().at(i);
-            int countAction = obj->list().count();
-            for(int j = 0; j < countAction; j++)
+            object *obj = n; /
+            int countAction = obj->list.size();
+            std::list<action*> list2 = obj->list();
+            for(action* a : list2) //(int j = 0; j < countAction; j++)
             {
-                int currentStep = obj->list().at(j)->timeStep();
+                action *act = a;
+                int currentStep = act->timeStep();
                 if(currentStep == timeStep)
                     obj->remove(j);
             }
