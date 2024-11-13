@@ -69,9 +69,10 @@ public:
     {
         std::cout << "Start append command for objects" << std::endl;
         int count = starship->count();
-        for(int i = 0; i < count; i ++)
+        std::list<object*> list1 = starship->list();
+        for(object* n : list1) //(int i = 0; i < count; i ++)
         {
-            object *obj = starship->list().at(i);
+            object *obj = n; //object *obj = starship->list().at(i);
             int countAction = 5;
             for(int j = 0; j < countAction; j++)
             {
@@ -85,14 +86,17 @@ public:
     {
         std::cout << "Start moving objects" << std::endl;
         int count = starship->count();
-        for(int i = 0; i < count; i ++)
+        std::list<object*> list1 = starship->list();
+        for(object* n : list1) //(int i = 0; i < count; i ++)
         {
-            object *obj = starship->list().at(i);
-            int countAction = obj->count();
-            for(int j = 0; j < countAction; j ++)
+            object *obj = n; //object *obj = starship->list().at(i);
+            int countAction = obj->list.size();
+            std::list<action*> list2 = obj->list();
+            for(action* a : list2) //(int j = 0; j < countAction; j++)
             {
-                int currentStep = obj->list().at(j)->timeStep();
-                int currentAction = obj->list().at(j)->actionID();
+                action *act = a;
+                int currentStep = act->timeStep();
+                int currentAction = act->actionID();
                 bool result;
                 if(currentStep == timeStep)
                 {
@@ -116,9 +120,9 @@ public:
                         //qDebug() << QObject::tr("Ошибка");
                         std::string text;
                         if(currentAction == 0)
-                            text = std::string("It is impossible to move the object with id: %1").arg(obj->id());
+                            text = format("It is impossible to move the object with id: %d", obj->id());
                         else
-                            text = std::string("It is impossible to rotate the object with id: %1").arg(obj->id());
+                            text = format("It is impossible to rotate the object with id: %d", obj->id());
                         new LogeCommand(currentAction, text);
 
                     }
@@ -134,7 +138,7 @@ public:
         std::list<object*> list1 = starship->list();
         for(object* n : list1) //(int i = 0; i < count; i ++)
         {
-            object *obj = n; /
+            object *obj = n;
             int countAction = obj->list.size();
             std::list<action*> list2 = obj->list();
             for(action* a : list2) //(int j = 0; j < countAction; j++)
@@ -142,7 +146,7 @@ public:
                 action *act = a;
                 int currentStep = act->timeStep();
                 if(currentStep == timeStep)
-                    obj->remove(j);
+                    obj->remove(a);
             }
         }
         return true;
