@@ -70,9 +70,9 @@ public:
         std::cout << "Start append command for objects" << std::endl;
         int count = starship->count();
         std::list<object*> list1 = starship->list();
-        for(object* n : list1) //(int i = 0; i < count; i ++)
+        for(object* n : list1)
         {
-            object *obj = n; //object *obj = starship->list().at(i);
+            object *obj = n;
             int countAction = 5;
             for(int j = 0; j < countAction; j++)
             {
@@ -87,10 +87,9 @@ public:
         std::cout << "Start moving objects" << std::endl;
         int count = starship->count();
         std::list<object*> list1 = starship->list();
-        for(object* n : list1) //(int i = 0; i < count; i ++)
+        for(object* n : list1)
         {
-            object *obj = n; //object *obj = starship->list().at(i);
-            int countAction = obj->list.size();
+            object *obj = n;
             std::list<action*> list2 = obj->list();
             for(action* a : list2) //(int j = 0; j < countAction; j++)
             {
@@ -118,10 +117,11 @@ public:
                     catch(Exception::UnknownTimeStep)
                     {
                         //qDebug() << QObject::tr("Ошибка");
+                        std::string text;
                         if(currentAction == 0)
-                            std::string text = "It is impossible to move the object";
+                            text = "It is impossible to move the object";
                         else
-                            std::string text = "It is impossible to rotate the object";
+                            text = "It is impossible to rotate the object";
                         new LogeCommand(currentAction, text);
 
                     }
@@ -138,16 +138,15 @@ public:
         for(object* n : list1) //(int i = 0; i < count; i ++)
         {
             object *obj = n;
-            int countAction = obj->list.size();
             std::list<action*> list2 = obj->list();
-            for(action* a : list2) //(int j = 0; j < countAction; j++)
+            for(action* a : list2)
             {
                 action *act = a;
                 int currentStep = act->timeStep();
                 if(currentStep == timeStep)
                 {
                     std::list<action*>::iterator it1;
-                    it1 = find(list2.begin(), list.end(), a);
+                    it1 = find(list2.begin(), list2.end(), a);
                     obj->remove(it1);
                 }
             }
