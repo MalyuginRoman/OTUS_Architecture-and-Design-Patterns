@@ -118,11 +118,10 @@ public:
                     catch(Exception::UnknownTimeStep)
                     {
                         //qDebug() << QObject::tr("Ошибка");
-                        std::string text;
                         if(currentAction == 0)
-                            text = format("It is impossible to move the object with id: %d", obj->id());
+                            std::string text = format("It is impossible to move the object with id: %d", obj->id());
                         else
-                            text = format("It is impossible to rotate the object with id: %d", obj->id());
+                            std::string text = format("It is impossible to rotate the object with id: %d", obj->id());
                         new LogeCommand(currentAction, text);
 
                     }
@@ -147,7 +146,7 @@ public:
                 int currentStep = act->timeStep();
                 if(currentStep == timeStep)
                 {
-                    list<action*>::iterator it1;
+                    std::list<action*>::iterator it1;
                     it1 = find(list2.begin(), list.end(), a);
                     obj->remove(it1);
                 }
