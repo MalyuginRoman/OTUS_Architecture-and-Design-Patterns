@@ -146,7 +146,11 @@ public:
                 action *act = a;
                 int currentStep = act->timeStep();
                 if(currentStep == timeStep)
-                    obj->remove(a);
+                {
+                    list<action*>::iterator it1;
+                    it1 = find(list2.begin(), list.end(), a);
+                    obj->remove(it1);
+                }
             }
         }
         return true;
