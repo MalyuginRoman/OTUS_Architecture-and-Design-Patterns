@@ -8,7 +8,7 @@
 class objectP
 {
 public:
-    std::list<action*> list;
+    QList<action*> list;
     int id;
     int velocity;
     double angular;
@@ -26,10 +26,11 @@ public:
     }
     ~objectP()
     {
-        list.clear();
+        qDeleteAll(list);
     }
     void reset()
     {
+        qDeleteAll(list);
         list.clear();
     }
     action *add(int actionId, int timeStep)
@@ -98,17 +99,17 @@ action *object::add(int actionID, int timeStep)
 }
 void object::remove(int index)
 {
-    delete imp->list.erase(index);
+    delete imp->list.takeAt(index);
 }
 bool object::isEmpty() const
 {
-    return imp->list.empty();
+    return imp->list.isEmpty();
 }
 int object::count() const
 {
-    return imp->list.size();
+    return imp->list.count();
 }
-const std::list<action *> &object::list() const
+const QList<action *> &object::list() const
 {
     return imp->list;
 }
@@ -145,7 +146,7 @@ int action::timeStep() const
 class objectListP
 {
 public:
-    std::list<object*> list;
+    QList<object*> list;
     int defaultVelocity;
     double defaultAngular;
     double defaultAngularVelocity;
@@ -162,10 +163,11 @@ public:
     }
     ~objectListP()
     {
-        list.clear();
+        qDeleteAll(list);
     }
     void reset()
     {
+        qDeleteAll(list);
         list.clear();
     }
     object *add(int id, int velocity, double angular, double angularVelocity, int placeX, int placeY)
@@ -232,13 +234,13 @@ object *objectList::add(int id, int velocity, double angular, double angularVelo
 }
 bool objectList::isEmpty() const
 {
-    return imp->list.empty();
+    return imp->list.isEmpty();
 }
 int objectList::count() const
 {
-    return imp->list.size();
+    return imp->list.count();
 }
-const std::list<object *> &objectList::list() const
+const QList<object *> &objectList::list() const
 {
     return imp->list;
 }
@@ -271,9 +273,17 @@ MoveCommand::MoveCommand(int x, int y, double a1, double a2, int v, int dt) :
 
 bool MoveCommand::getPosition(object *obj, int dt)
 {
-    obj->setPlaceX(obj->velocity() * cos(obj->angular()*TR) * dt);
-    obj->setPlaceY(obj->velocity() * sin(obj->angular()*TR) * dt);
-    return true;
+    if(dt > 0)
+    {
+        obj->setPlaceX(obj->velocity() * cos(obj->angular()*TR) * dt);
+        obj->setPlaceY(obj->velocity() * sin(obj->angular()*TR) * dt);
+        return true;
+    else
+    {
+        std::cerr << "It is impossible to move the object with id: " << obj->id() << std::endl;
+        throw new Exception::UnknownTimeStep();
+        return false;
+    }
 }
 
 bool MoveCommand::setPosition(object *obj)
@@ -319,8 +329,17 @@ RotateCommand::RotateCommand(int x, int y, double a1, double a2, int v, int dt) 
 
 bool RotateCommand::getAngular(object *obj, int dt)
 {
-    obj->setAngular(obj->angular() * obj->angularVelocity() * dt);
-    return true;
+    if(dt > 0)
+    {
+        obj->setAngular(obj->angular() * obj->angularVelocity() * dt);
+        return true;
+    }
+    else
+    {
+        std::cerr << "It is impossible to rotate the object with id: " << obj->id() << std::endl;
+        throw new Exception::UnknownTimeStep();
+        return false;
+    }
 }
 
 bool RotateCommand::setAngular(object *obj)
