@@ -1,6 +1,6 @@
 #pragma once
-#include <list>
-#include <string>
+#include <QList>
+#include <QString>
 
 class action
 {
@@ -33,7 +33,7 @@ public:
     void remove(int index);
     bool isEmpty() const;
     int count() const;
-    const std::list<action *>& list() const;
+    const QList<action *>& list() const;
     void addAction(int actionID, int timeStep);
     void removeAction(int actionID, int timeStep);
 private:
@@ -59,7 +59,7 @@ public:
     object* add(int id, int velocity, double angular, double angularVelocity, int placeX, int placeY);
     bool isEmpty() const;
     int count() const;
-    const std::list<object *>& list() const;
+    const QList<object *>& list() const;
 private:
     class objectListP* imp;
 };
