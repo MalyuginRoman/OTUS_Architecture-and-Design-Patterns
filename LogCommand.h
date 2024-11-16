@@ -1,10 +1,10 @@
 #pragma once
-#include <string>
+#include "QString"
 
 class LogeCommand
 {
 public:
-    LogeCommand(int actionID, std::string text);
+    LogeCommand(int actionID, QString text);
 
 private:
     class LogeCommandP *imp;
