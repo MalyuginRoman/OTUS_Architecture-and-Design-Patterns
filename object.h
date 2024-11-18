@@ -1,6 +1,6 @@
 #pragma once
-#include <QList>
-#include <QString>
+//#include <QList>
+//#include <QString>
 
 class action
 {
