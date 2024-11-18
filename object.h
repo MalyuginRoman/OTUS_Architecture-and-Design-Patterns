@@ -1,6 +1,6 @@
 #ifndef OBJECT_H
 #define OBJECT_H
-#include <QList.h>
+#include "QList.h"
 #include <QString>
 
 class action
