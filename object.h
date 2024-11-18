@@ -1,6 +1,7 @@
-#pragma once
-//#include <QList>
-//#include <QString>
+#ifndef OBJECT_H
+#define OBJECT_H
+#include <QList>
+#include <QString>
 
 class action
 {
@@ -63,3 +64,5 @@ public:
 private:
     class objectListP* imp;
 };
+
+#endif // OBJECT_H
