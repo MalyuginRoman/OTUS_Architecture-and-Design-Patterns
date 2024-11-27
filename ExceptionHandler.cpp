@@ -1,5 +1,6 @@
 #include "ExceptionHandler.h"
 #include "CommandLoger.h"
+#include "CommandRepeat.h"
 
 class ExceptionHandlerP
 {
@@ -16,6 +17,11 @@ public:
 ExceptionHandler::ExceptionHandler(ICommand* cmd, std::exception ex) :
     imp(new ExceptionHandlerP(cmd, ex))
 {
+}
+
+ExceptionHandler::~ExceptionHandler()
+{
+    delete imp;
 }
 
 void ExceptionHandler::executeRepeat(ExceptionHandler* handler, CommandQueue* cmd, ICommand* com, std::exception ex)
@@ -37,4 +43,16 @@ void ExceptionHandler::executeWrite(CommandQueue* cmd, ICommand* com, std::excep
     CommandLoger *cmd_loger = new CommandLoger;
     cmd_loger->execute();
     cmd->del();
+}
+
+void ExceptionHandler::executeLogerAfter(CommandQueue* cmd, std::exception ex)
+{
+    CommandLoger *cmd_loger = new CommandLoger;
+    cmd->add(cmd_loger);
+}
+
+void ExceptionHandler::executeRepeatOnce(CommandQueue* cmd, std::exception ex)
+{
+    CommandRepeat *cmd_repeat = new CommandRepeat;
+    cmd->add(cmd_repeat );
 }
