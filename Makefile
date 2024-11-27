@@ -1,8 +1,8 @@
 all:
-	g++ -std=c++17 equation.cpp -o equation
-	g++ -std=c++17 equationTest.cpp -lcppunit -o equationTest
+	g++ -std=c++17 main.cpp CommandLoger.cpp CommandMove.cpp CommandQueue.cpp CommandRepeat.cpp CommandRotate.cpp ExceptionHandler.cpp -o ExceptionHandler
+	g++ -std=c++17 test_exception.cpp CommandLoger.cpp CommandMove.cpp CommandQueue.cpp CommandRepeat.cpp CommandRotate.cpp ExceptionHandler.cpp -lcppunit -o test_exception
 test:
-	chmod +x equation
-	./equationTest
+	chmod +x ExceptionHandler
+	./test_exception
 clean:
-	$(RM) equation equationTest
+	$(RM) ExceptionHandler test_exception
