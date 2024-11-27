@@ -8,7 +8,7 @@ CommandRotate::CommandRotate()
 
 void CommandRotate::execute()
 {
-    std::cout << "Start execute of CommandRotate" << std::endl;
+    //std::cout << "Start execute of CommandRotate" << std::endl;
     throw std::runtime_error("CommandRotate");
 }
 
