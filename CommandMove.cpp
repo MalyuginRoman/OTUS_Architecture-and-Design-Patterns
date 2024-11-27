@@ -8,7 +8,7 @@ CommandMove::CommandMove()
 
 void CommandMove::execute()
 {
-    std::cout << "Start execute of CommandMove" << std::endl;
+    //std::cout << "Start execute of CommandMove" << std::endl;
     throw std::runtime_error ("CommandMove");
 }
 
