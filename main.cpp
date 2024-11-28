@@ -3,10 +3,8 @@
 #include "object.h"
 #include "config.h"
 
-int main(int argc, char *argv[])
+int main(int ac, char **av)
 {
-    QCoreApplication a(argc, argv);
-
     objectVector vector;
     int count = 1;
     for(int i = 0; i < count; i++)
@@ -53,6 +51,4 @@ int main(int argc, char *argv[])
         cmd.del();
     }
     std::cout << std::endl;
-
-    return a.exec();
 }
