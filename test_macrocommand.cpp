@@ -181,7 +181,7 @@ protected:
   
     CommandQueue cmd;
     CommandFuelCheck *cmd_check = new CommandFuelCheck(vector.at(0));
-    CommandMove *cmd_rotate = new CommandRotate(vector.at(0));
+    CommandRotate *cmd_rotate = new CommandRotate(vector.at(0));
     CommandFuelBurn *cmd_burn = new CommandFuelBurn(vector.at(0));
     std::exception ex;
     ExceptionHandler* handler = new ExceptionHandler(0, ex);
