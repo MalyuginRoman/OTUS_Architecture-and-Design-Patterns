@@ -7,21 +7,13 @@
 #include <cppunit/extensions/TestFactoryRegistry.h>
 #include <cppunit/extensions/HelperMacros.h>
 
-#include "CommandQueue.h"
-#include "CommandMove.h"
-#include "CommandRotate.h"
-#include "CommandLoger.h"
-#include "CommandRepeat.h"
-#include "ExceptionHandler.h"
+#include "config.h"
 
-class test_exception : public CPPUNIT_NS::TestCase
+class test_macrocommand : public CPPUNIT_NS::TestCase
 {
-CPPUNIT_TEST_SUITE(test_exception);
+CPPUNIT_TEST_SUITE(test_macrocommand);
   CPPUNIT_TEST(test1);
   CPPUNIT_TEST(test2);
-  CPPUNIT_TEST(test3);
-  CPPUNIT_TEST(test4);
-  CPPUNIT_TEST(test5);
 CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -29,14 +21,32 @@ void setUp(void) {}
 void tearDown(void){}
 
 protected:
-// Реализовать Команду, которая записывает информацию о выброшенном исключении в лог.
+// Реализовать класс CheckFuelComamnd и тесты к нему.
   void test1(void)
 {
-    CommandQueue cmd;
-    CommandMove *cmd_move = new CommandMove;
-    CommandRotate *cmd_rotate = new CommandRotate;
-    CommandLoger *cmd_loger = new CommandLoger;
+    objectVector vector;
+    {
+        int id = 0;
+        coord place;
+        react state;
 
+        place.placeX = 0.;
+        place.placeY = 0.;
+        place.angular = 45;
+
+        state.velocity = 100;
+        state.angularVelocity = 20;
+        state.fuel = 10;
+
+        vector.add(id, state, place);
+    }
+  
+    CommandQueue cmd;
+    CommandFuelCheck *cmd_check = new CommandFuelCheck(vector.at(0));
+    CommandMove *cmd_move = new CommandMove(vector.at(0));
+    CommandRotate *cmd_rotate = new CommandRotate(vector.at(0));
+
+    cmd.add(cmd_check);
     cmd.add(cmd_move);
     cmd.add(cmd_rotate);
 
@@ -46,23 +56,45 @@ protected:
         try {
             cmd.front()->execute();
         } catch( std::exception ex) {
-            cmd_loger->execute(cmd.front());
+            handler->executeWrite(&cmd, cmd.front(), ex);
         }
         cmd.del();
     }
     std::cout << std::endl;
 }
-// Реализовать обработчик исключения, который ставит Команду, пишущую в лог в очередь Команд.
+// Реализовать класс BurnFuelCommand и тесты к нему.
   void test2(void)
 {
+    objectVector vector;
+    {
+        int id = 0;
+        coord place;
+        react state;
+
+        place.placeX = 0.;
+        place.placeY = 0.;
+        place.angular = 45;
+
+        state.velocity = 100;
+        state.angularVelocity = 20;
+        state.fuel = 10;
+
+        vector.add(id, state, place);
+    }
+  
     CommandQueue cmd;
-    CommandMove *cmd_move = new CommandMove;
-    CommandRotate *cmd_rotate = new CommandRotate;
+    CommandFuelCheck *cmd_check = new CommandFuelCheck(vector.at(0));
+    CommandMove *cmd_move = new CommandMove(vector.at(0));
+    CommandRotate *cmd_rotate = new CommandRotate(vector.at(0));
+    CommandFuelBurn *cmd_burn = new CommandFuelBurn(vector.at(0));
     std::exception ex;
     ExceptionHandler* handler = new ExceptionHandler(0, ex);
 
+    cmd.add(cmd_check);
     cmd.add(cmd_move);
+    cmd.add(cmd_burn);
     cmd.add(cmd_rotate);
+    cmd.add(cmd_burn);
 
     std::cout << std::endl;
     while(!cmd.isEmpty())
@@ -70,85 +102,15 @@ protected:
         try {
             cmd.front()->execute();
         } catch( std::exception ex) {
-            handler->executeLogerAfter(&cmd, ex);
+            handler->executeWrite(&cmd, cmd.front(), ex);
         }
         cmd.del();
-    }
-    std::cout << std::endl;
-}
-// Реализовать Команду, которая повторяет Команду, выбросившую исключение.
-  void test3(void)
-{
-    CommandQueue cmd;
-    CommandMove *cmd_move = new CommandMove;
-    CommandRotate *cmd_rotate = new CommandRotate;
-    CommandRepeat *cmd_repeat = new CommandRepeat;
-
-    cmd.add(cmd_move);
-    cmd.add(cmd_rotate);
-
-    std::cout << std::endl;
-    while(!cmd.isEmpty())
-    {
-        try {
-            cmd.front()->execute();
-        } catch( std::exception ex) {
-            cmd_repeat->execute();
-        }
-        cmd.del();
-    }
-    std::cout << std::endl;
-}
-// Реализовать обработчик исключения, который ставит в очередь Команду - повторитель команды, выбросившей исключение.
-  void test4(void)
-{
-    CommandQueue cmd;
-    CommandMove *cmd_move = new CommandMove;
-    CommandRotate *cmd_rotate = new CommandRotate;
-    std::exception ex;
-    ExceptionHandler* handler = new ExceptionHandler(0, ex);
-
-    cmd.add(cmd_move);
-    cmd.add(cmd_rotate);
-
-    std::cout << std::endl;
-    while(!cmd.isEmpty())
-    {
-        try {
-            cmd.front()->execute();
-        } catch( std::exception ex) {
-            handler->executeRepeatOnce(&cmd, ex);
-        }
-        cmd.del();
-    }
-    std::cout << std::endl;
-}
-// Реализовать обработчик исключения: при первом выбросе исключения повторить команду, при повторном выбросе исключения записать информацию в лог.
-  void test5(void)
-{
-    CommandQueue cmd;
-    CommandMove *cmd_move = new CommandMove;
-    CommandRotate *cmd_rotate = new CommandRotate;
-    std::exception ex;
-    ExceptionHandler* handler = new ExceptionHandler(0, ex);
-
-    cmd.add(cmd_move);
-    cmd.add(cmd_rotate);
-
-    std::cout << std::endl;
-    while(!cmd.isEmpty())
-    {
-        try {
-            cmd.front()->execute();
-        } catch( std::exception ex) {
-            handler->executeRepeat(handler, &cmd, cmd.front(), ex);
-        }
     }
     std::cout << std::endl;
 }
 };
 
-CPPUNIT_TEST_SUITE_REGISTRATION(test_exception);
+CPPUNIT_TEST_SUITE_REGISTRATION(test_macrocommand);
 
 int main()
 {
