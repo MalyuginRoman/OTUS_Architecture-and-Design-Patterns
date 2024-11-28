@@ -1,5 +1,4 @@
-#ifndef COMMANDFUELBURN_H
-#define COMMANDFUELBURN_H
+#pragma once
 #include "ICommand.h"
 #include "object.h"
 #include <string>
@@ -19,5 +18,3 @@ private:
     std::string str;
     class CommandFuelBurnP* imp;
 };
-
-#endif // COMMANDFUELBURN_H
