@@ -1,4 +1,4 @@
-#pragma once;
+#pragma once
 #include "CommandQueue.h"
 #include "CommandMove.h"
 #include "CommandRotate.h"
