@@ -160,7 +160,7 @@ protected:
     std::cout << std::endl;
 }
 // Реализовать команду поворота с расходом топлива.
-  void test3(void)
+  void test4(void)
 {
     objectVector vector;
     {
