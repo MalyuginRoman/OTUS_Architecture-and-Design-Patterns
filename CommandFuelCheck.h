@@ -1,5 +1,4 @@
-#ifndef COMMANDFUELCHECK_H
-#define COMMANDFUELCHECK_H
+#pragma once
 #include "ICommand.h"
 #include "object.h"
 #include <string>
@@ -19,5 +18,3 @@ private:
     std::string str;
     class CommandFuelCheckP* imp;
 };
-
-#endif // COMMANDFUELCHECK_H
