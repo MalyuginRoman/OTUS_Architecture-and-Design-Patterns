@@ -1,4 +1,4 @@
-#pragma once;
+#pragma once
 
 const int dt = 1;
 const int dF = 1;
