@@ -1,5 +1,4 @@
-#ifndef OBJECT_H
-#define OBJECT_H
+#pragma once
 
 #include <vector>
 #include "minor.h"
@@ -50,5 +49,3 @@ public:
 private:
     class objectVectorP* imp;
 };
-
-#endif // OBJECT_H
