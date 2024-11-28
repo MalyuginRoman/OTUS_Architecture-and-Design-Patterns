@@ -7,3 +7,4 @@
 #include "ExceptionHandler.h"
 #include "CommandFuelCheck.h"
 #include "CommandFuelBurn.h"
+#include "CommandSimpleMacro.h"
