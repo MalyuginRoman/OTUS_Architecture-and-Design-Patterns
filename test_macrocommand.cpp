@@ -45,6 +45,8 @@ protected:
     CommandFuelCheck *cmd_check = new CommandFuelCheck(vector.at(0));
     CommandMove *cmd_move = new CommandMove(vector.at(0));
     CommandRotate *cmd_rotate = new CommandRotate(vector.at(0));
+    std::exception ex;
+    ExceptionHandler* handler = new ExceptionHandler(0, ex);
 
     cmd.add(cmd_check);
     cmd.add(cmd_move);
