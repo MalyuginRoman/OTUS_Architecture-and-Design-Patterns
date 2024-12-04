@@ -28,18 +28,35 @@ int main(int ac, char **av)
                    << "," << vector.at(0)->place().placeX << "," << vector.at(0)->place().placeY << "," << vector.at(0)->place().angular << std::endl;
 
     CommandQueue cmd;
-    CommandFuelCheck *cmd_check = new CommandFuelCheck(vector.at(0));
+    /*CommandFuelCheck *cmd_check = new CommandFuelCheck(vector.at(0));
     CommandMove *cmd_move = new CommandMove(vector.at(0));
     CommandRotate *cmd_rotate = new CommandRotate(vector.at(0));
-    CommandFuelBurn *cmd_burn = new CommandFuelBurn(vector.at(0));
+    CommandFuelBurn *cmd_burn = new CommandFuelBurn(vector.at(0));*/
     std::exception ex;
     ExceptionHandler* handler = new ExceptionHandler(0, ex);
 
-    cmd.add(cmd_check);
+    auto lambda1 = [&vector](){return new CommandMove(vector.at(0));};
+    CurrentScope.insert("Command.Move",
+                        lambda1());
+    cmd.add(lambda1());
+    auto lambda2 = [&vector](){return new CommandRotate(vector.at(0));};
+    CurrentScope.insert("Command.Rotate",
+                        lambda2());
+    cmd.add(lambda2());
+    auto lambda3 = [&vector](){return new CommandFuelCheck(vector.at(0));};
+    CurrentScope.insert("Command.CheckFuel",
+                        lambda3());
+    cmd.add(lambda3());
+    auto lambda4 = [&vector](){return new CommandFuelBurn(vector.at(0));};
+    CurrentScope.insert("Command.BurnFuel",
+                        lambda4());
+    cmd.add(lambda4());
+
+    /*cmd.add(cmd_check);
     cmd.add(cmd_move);
     cmd.add(cmd_burn);
     cmd.add(cmd_rotate);
-    cmd.add(cmd_burn);
+    cmd.add(cmd_burn);*/
 
     while(!cmd.isEmpty())
     {
