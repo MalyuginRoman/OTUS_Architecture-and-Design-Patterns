@@ -3,7 +3,7 @@
 scope::scope()
 {}
 
-void scope::insert(const std::string key, const ICommand* value)
+void scope::insert(std::string key, ICommand* value)
 {
     CurrentScope.emplace(std::make_pair(key, value));
 }
