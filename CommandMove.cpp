@@ -1,5 +1,6 @@
 #include <iostream>
 #include "CommandMove.h"
+using namespace std;
 
 class CommandMoveP
 {
@@ -22,23 +23,23 @@ CommandMove::~CommandMove() { delete imp;}
 
 void CommandMove::execute()
 {
-    std::cout << "Start execute of CommandMove" << std::endl;
+    cout << "Start execute of CommandMove" << endl;
     if(imp->obj->place().placeX < 0 && imp->obj->place().placeY < 0)
-        throw std::runtime_error ("Object not found");
+        throw runtime_error ("Object not found");
     if(!imp->obj->getVelocity(imp->obj, 0))
-        throw std::runtime_error ("Unknown velocity");
-    std::cout << imp->obj->place().placeX << "," << imp->obj->place().placeY << std::endl;
+        throw runtime_error ("Unknown velocity");
+    cout << "Coord before using command [" << imp->obj->place().placeX << ";" << imp->obj->place().placeY << "]" << endl;
     if(!imp->obj->getPosition(imp->obj, dt))
         throw std::runtime_error ("Unknown position");
-    std::cout << imp->obj->place().placeX << "," << imp->obj->place().placeY << std::endl;
+    cout << "Coord after using command [" << imp->obj->place().placeX << ";" << imp->obj->place().placeY << "]" << endl;
 }
 
-void CommandMove::getStr(std::string value)
+void CommandMove::getStr(string value)
 {
     this->str = value;
 }
 
-std::string CommandMove::setStr()
+string CommandMove::setStr()
 {
     return this->str;
 }
