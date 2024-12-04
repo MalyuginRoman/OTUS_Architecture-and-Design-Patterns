@@ -1,5 +1,6 @@
 #include <iostream>
 #include "CommandRotate.h"
+using namespace std;
 
 class CommandRotateP
 {
@@ -22,23 +23,23 @@ CommandRotate::~CommandRotate() { delete imp;}
 
 void CommandRotate::execute()
 {
-    std::cout << "Start execute of CommandRotate" << std::endl;
+    cout << "Start execute of CommandRotate" << endl;
     if(imp->obj->place().placeX < 0 && imp->obj->place().placeY < 0)
-        throw std::runtime_error ("Object not found");
+        throw runtime_error ("Object not found");
     if(!imp->obj->getAngularVelocity(imp->obj, 0))
-        throw std::runtime_error ("Unknown angular velocity");
-    std::cout << imp->obj->place().angular << std::endl;
+        throw runtime_error ("Unknown angular velocity");
+    cout << imp->obj->place().angular << endl;
     if(!imp->obj->getAngular(imp->obj, dt))
-        throw std::runtime_error ("Unknown position");
-    std::cout << imp->obj->place().angular << std::endl;
+        throw runtime_error ("Unknown position");
+    cout << imp->obj->place().angular << endl;
 }
 
-void CommandRotate::getStr(std::string value)
+void CommandRotate::getStr(string value)
 {
     this->str = value;
 }
 
-std::string CommandRotate::setStr()
+string CommandRotate::setStr()
 {
     return this->str;
 }
