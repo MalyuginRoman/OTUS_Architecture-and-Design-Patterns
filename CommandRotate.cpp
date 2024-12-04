@@ -28,10 +28,10 @@ void CommandRotate::execute()
         throw runtime_error ("Object not found");
     if(!imp->obj->getAngularVelocity(imp->obj, 0))
         throw runtime_error ("Unknown angular velocity");
-    cout << imp->obj->place().angular << endl;
+    cout << "Angular before using command : " << imp->obj->place().angular << endl;
     if(!imp->obj->getAngular(imp->obj, dt))
         throw runtime_error ("Unknown position");
-    cout << imp->obj->place().angular << endl;
+    cout << "Angular after using command : " << imp->obj->place().angular << endl;
 }
 
 void CommandRotate::getStr(string value)
