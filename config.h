@@ -8,3 +8,5 @@
 #include "CommandFuelCheck.h"
 #include "CommandFuelBurn.h"
 #include "CommandSimpleMacro.h"
+
+#include "scope.h"
