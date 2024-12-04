@@ -6,6 +6,7 @@
 int main(int ac, char **av)
 {
     objectVector vector;
+    scope CurrentScope;
     int count = 1;
     for(int i = 0; i < count; i++)
     {
