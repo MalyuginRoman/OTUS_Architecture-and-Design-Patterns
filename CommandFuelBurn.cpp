@@ -23,10 +23,10 @@ CommandFuelBurn::~CommandFuelBurn() { delete imp;}
 void CommandFuelBurn::execute()
 {
     std::cout << "Start execute of CommandFuelBurn" << std::endl;
-    std::cout << imp->obj->state().fuel << std::endl;
+    std::cout << "Fuel before using command : " << imp->obj->state().fuel << std::endl;
     if(imp->obj->getFuel(imp->obj, dF) < 0)
         throw std::runtime_error ("Not enough fuel");
-    std::cout << imp->obj->state().fuel << std::endl;
+    std::cout << "Fuel after using command : " << imp->obj->state().fuel << std::endl;
 }
 
 void CommandFuelBurn::getStr(std::string value)
