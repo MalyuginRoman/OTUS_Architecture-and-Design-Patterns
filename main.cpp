@@ -40,7 +40,7 @@ int main(int ac, char **av)
     CurrentScope.insert("Command.Move",
                         lambda1());
     cmd.add(lambda1());
-    /*auto lambda2 = [&vector](){return new CommandRotate(vector.at(0));};
+    auto lambda2 = [&vector](){return new CommandRotate(vector.at(0));};
     CurrentScope.insert("Command.Rotate",
                         lambda2());
     cmd.add(lambda2());
@@ -51,7 +51,7 @@ int main(int ac, char **av)
     auto lambda4 = [&vector](){return new CommandFuelBurn(vector.at(0));};
     CurrentScope.insert("Command.BurnFuel",
                         lambda4());
-    cmd.add(lambda4());*/
+    cmd.add(lambda4());
 
     /*cmd.add(cmd_check);
     cmd.add(cmd_move);
