@@ -2,7 +2,6 @@
 #include "ioc.h"
 #include "icommand.h"
 #include "object.h"
-using namespace std;
 
 int main(int ac, char **av)
 {
@@ -27,8 +26,8 @@ int main(int ac, char **av)
 
     for(int i = 0; i < count; i++)
     {
-        cout << vector.at(i)->id() << ":" << vector.at(i)->state().velocity << "," << vector.at(i)->state().angularVelocity << "," << vector.at(i)->state().fuel
-                       << "," << vector.at(i)->place().placeX << "," << vector.at(i)->place().placeY << "," << vector.at(i)->place().angular << endl;
+        std::cout << vector.at(i)->id() << ":" << vector.at(i)->state().velocity << "," << vector.at(i)->state().angularVelocity << "," << vector.at(i)->state().fuel
+                       << "," << vector.at(i)->place().placeX << "," << vector.at(i)->place().placeY << "," << vector.at(i)->place().angular << std::endl;
     }
 
     IocContainer<ICommand> ioc;
