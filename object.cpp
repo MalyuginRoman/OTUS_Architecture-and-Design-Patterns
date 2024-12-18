@@ -1,7 +1,6 @@
 #include <iostream>
 #include "object.h"
 #include "math.h"
-using namespace std;
 
 const double TR = 0.01745329252;
 
@@ -70,8 +69,8 @@ bool object::getPosition(object *obj, int dt)
         }
         else
         {
-            cerr << "It is impossible to move the object with id: " << obj->id() << endl;
-            throw runtime_error ("UnknownTimeStep");
+            std::cerr << "It is impossible to move the object with id: " << obj->id() << std::endl;
+            throw std::runtime_error ("UnknownTimeStep");
             return false;
         }
     } catch(...) {
@@ -118,8 +117,8 @@ bool object::getAngular(object *obj, int dt)
         }
         else
         {
-            cerr << "It is impossible to rotate the object with id: " << obj->id() << endl;
-            throw runtime_error ("UnknownTimeStep");
+            std::cerr << "It is impossible to rotate the object with id: " << obj->id() << std::endl;
+            throw std::runtime_error ("UnknownTimeStep");
             return false;
         }
     } catch(...) {
@@ -158,8 +157,8 @@ bool object::getFuel(object *obj, int dF)
         }
         else
         {
-            cerr << "It is impossible to burn fuel the object with id: " << obj->id() << endl;
-            throw runtime_error ("UnknownTimeStep");
+            std::cerr << "It is impossible to burn fuel the object with id: " << obj->id() << std::endl;
+            throw std::runtime_error ("UnknownTimeStep");
             return false;
         }
     } catch(...) {
@@ -171,7 +170,7 @@ bool object::getFuel(object *obj, int dF)
 class objectVectorP
 {
 public:
-    vector<object*> vector;
+    std::vector<object*> vector;
 
     ~objectVectorP()
     {
@@ -215,7 +214,7 @@ size_t objectVector::count() const
 {
     return imp->vector.size();
 }
-const vector<object *> &objectVector::vector() const
+const std::vector<object *> &objectVector::vector() const
 {
     return imp->vector;
 }
@@ -223,29 +222,4 @@ const vector<object *> &objectVector::vector() const
 object *objectVector::at(int i)
 {
     return imp->at(i);
-}
-
-objectVector objectVector::returnOneObject()
-{
-    objectVector vector;
-
-    int count = 1;
-    for(int i = 0; i < count; i++)
-    {
-        int id = i;
-        coord place;
-        react state;
-
-        place.placeX = 0.;
-        place.placeY = 0.;
-        place.angular = 45 * i;
-
-        state.velocity = 100;
-        state.angularVelocity = 20;
-        state.fuel = 10;
-
-        vector.add(id, state, place);
-    }
-
-    return vector;
 }
