@@ -1,8 +1,8 @@
 #pragma once
 #include <vector>
 #include "minor.h"
-#include "IMoving.h"
-#include "IRotateble.h"
+#include "imoving.h"
+#include "irotateble.h"
 using namespace std;
 
 class object : public IMoving, IRotatable
