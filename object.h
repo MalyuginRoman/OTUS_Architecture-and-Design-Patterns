@@ -46,6 +46,6 @@ public:
     const std::vector<object *>& vector() const;
     object* at(int i);
     objectVector returnOneObject();
-private:
+private: 
     class objectVectorP* imp;
 };
