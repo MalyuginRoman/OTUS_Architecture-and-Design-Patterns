@@ -1,13 +1,13 @@
 #include <iostream>
-
+#include "ioc.h"
+#include "icommand.h"
 #include "object.h"
-#include "config.h"
+using namespace std;
 
 int main(int ac, char **av)
 {
     objectVector vector;
-    scope CurrentScope;
-    int count = 1;
+    int count = 2;
     for(int i = 0; i < count; i++)
     {
         int id = i;
@@ -25,48 +25,54 @@ int main(int ac, char **av)
         vector.add(id, state, place);
     }
 
-    std::cout << vector.at(0)->id() << "," << vector.at(0)->state().velocity << "," << vector.at(0)->state().angularVelocity << "," << vector.at(0)->state().fuel
-                   << "," << vector.at(0)->place().placeX << "," << vector.at(0)->place().placeY << "," << vector.at(0)->place().angular << std::endl;
-
-    CommandQueue cmd;
-    /*CommandFuelCheck *cmd_check = new CommandFuelCheck(vector.at(0));
-    CommandMove *cmd_move = new CommandMove(vector.at(0));
-    CommandRotate *cmd_rotate = new CommandRotate(vector.at(0));
-    CommandFuelBurn *cmd_burn = new CommandFuelBurn(vector.at(0));*/
-    std::exception ex;
-    ExceptionHandler* handler = new ExceptionHandler(0, ex);
-
-    auto lambda1 = [&vector](){return new CommandMove(vector.at(0));};
-    CurrentScope.insert("Command.Move",
-                        lambda1());
-    cmd.add(lambda1());
-    auto lambda2 = [&vector](){return new CommandRotate(vector.at(0));};
-    CurrentScope.insert("Command.Rotate",
-                        lambda2());
-    cmd.add(lambda2());
-    auto lambda3 = [&vector](){return new CommandFuelCheck(vector.at(0));};
-    CurrentScope.insert("Command.CheckFuel",
-                        lambda3());
-    cmd.add(lambda3());
-    auto lambda4 = [&vector](){return new CommandFuelBurn(vector.at(0));};
-    CurrentScope.insert("Command.BurnFuel",
-                        lambda4());
-    cmd.add(lambda4());
-
-    /*cmd.add(cmd_check);
-    cmd.add(cmd_move);
-    cmd.add(cmd_burn);
-    cmd.add(cmd_rotate);
-    cmd.add(cmd_burn);*/
-
-    while(!cmd.isEmpty())
+    for(int i = 0; i < count; i++)
     {
-        try {
-            cmd.front()->execute();
-        } catch( std::exception ex) {
-            handler->executeRepeat(handler, &cmd, cmd.front(), ex);
-        }
-        cmd.del();
+        cout << vector.at(i)->id() << ":" << vector.at(i)->state().velocity << "," << vector.at(i)->state().angularVelocity << "," << vector.at(i)->state().fuel
+                       << "," << vector.at(i)->place().placeX << "," << vector.at(i)->place().placeY << "," << vector.at(i)->place().angular << endl;
     }
-    std::cout << std::endl;
+
+    IocContainer<ICommand> ioc;
+
+    // Scope1 not fuel
+    ioc.registerType<MoveCommand>(
+                "Scope1",
+                "MoveCommand",
+                [] { return new MoveCommand(); });
+    ioc.registerType<RotateCommand>(
+                "Scope1",
+                "RotateCommand",
+                [] { return new RotateCommand(); });
+
+    ioc.resolved("MoveCommand", vector.at(0))->execute();
+    ioc.resolved("RotateCommand", vector.at(0), vector.at(1))->execute();
+
+    // Scope2 with fuel
+    // формируем макрокоманды
+    CheckCommand *cmd_check = new CheckCommand();
+    MoveCommand *cmd_move = new MoveCommand();
+    RotateCommand *cmd_rotate = new RotateCommand();
+    BurnCommand *cmd_burn = new BurnCommand();
+    list<ICommand*> cmd_list;
+    cmd_list.push_back(cmd_check);
+    cmd_list.push_back(cmd_move);
+    cmd_list.push_back(cmd_burn);
+    ioc.registerType<MacroCommand>(
+                "Scope2",
+                "MacroCommand1",
+                [&cmd_list]() { return new MacroCommand(cmd_list); });
+    ioc.resolved("MacroCommand1", vector.at(0))->execute();
+    cmd_list.clear();
+
+
+    cmd_list.push_back(cmd_check);
+    cmd_list.push_back(cmd_rotate);
+    cmd_list.push_back(cmd_burn);
+    ioc.registerType<MacroCommand>(
+                "Scope2",
+                "MacroCommand2",
+                [&cmd_list]() {return new MacroCommand(cmd_list); });
+
+    ioc.resolved("MacroCommand2", vector.at(0), vector.at(1))->execute();
+
+    return 0;
 }
