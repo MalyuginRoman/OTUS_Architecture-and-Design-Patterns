@@ -3,7 +3,6 @@
 #include "minor.h"
 #include "imoving.h"
 #include "irotateble.h"
-using namespace std;
 
 class object : public IMoving, IRotatable
 {
@@ -44,7 +43,7 @@ public:
     object* add(int id, react state, coord place);
     bool isEmpty() const;
     size_t count() const;
-    const vector<object *>& vector() const;
+    const std::vector<object *>& vector() const;
     object* at(int i);
     objectVector returnOneObject();
 private:
