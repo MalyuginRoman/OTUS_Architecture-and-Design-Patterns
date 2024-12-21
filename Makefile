@@ -5,6 +5,7 @@ all:
 
 test:
 	chmod +x adapter
-	./main_adapter test_adapter
+	./main_adapter
+	./test_adapter
 clean:
 	$(RM) adapter main_adapter test_adapter
