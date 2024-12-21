@@ -1,5 +1,5 @@
 #include <iostream>
-/*#include "math.h"
+#include "math.h"
 #include <cppunit/TestRunner.h>
 #include <cppunit/TestResult.h>
 #include <cppunit/TestResultCollector.h>
@@ -11,7 +11,7 @@
 #include "icommand.h"
 #include "object.h"
 
-class test_adapter : public CPPUNIT_NS::TestCase
+/*class test_adapter : public CPPUNIT_NS::TestCase
 {
 CPPUNIT_TEST_SUITE(test_adapter);
   CPPUNIT_TEST(test1);
