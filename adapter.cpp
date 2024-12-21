@@ -4,7 +4,7 @@
 #include <filesystem>
 
 using namespace std;
-namespace fs = /*experimental::*/filesystem;
+namespace fs = experimental::filesystem;
 
 int main()
 {
