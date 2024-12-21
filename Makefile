@@ -1,8 +1,8 @@
 all:
-	g++ -std=c++17 equation.cpp -o equation
-	g++ -std=c++17 equationTest.cpp -lcppunit -o equationTest
+	g++ -std=c++17 main.cpp CommandFuelBurn.cpp CommandFuelCheck.cpp CommandLoger.cpp CommandMove.cpp CommandQueue.cpp CommandRepeat.cpp CommandRotate.cpp CommandSimpleMacro.cpp ExceptionHandler.cpp object.cpp -o MacroCommand
+	g++ -std=c++17 test_macrocommand.cpp CommandFuelBurn.cpp CommandFuelCheck.cpp CommandLoger.cpp CommandMove.cpp CommandQueue.cpp CommandRepeat.cpp CommandRotate.cpp CommandSimpleMacro.cpp ExceptionHandler.cpp object.cpp -lcppunit -o test_macrocommand
 test:
-	chmod +x equation
-	./equationTest
+	chmod +x MacroCommand
+	./test_macrocommand
 clean:
-	$(RM) equation equationTest
+	$(RM) MacroCommand test_macrocommand
