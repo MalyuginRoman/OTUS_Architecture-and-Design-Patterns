@@ -25,8 +25,8 @@ void tearDown(void){}
 protected:
   void test1(void)
     {
-      endl;
-      cout << "Start test" << endl;
+      std::endl;
+      std::cout << "Start test" << std::endl;
 
       std::filesystem::path current_path = std::filesystem::current_path();
       std::filesystem::path file_path(current_path);
