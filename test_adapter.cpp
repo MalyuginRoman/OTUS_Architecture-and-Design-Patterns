@@ -29,7 +29,7 @@ protected:
     }
 };
 
-/*CPPUNIT_TEST_SUITE_REGISTRATION(test_adapter);*/
+CPPUNIT_TEST_SUITE_REGISTRATION(test_adapter);/**/
 
 int main()
 {
