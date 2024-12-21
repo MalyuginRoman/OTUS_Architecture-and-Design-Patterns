@@ -24,8 +24,7 @@ void tearDown(void){}
 protected:
   void test1(void)
     {
-      CPPUNIT_ASSERT(0 < 1);
-      //std::cout << "Start test" << std::endl;
+      std::cout << "Start test" << std::endl;
     }
 };
 
