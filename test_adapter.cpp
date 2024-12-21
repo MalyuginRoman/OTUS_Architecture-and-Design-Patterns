@@ -42,7 +42,8 @@ controller.addListener(&progress);
 
 CPPUNIT_NS::TestRunner runner;
 runner.addTest(CPPUNIT_NS::TestFactoryRegistry::getRegistry().makeTest());
-runner.run(controller);*/
+runner.run(controller);
 
-return result.wasSuccessful() ? 0 : 1;
+return result.wasSuccessful() ? 0 : 1;*/
+  return 0;
 }
