@@ -7,7 +7,6 @@
 #include <cppunit/extensions/TestFactoryRegistry.h>
 #include <cppunit/extensions/HelperMacros.h>
 
-
 class test_adapter : public CPPUNIT_NS::TestCase
 {
 CPPUNIT_TEST_SUITE(test_adapter);
