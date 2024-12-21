@@ -12,11 +12,12 @@
 #include "object.h"
 #include <filesystem>
 
+class test_adapter : public CPPUNIT_NS::TestCase
+{
+
 using namespace std;
 namespace fs = filesystem;
 
-class test_adapter : public CPPUNIT_NS::TestCase
-{
 CPPUNIT_TEST_SUITE(test_adapter);
   CPPUNIT_TEST(test1);
 CPPUNIT_TEST_SUITE_END();
