@@ -28,11 +28,11 @@ protected:
     }
 };
 
-CPPUNIT_TEST_SUITE_REGISTRATION(test_adapter);/**/
+/*CPPUNIT_TEST_SUITE_REGISTRATION(test_adapter);*/
 
 int main()
 {
-/*CPPUNIT_NS::TestResult controller;
+CPPUNIT_NS::TestResult controller;
 
 CPPUNIT_NS::TestResultCollector result;
 controller.addListener(&result);
@@ -44,6 +44,6 @@ CPPUNIT_NS::TestRunner runner;
 runner.addTest(CPPUNIT_NS::TestFactoryRegistry::getRegistry().makeTest());
 runner.run(controller);
 
-return result.wasSuccessful() ? 0 : 1;*/
-  return 0;
+return result.wasSuccessful() ? 0 : 1;
+/*  return 0;*/
 }
