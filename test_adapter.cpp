@@ -11,6 +11,9 @@
 #include "icommand.h"
 #include "object.h"
 
+using namespace std;
+namespace fs = experimental::filesystem;
+
 class test_adapter : public CPPUNIT_NS::TestCase
 {
 CPPUNIT_TEST_SUITE(test_adapter);
@@ -24,7 +27,13 @@ void tearDown(void){}
 protected:
   void test1(void)
     {
-      std::cout << "Start test" << std::endl;
+      endl;
+      cout << "Start test" << endl;
+
+      fs::path current_path = fs::current_path();
+      fs::path file_path(current_path);
+
+      cout << file_path.parent_path() << endl;
     }
 };
 
