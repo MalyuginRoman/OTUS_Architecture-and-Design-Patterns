@@ -6,7 +6,7 @@
 using namespace std;
 namespace fs = filesystem;
 
-int adapter()
+int main()
 {
     fs::path current_path = fs::current_path();
     fs::path file_path(current_path);
