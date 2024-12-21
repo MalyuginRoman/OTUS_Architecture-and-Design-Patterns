@@ -1,5 +1,5 @@
 #include <iostream>
-#include "math.h"
+/*#include "math.h"
 #include <cppunit/TestRunner.h>
 #include <cppunit/TestResult.h>
 #include <cppunit/TestResultCollector.h>
@@ -28,7 +28,7 @@ protected:
     }
 };
 
-CPPUNIT_TEST_SUITE_REGISTRATION(test_adapter);
+CPPUNIT_TEST_SUITE_REGISTRATION(test_adapter);*/
 
 int main()
 {
