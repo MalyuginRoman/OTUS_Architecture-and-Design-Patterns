@@ -32,9 +32,9 @@ CPPUNIT_TEST_SUITE_REGISTRATION(test_adapter);*/
 
 int main()
 {
-CPPUNIT_NS::TestResult controller;
+/*CPPUNIT_NS::TestResult controller;
 
-/*CPPUNIT_NS::TestResultCollector result;
+CPPUNIT_NS::TestResultCollector result;
 controller.addListener(&result);
 
 CPPUNIT_NS::BriefTestProgressListener progress;
