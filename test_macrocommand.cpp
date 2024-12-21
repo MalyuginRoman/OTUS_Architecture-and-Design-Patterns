@@ -7,6 +7,7 @@
 #include <cppunit/extensions/TestFactoryRegistry.h>
 #include <cppunit/extensions/HelperMacros.h>
 
+
 #include "config.h"
 
 class test_macrocommand : public CPPUNIT_NS::TestCase
