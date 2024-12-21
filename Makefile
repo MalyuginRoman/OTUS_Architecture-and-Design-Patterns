@@ -4,6 +4,7 @@ all:
 	g++ -std=c++17 test_adapter.cpp icommand.cpp object.cpp -o test_adapter
 test:
 	chmod +x main_adapter
-	./adapter test_adatper
+	./adapter
+	./test_adatper
 clean:
 	$(RM) main_adapter adatper test_adatper
