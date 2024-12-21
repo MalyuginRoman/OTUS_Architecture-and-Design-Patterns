@@ -7,6 +7,10 @@
 #include <cppunit/extensions/TestFactoryRegistry.h>
 #include <cppunit/extensions/HelperMacros.h>
 
+#include "ioc.h"
+#include "icommand.h"
+#include "object.h"
+
 class test_adapter : public CPPUNIT_NS::TestCase
 {
 CPPUNIT_TEST_SUITE(test_adapter);
