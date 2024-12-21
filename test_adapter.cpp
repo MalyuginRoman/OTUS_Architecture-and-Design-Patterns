@@ -14,10 +14,6 @@
 
 class test_adapter : public CPPUNIT_NS::TestCase
 {
-
-using namespace std;
-namespace fs = filesystem;
-
 CPPUNIT_TEST_SUITE(test_adapter);
   CPPUNIT_TEST(test1);
 CPPUNIT_TEST_SUITE_END();
@@ -32,8 +28,8 @@ protected:
       endl;
       cout << "Start test" << endl;
 
-      fs::path current_path = fs::current_path();
-      fs::path file_path(current_path);
+      std::filesystem::path current_path = std::filesystem::current_path();
+      std::filesystem::path file_path(current_path);
 
       cout << file_path.parent_path() << endl;
     }
