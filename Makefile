@@ -1,8 +1,7 @@
 all:
-	g++ -std=c++17 equation.cpp -o equation
-	g++ -std=c++17 equationTest.cpp -lcppunit -o equationTest
+	g++ -std=c++17 main.cpp icommand.cpp object.cpp -o IoC
 test:
-	chmod +x equation
-	./equationTest
+	chmod +x IoC
+	./test_IoC
 clean:
-	$(RM) equation equationTest
+	$(RM) IoC
