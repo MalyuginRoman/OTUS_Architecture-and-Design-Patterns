@@ -11,7 +11,7 @@
 #include "icommand.h"
 #include "object.h"
 
-/*class test_adapter : public CPPUNIT_NS::TestCase
+class test_adapter : public CPPUNIT_NS::TestCase
 {
 CPPUNIT_TEST_SUITE(test_adapter);
   CPPUNIT_TEST(test1);
@@ -28,7 +28,7 @@ protected:
     }
 };
 
-CPPUNIT_TEST_SUITE_REGISTRATION(test_adapter);*/
+/*CPPUNIT_TEST_SUITE_REGISTRATION(test_adapter);*/
 
 int main()
 {
