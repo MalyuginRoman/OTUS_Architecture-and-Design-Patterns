@@ -12,7 +12,7 @@
 #include "object.h"
 
 using namespace std;
-namespace fs = experimental::filesystem;
+namespace fs = filesystem;
 
 class test_adapter : public CPPUNIT_NS::TestCase
 {
