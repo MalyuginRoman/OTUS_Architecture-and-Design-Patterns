@@ -23,9 +23,9 @@ void tearDown(void){}
 
 protected:
   void test1(void)
-{
-    std::cout << "Start test" << std::endl;
-}
+    {
+      std::cout << "Start test" << std::endl;
+    }
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION(test_adapter);
