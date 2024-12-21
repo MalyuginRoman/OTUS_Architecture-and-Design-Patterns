@@ -1,10 +1,10 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-#include <filesystem>
+#include <experimental/filesystem>
 
 using namespace std;
-namespace fs = experimental::filesystem;
+namespace fs = filesystem;
 
 int main()
 {
