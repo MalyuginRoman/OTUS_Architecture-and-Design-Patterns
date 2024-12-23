@@ -35,7 +35,10 @@ protected:
 
       for (auto &p : std::filesystem::recursive_directory_iterator(file_path.parent_path()))
         {
-          std::cout << p.path().parent_path() << " _ " << p.path().filename() << std::endl;
+          if(p.path().extension() == ".h")
+          {
+            std::cout << p.path().parent_path() << " _ " << p.path().filename() << std::endl;
+          }
         }
     }
 };
