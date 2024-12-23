@@ -1,7 +1,6 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-#include <fstream>
 #include <filesystem>
 #include <list>
 
@@ -24,7 +23,7 @@ int main()
             std::string current_file = p.path().filename().generic_string();
             std::string readFileName = p.path().parent_path().generic_string() + "/" +
                                   p.path().filename().generic_string();
-            fstream readFile(readFileName);
+            std::fstream readFile(readFileName);
             if (!readFile.is_open())
             {
                 std::cout << "File " << readFileName << " not be opened" << std::endl;
@@ -58,7 +57,7 @@ int main()
                             p.path().filename().replace_extension(".cpp").generic_string();
                     std::cout << fileWriteName << std::endl;
                     listFileName.push_back(fileWriteName);
-                    ofstream f;
+                    std::ofstream f;
                     f.open(fileWriteName, ios::out);
                     {
                         f << "#include \"object.h\"" << std::endl;
@@ -130,7 +129,7 @@ int main()
                             p.path().filename().replace_extension(".cpp").generic_string();
                     std::cout << fileWriteName << std::endl;
                     listFileName.push_back(fileWriteName);
-                    ofstream f;
+                    std::ofstream f;
                     f.open(fileWriteName, ios::out);
                     {
                         f << "#include \"object.h\"" << std::endl;
