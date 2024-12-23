@@ -38,6 +38,23 @@ protected:
           if(p.path().extension() == ".h")
           {
             std::cout << p.path().parent_path() << " _ " << p.path().filename() << std::endl;
+            
+            std::string readFileName = p.path().parent_path().generic_string() + "/" +
+                                  p.path().filename().generic_string();
+            fstream readFile(readFileName);
+            if (!readFile.is_open())
+            {
+                std::cout << "File " << readFileName << " not be opened" << std::endl;
+            }
+            else
+            {
+                std::string str;
+                while(readFile >> str)
+                {
+                    std::cout << str << std::endl;
+                }
+            }
+            readFile.close();
           }
         }
     }
