@@ -206,7 +206,7 @@ protected:
             readFile.close();
           }
         }
-      int count = listFileName.size()
+      int count = listFileName.size();
       for(int i = 0; i < count; i++)
       {
         std::filesystem::remove(listFileName.front());
