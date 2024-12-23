@@ -32,6 +32,7 @@ protected:
       std::filesystem::path file_path(current_path);
       std::list<std::string> list1, list2, list11, list12, list13, list14,
                              list3, list4, list41, list42, list43, list44;
+      std::list<std::string> listFileName;
 
       cout << file_path.parent_path() << endl;
 
@@ -77,6 +78,7 @@ protected:
                             p.path().parent_path().generic_string() + "/" +
                             p.path().filename().replace_extension(".cpp").generic_string();
                     std::cout << fileWriteName << std::endl;
+                    listFileName.push_bak(fileWriteName);
                     ofstream f;
                     f.open(fileWriteName, ios::out);
                     {
@@ -148,6 +150,7 @@ protected:
                             p.path().parent_path().generic_string() + "/" +
                             p.path().filename().replace_extension(".cpp").generic_string();
                     std::cout << fileWriteName << std::endl;
+                    listFileName.push_bak(fileWriteName);
                     ofstream f;
                     f.open(fileWriteName, ios::out);
                     {
@@ -203,6 +206,12 @@ protected:
             readFile.close();
           }
         }
+      int count = listFileName.size()
+      for(int i = 0; i < count, i++)
+      {
+        std::filesystem::remove(listFileName.front());
+        listFileName.erase(listFileName.begin());
+      }
     }
 };
 
