@@ -78,7 +78,7 @@ protected:
                             p.path().parent_path().generic_string() + "/" +
                             p.path().filename().replace_extension(".cpp").generic_string();
                     std::cout << fileWriteName << std::endl;
-                    listFileName.push_bak(fileWriteName);
+                    listFileName.push_back(fileWriteName);
                     ofstream f;
                     f.open(fileWriteName, ios::out);
                     {
@@ -150,7 +150,7 @@ protected:
                             p.path().parent_path().generic_string() + "/" +
                             p.path().filename().replace_extension(".cpp").generic_string();
                     std::cout << fileWriteName << std::endl;
-                    listFileName.push_bak(fileWriteName);
+                    listFileName.push_back(fileWriteName);
                     ofstream f;
                     f.open(fileWriteName, ios::out);
                     {
