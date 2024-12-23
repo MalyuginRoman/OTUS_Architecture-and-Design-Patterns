@@ -112,7 +112,12 @@ protected:
                                     f << "  return 0;" << std::endl;
                                 }
                             f << "}" << std::endl;
-                            erase(list1, list2, list11, list12, list13, list14);
+                            list1.erase(list1.begin());
+                            list2.erase(list2.begin());
+                            list11.erase(list11.begin());
+                            list12.erase(list12.begin());
+                            list13.erase(list13.begin());
+                            list14.erase(list14.begin());
                         }
                     }
                     f.close();
@@ -180,7 +185,12 @@ protected:
                                     f << "  return 0;" << std::endl;
                                 }
                             f << "}" << std::endl;
-                            erase2(list3, list4, list41, list42, list43, list44);
+                            list3.erase(list3.begin());
+                            list4.erase(list4.begin());
+                            list41.erase(list41.begin());
+                            list42.erase(list42.begin());
+                            list43.erase(list43.begin());
+                            list44.erase(list44.begin());
                         }
                     }
                     f.close();
