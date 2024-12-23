@@ -33,7 +33,7 @@ protected:
 
       cout << file_path.parent_path() << endl;
 
-      for (auto &p : std::filesystem:recursive_directory_iterator(file_path.parent_path()))
+      for (auto &p : std::filesystem::recursive_directory_iterator(file_path.parent_path()))
         {
           std::cout << p.path().parent_path() << " _ " << p.path().filename() << std::endl;
         }
