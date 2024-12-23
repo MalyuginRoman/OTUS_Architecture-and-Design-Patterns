@@ -1,6 +1,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <fstream>
 #include <filesystem>
 #include <list>
 
@@ -12,7 +13,7 @@ int main()
                              list3, list4, list41, list42, list43, list44;
       std::list<std::string> listFileName;
 
-      cout << file_path.parent_path() << endl;
+      std::cout << file_path.parent_path() << std::endl;
 
       for (auto &p : std::filesystem::recursive_directory_iterator(file_path.parent_path()))
         {
@@ -20,7 +21,7 @@ int main()
           {
             std::cout << p.path().parent_path() << " _ " << p.path().filename() << std::endl;
             
-            string current_file = p.path().filename().generic_string();
+            std::string current_file = p.path().filename().generic_string();
             std::string readFileName = p.path().parent_path().generic_string() + "/" +
                                   p.path().filename().generic_string();
             fstream readFile(readFileName);
