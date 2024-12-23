@@ -2,15 +2,10 @@
 #include <iostream>
 #include <fstream>
 #include <filesystem>
-
-using namespace std;
-namespace fs = filesystem;
+#include <list>
 
 int main()
 {
-      std::cout << std::endl;
-      std::cout << "Start test" << std::endl;
-
       std::filesystem::path current_path = std::filesystem::current_path();
       std::filesystem::path file_path(current_path);
       std::list<std::string> list1, list2, list11, list12, list13, list14,
