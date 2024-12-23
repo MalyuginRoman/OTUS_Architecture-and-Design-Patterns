@@ -41,6 +41,7 @@ protected:
           {
             std::cout << p.path().parent_path() << " _ " << p.path().filename() << std::endl;
             
+            string current_file = p.path().filename().generic_string();
             std::string readFileName = p.path().parent_path().generic_string() + "/" +
                                   p.path().filename().generic_string();
             fstream readFile(readFileName);
