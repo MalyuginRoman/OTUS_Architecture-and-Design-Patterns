@@ -207,7 +207,7 @@ protected:
           }
         }
       int count = listFileName.size()
-      for(int i = 0; i < count, i++)
+      for(int i = 0; i < count; i++)
       {
         std::filesystem::remove(listFileName.front());
         listFileName.erase(listFileName.begin());
