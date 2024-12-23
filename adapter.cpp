@@ -58,7 +58,7 @@ int main()
                     std::cout << fileWriteName << std::endl;
                     listFileName.push_back(fileWriteName);
                     std::ofstream f;
-                    f.open(fileWriteName, ios::out);
+                    f.open(fileWriteName, std::ios::out);
                     {
                         f << "#include \"object.h\"" << std::endl;
                         f << "class IMoving" << std::endl;
@@ -130,7 +130,7 @@ int main()
                     std::cout << fileWriteName << std::endl;
                     listFileName.push_back(fileWriteName);
                     std::ofstream f;
-                    f.open(fileWriteName, ios::out);
+                    f.open(fileWriteName, std::ios::out);
                     {
                         f << "#include \"object.h\"" << std::endl;
                         f << "class IRotateble" << std::endl;
