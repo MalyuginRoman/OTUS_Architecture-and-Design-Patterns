@@ -166,7 +166,7 @@ protected:
                 "Scope2",
                 "MacroCommand1",
                 [&cmd_list1]() { return new MacroCommand(cmd_list1); });
-    std::thread t1(ioc.resolved("MacroCommand1", vector.at(0))->execute(),vector.at(0)); 
+    std::thread t1{ioc.resolved("MacroCommand1", vector.at(0))->execute}; 
 
     list<ICommand*> cmd_list2;
     cmd_list2.push_back(cmd_check);
@@ -177,7 +177,7 @@ protected:
                 "MacroCommand2",
                 [&cmd_list2]() {return new MacroCommand(cmd_list2); });
 
-    std::thread t2(ioc.resolved("MacroCommand2", vector.at(0), vector.at(1)).execute());
+    //std::thread t2(ioc.resolved("MacroCommand2", vector.at(0), vector.at(1)).execute());
 
     t1.join();
     t2.join();
