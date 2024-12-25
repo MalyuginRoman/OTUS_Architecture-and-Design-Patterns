@@ -43,10 +43,13 @@ void test_thread1()
     cmd_list.push_back(cmd_check);
     cmd_list.push_back(cmd_move);
     cmd_list.push_back(cmd_burn);
+    ioc.registerType<MacroCommand>(
+                "Scope2",
+                "MacroCommand1",
+                [&cmd_list]() { return new MacroCommand(cmd_list); });
     std::thread t1(
-                [&cmd_list](){
-                    auto cmd = new MacroCommand(cmd_list);
-                    cmd->execute();
+                [&ioc, &vector](){
+                    ioc.resolved("MacroCommand1", vector.at(0))->execute();
     });
     t1.join();
 }
@@ -92,10 +95,13 @@ void thread2()
     cmd_list.push_back(cmd_check);
     cmd_list.push_back(cmd_rotate);
     cmd_list.push_back(cmd_burn);
+    ioc.registerType<MacroCommand>(
+                "Scope2",
+                "MacroCommand2",
+                [&cmd_list]() { return new MacroCommand(cmd_list); });
     std::thread t2(
-                [&cmd_list](){
-                    auto cmd = new MacroCommand(cmd_list);
-                    cmd->execute();
+                [&ioc, &vector](){
+                    ioc.resolved("MacroCommand2", vector.at(0))->execute();
     });
     t2.join();
 }
