@@ -10,6 +10,7 @@
 #include "ioc.h"
 #include "icommand.h"
 #include "object.h"
+#include "producer.h"
 #include <filesystem>
 #include <thread>
 
