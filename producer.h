@@ -4,7 +4,7 @@
 #include "ioc.h"
 #include "icommand.h"
 #include "object.h"
-#include "SafeQueue.h"
+#include "safequeue.h"
 
 void test_thread1()
 {
