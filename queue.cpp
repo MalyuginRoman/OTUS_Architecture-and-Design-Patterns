@@ -1,4 +1,3 @@
-#include "SafeQueue.h"
 #include <iostream>
 #include "ioc.h"
 #include "icommand.h"
