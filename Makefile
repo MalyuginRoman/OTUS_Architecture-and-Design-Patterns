@@ -1,5 +1,5 @@
 all:
-	g++ -std=c++17 main.cpp icommand.cpp object.cpp -o queue
+	g++ -std=c++17 queue.cpp icommand.cpp object.cpp -o queue
 	g++ -std=c++17 queue_test.cpp icommand.cpp object.cpp -lcppunit -o queue_test
 test:
 	chmod +x queue
