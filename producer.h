@@ -6,6 +6,7 @@
 
 void test_thread1()
 {
+    std::cout << "Start test_thread1" << std::endl;
     objectVector vector;
     int count = 2;
     for(int i = 0; i < count; i++)
@@ -56,6 +57,7 @@ void test_thread1()
 
 void test_thread2()
 {
+    std::cout << "Start test_thread2" << std::endl;
     objectVector vector;
     int count = 2;
     for(int i = 0; i < count; i++)
