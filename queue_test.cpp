@@ -20,7 +20,9 @@ void tearDown(void){}
 protected:
   void test1(void)
 {
-  CPPUNIT_ASSERT(1 < 0);
+    std::cout << std::endl;
+    std::cout << "Testing thread methods..." << std::endl;
+    test_thread1()
 }
 };
 
