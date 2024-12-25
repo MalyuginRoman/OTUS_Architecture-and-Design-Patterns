@@ -4,7 +4,7 @@
 #include "icommand.h"
 #include "object.h"
 
-void thread1()
+void test_thread1()
 {
     objectVector vector;
     int count = 2;
@@ -54,7 +54,7 @@ void thread1()
     t1.join();
 }
 
-void thread2()
+void test_thread2()
 {
     objectVector vector;
     int count = 2;
