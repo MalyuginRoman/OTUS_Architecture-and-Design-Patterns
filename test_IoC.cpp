@@ -127,6 +127,7 @@ protected:
     }
   void test3(void)
     {
+      std::cout << "Testing thread methods..." << std::endl;
       test_thread1();
       test_thread2();
     }
