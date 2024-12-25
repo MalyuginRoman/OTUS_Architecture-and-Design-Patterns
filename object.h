@@ -1,4 +1,9 @@
 #pragma once
+#include <vector>
+#include "minor.h"
+#include "imoving.h"
+#include "irotateble.h"
+
 class object : public IMoving, IRotatable
 {
 public:
