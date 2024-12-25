@@ -7,6 +7,8 @@
 #include <cppunit/extensions/TestFactoryRegistry.h>
 #include <cppunit/extensions/HelperMacros.h>
 
+#include "producer.h"
+
 class queue_test : public CPPUNIT_NS::TestCase
 {
 CPPUNIT_TEST_SUITE(queue_test);
@@ -22,7 +24,7 @@ protected:
 {
     std::cout << std::endl;
     std::cout << "Testing thread methods..." << std::endl;
-    test_thread1()
+    test_thread1();
 }
 };
 
