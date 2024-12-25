@@ -2,6 +2,7 @@
 #include "ioc.h"
 #include "icommand.h"
 #include "object.h"
+#include "producer.h"
 
 int main(int ac, char **av)
 {
