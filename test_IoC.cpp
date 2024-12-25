@@ -13,9 +13,9 @@
 #include <filesystem>
 #include <thread>
 
-class test_adapter : public CPPUNIT_NS::TestCase
+class test_IoC : public CPPUNIT_NS::TestCase
 {
-CPPUNIT_TEST_SUITE(test_adapter);
+CPPUNIT_TEST_SUITE(test_IoC);
   CPPUNIT_TEST(test1);
   CPPUNIT_TEST(test2);
   CPPUNIT_TEST(test3);
@@ -131,7 +131,7 @@ protected:
     }
 };
 
-CPPUNIT_TEST_SUITE_REGISTRATION(test_adapter);/**/
+CPPUNIT_TEST_SUITE_REGISTRATION(test_IoC);
 
 int main()
 {
@@ -148,5 +148,4 @@ runner.addTest(CPPUNIT_NS::TestFactoryRegistry::getRegistry().makeTest());
 runner.run(controller);
 
 return result.wasSuccessful() ? 0 : 1;
-/*  return 0;*/
 }
