@@ -36,6 +36,7 @@ void test_thread1()
 
     IocContainer<ICommand> ioc;
     SafeQueue<ICommand*> queueCmds;
+    SafeQueue<ICommand*> queueCmds_1;
 
     // Scope2 with fuel
     // формируем макрокоманды
