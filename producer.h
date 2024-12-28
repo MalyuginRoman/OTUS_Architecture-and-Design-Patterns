@@ -59,7 +59,7 @@ void test_thread1()
     std::thread t1(
                 [&ioc, &producer, &queueCmds, &handler, &ex](){
         try {
-            producer->start(&queueCmds);
+            producer->start(&queueCmds, 1);
         } catch( std::exception ex) {
             handler->executeRepeat(handler, &queueCmds, ex);
         }
