@@ -48,7 +48,7 @@ void eventloop::start(SafeQueue<ICommand *> *cmds, int variant)
         if(cmds->empty())
             stop = true;
         if(ic == 2) cmds->push(cmd_empty);
-        if(variant == 1) cmds->push(cmd_soft);
+        if(variant == 1 && ic == 3) cmds->push(cmd_soft);
         if(variant == 2) cmds->push(cmd_hard);
     } /**/
 }
