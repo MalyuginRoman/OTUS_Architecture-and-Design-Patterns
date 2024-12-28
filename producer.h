@@ -5,6 +5,8 @@
 #include "icommand.h"
 #include "object.h"
 #include "safequeue.h"
+#include "exceptionhandler.h"
+#include "eventloop.h"
 
 void test_thread1()
 {
@@ -44,19 +46,16 @@ void test_thread1()
     MoveCommand *cmd_move = new MoveCommand();
     RotateCommand *cmd_rotate = new RotateCommand();
     BurnCommand *cmd_burn = new BurnCommand();
-    EmptyCommand *cmd_empty = new EmptyCommand();
-    HardStopCommand *cmd_hard = new HardStopCommand();
-    SoftStopCommand *cmd_soft = new SoftStopCommand();
-
-    bool stop = false;
-    int ic = 0;
-
+    std::exception ex;
+    ExceptionHandler* handler = new ExceptionHandler(0, ex);
     queueCmds.push(cmd_check);
     queueCmds.push(cmd_move);
     queueCmds.push(cmd_burn);
     queueCmds.push(cmd_check);
     queueCmds.push(cmd_rotate);
     queueCmds.push(cmd_burn);
+    
+    eventloop* producer = new eventloop(&queueCmds);
     std::thread t1(
                 [&ioc, &producer, &queueCmds, &handler, &ex](){
         try {
