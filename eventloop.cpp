@@ -35,29 +35,15 @@ void eventloop::start(SafeQueue<ICommand *> *cmds, int variant)
         if(cmd == cmd_hard)
         {
             stop = true;
-            std::cout << "in queue after HardStop : " << std::endl;
-            while(!cmds->empty())
-            {
-                ICommand* cmdh = cmds->front();
-                cmdh->execute();
-                cmds->pop();
-            }
         }
         if(cmd == cmd_soft)
         {
             stop = true;
             while(!cmds->empty())
             {
-                std::cout << cmds->size() << " -> " << cmds_1.size() << std::endl;
-                ICommand* cmdss = cmds->front();
-                cmds_1.push(cmdss);
-                cmds->pop();
-            }
-            while(!cmds_1.empty())
-            {
-                ICommand* cmds = cmds_1.front();
-                cmds->execute();
-                cmds_1.pop();
+                ICommand* cmd = cmds.front();
+                cmd->execute();
+                cmds.pop();
             }
         }
         if(cmds->empty())
