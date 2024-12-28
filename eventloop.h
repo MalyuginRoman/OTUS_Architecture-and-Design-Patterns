@@ -11,7 +11,7 @@ public:
 
     SafeQueue<ICommand *> *cmds;
 
-    void start(SafeQueue<ICommand *> *cmds);
+    void start(SafeQueue<ICommand *> *cmds, int variant);
 private:
     class eventloopP* imp;
 };
