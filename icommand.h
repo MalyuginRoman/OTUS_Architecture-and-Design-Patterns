@@ -40,6 +40,15 @@ class BurnCommand : public ICommand
     }
 };
 
+class LogerCommand : public ICommand
+{
+public:
+    void execute()
+    {
+        cout << "Start execute LogerCommand" << endl;
+    }
+};
+
 class EmptyCommand : public ICommand
 {
     void execute()
