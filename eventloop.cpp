@@ -22,7 +22,6 @@ void eventloop::start(SafeQueue<ICommand *> *cmds, int variant)
 {
     bool stop = false;
     int ic = 0;
-    SafeQueue<ICommand*> cmds_1;
     EmptyCommand *cmd_empty = new EmptyCommand();
     HardStopCommand *cmd_hard = new HardStopCommand();
     SoftStopCommand *cmd_soft = new SoftStopCommand();
@@ -41,9 +40,9 @@ void eventloop::start(SafeQueue<ICommand *> *cmds, int variant)
             stop = true;
             while(!cmds->empty())
             {
-                ICommand* cmd = cmds.front();
+                ICommand* cmd = cmds->front();
                 cmd->execute();
-                cmds.pop();
+                cmds->pop();
             }
         }
         if(cmds->empty())
