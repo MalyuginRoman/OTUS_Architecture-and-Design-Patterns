@@ -61,7 +61,7 @@ void eventloop::start(SafeQueue<ICommand *> *cmds, int variant)
                 if(variant == 2) cmds->push(cmd_hard);
             }
         } catch( std::exception ex) {
-            handler->executeRepeat(handler, &cmds, ex);
+            handler->executeRepeat(handler, cmds, ex);
         }
     });
     t1.join();
