@@ -46,8 +46,8 @@ void test_thread1()
     MoveCommand *cmd_move = new MoveCommand();
     RotateCommand *cmd_rotate = new RotateCommand();
     BurnCommand *cmd_burn = new BurnCommand();
-    std::exception ex;
-    ExceptionHandler* handler = new ExceptionHandler(0, ex);
+    //std::exception ex;
+    //ExceptionHandler* handler = new ExceptionHandler(0, ex);
     queueCmds.push(cmd_check);
     queueCmds.push(cmd_move);
     queueCmds.push(cmd_burn);
