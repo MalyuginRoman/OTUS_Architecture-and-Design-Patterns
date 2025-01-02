@@ -56,7 +56,7 @@ void test_thread1()
     queueCmds.push(cmd_burn);
     
     eventloop* producer = new eventloop(&queueCmds);
-    std::thread t1(
+    /*std::thread t1(
                 [&ioc, &producer, &queueCmds, &handler, &ex](){
         try {
             producer->start(&queueCmds, 1);
@@ -64,5 +64,6 @@ void test_thread1()
             handler->executeRepeat(handler, &queueCmds, ex);
         }
     });
-    t1.join();
+    t1.join();*/
+    producer->start(&queueCmds, 1);
 }
