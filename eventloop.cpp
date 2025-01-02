@@ -28,7 +28,7 @@ void eventloop::start(SafeQueue<ICommand *> *cmds, int variant)
     SoftStopCommand *cmd_soft = new SoftStopCommand();
     
     std::thread t1(
-                [&cmds, &variant](){
+                [&cmds, &stop, &ic, &variant, &cmd_empty, &cmd_hard, &cmd_soft](){
         try {
             while(!stop)
             {
