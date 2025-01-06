@@ -47,9 +47,18 @@ public:
     ~MacroCommand();
     list<ICommand*> cmds;
     void execute();
-/*    {
-        cout << "Start execute MacroCommand" << endl;
-    }*/
 private:
-    class MacroCommandP* imp; /**/
+    class MacroCommandP* imp;
+};
+
+class RegisterCommand : public ICommand
+{
+public:
+    RegisterCommand(list<string> scope, list<string> command);
+    ~RegisterCommand();
+    list<string> scope;
+    list<string> command;
+    void execute();
+private:
+    class RegisterCommandP* imp;
 };
