@@ -34,5 +34,36 @@ void MacroCommand::execute()
             throw runtime_error ("Pass the error up");
         }
     }
+}
 
+template<class T>
+class RegisterCommandP
+{
+public:
+    map<string, function<T*()>> *m_map;
+    map<string, string> *m_scope;
+
+    RegisterCommandP(map<string, function<T*()>> *m_map, map<string, string> *m_scope) :
+        m_map(m_map);
+        m_scope(m_scope)
+    {
+    }
+};
+
+RegisterCommand::RegisterCommand(map<string, function<T*()>> *m_map, map<string, string> *m_scope) :
+    imp(new RegisterCommandP(m_map, m_scope))
+{
+}
+
+RegisterCommand::~RegisterCommand() { delete imp;}
+
+void RegisterCommand::execute()
+{
+}
+
+void RegisterCommand::registerType(string key_s, string key_f, FuncType func)
+{
+        m_scope.emplace(key_s, key_f);
+        m_map.emplace(key_f, func);
+        cout << "Registre " << key_f << " in " << key_s << endl;
 }
