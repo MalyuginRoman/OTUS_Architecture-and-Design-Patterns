@@ -55,12 +55,12 @@ template<class T>
 class RegisterCommand : public ICommand
 {
 public:
-    RegisterCommand(map<string, function<T*()>> *m_map, map<string, string> *m_scope);
+    RegisterCommand(std::map<string, function<T*()>> *m_map, std::map<string, string> *m_scope);
     ~RegisterCommand();
-    map<string, function<T*()>> *m_map;
-    map<string, string> *m_scope;
+    std::map<string, function<T*()>> *m_map;
+    std::map<string, string> *m_scope;
     void execute();
-    void registerType(string key_s, string key_f, function<T*()> func)
+    void registerType(string key_s, string key_f, function<T*()> func);
 private:
     class RegisterCommandP* imp;
 };
