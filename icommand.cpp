@@ -68,7 +68,7 @@ void RegisterCommand<T>::execute()
 template<class T>
 void RegisterCommand<T>::registerType(string key_s, string key_f, function<T*()> func)
 {
-        m_scope.emplace(key_s, key_f);
+        m_scope->emplace(key_s, key_f);
         m_map.emplace(key_f, func);
         cout << "Registre " << key_f << " in " << key_s << endl;
 }
