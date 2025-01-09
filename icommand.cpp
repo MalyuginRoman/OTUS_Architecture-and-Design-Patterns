@@ -47,7 +47,7 @@ public:
     RegisterCommandP(map<string, FuncType> *m_map, map<string, string> *m_scope) :
         m_map(m_map);
         m_scope(m_scope)
-    {
+    { 
     }
 };
 
