@@ -56,18 +56,23 @@ protected:
 
     IocContainer<ICommand> ioc;
 
+    std::map<std::string, std::function<ICommand*()>> m_map;
+    std::map<std::string, std::string> m_scope;
+
+    RegisterCommand *cmd_registr = new RegisterCommand(&m_map, &m_scope);
+
     // Scope1 not fuel
-    ioc.registerType<MoveCommand>(
+    cmd_registr->registerType(
                 "Scope1",
                 "MoveCommand",
-                [] { return new MoveCommand(); });
-    ioc.registerType<RotateCommand>(
+                []() { return new MoveCommand(); });
+    cmd_registr->registerType(
                 "Scope1",
                 "RotateCommand",
-                [] { return new RotateCommand(); });
+                []() { return new RotateCommand(); });;
 
-    ioc.resolved("MoveCommand", vector.at(0))->execute();
-    ioc.resolved("RotateCommand", vector.at(0), vector.at(1))->execute();
+    ioc.resolve("MoveCommand", m_map, m_scope, vector.at(0))->execute();
+    ioc.resolve("RotateCommand", m_map, m_scope, vector.at(0), vector.at(1))->execute();
     }
   void test2(void)
     {
@@ -107,23 +112,28 @@ protected:
     cmd_list.push_back(cmd_check);
     cmd_list.push_back(cmd_move);
     cmd_list.push_back(cmd_burn);
-    ioc.registerType<MacroCommand>(
+
+    std::map<std::string, std::function<ICommand*()>> m_map;
+    std::map<std::string, std::string> m_scope;
+
+    RegisterCommand *cmd_registr = new RegisterCommand(&m_map, &m_scope);
+    cmd_registr->registerType(
                 "Scope2",
                 "MacroCommand1",
                 [&cmd_list]() { return new MacroCommand(cmd_list); });
-    ioc.resolved("MacroCommand1", vector.at(0))->execute();
+    ioc.resolve("MacroCommand1", m_map, m_scope, vector.at(0))->execute();
     cmd_list.clear();
 
 
     cmd_list.push_back(cmd_check);
     cmd_list.push_back(cmd_rotate);
     cmd_list.push_back(cmd_burn);
-    ioc.registerType<MacroCommand>(
+    cmd_registr->registerType(
                 "Scope2",
                 "MacroCommand2",
-                [&cmd_list]() {return new MacroCommand(cmd_list); });
+                [&cmd_list]() { return new MacroCommand(cmd_list); });
 
-    ioc.resolved("MacroCommand2", vector.at(0), vector.at(1))->execute();
+    ioc.resolved("MacroCommand2", m_map, m_scope, vector.at(0), vector.at(1))->execute();
     }
   void test3(void)
     {
