@@ -61,11 +61,7 @@ int main(int ac, char **av)
     cmd_list.push_back(cmd_check);
     cmd_list.push_back(cmd_move);
     cmd_list.push_back(cmd_burn);
-
-    std::map<std::string, std::function<ICommand*()>> m_map;
-    std::map<std::string, std::string> m_scope;
-
-    RegisterCommand *cmd_registr = new RegisterCommand(&m_map, &m_scope);
+    
     cmd_registr->registerType(
                 "Scope2",
                 "MacroCommand1",
