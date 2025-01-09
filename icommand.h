@@ -53,16 +53,15 @@ private:
     class MacroCommandP* imp;
 };
 
-template<class T>
 class RegisterCommand : public ICommand
 {
 public:
-    RegisterCommand(map<string, function<T*()>> *m_map, map<string, string> *m_scope);
+    RegisterCommand(map<string, function<ICommand*()>> *m_map, map<string, string> *m_scope);
     ~RegisterCommand();
-    map<string, function<T*()>> *m_map;
-    map<string, string> *m_scope;
+    map<string, function<ICommand*()>>* m_map;
+    map<string, string>* m_scope;
     void execute();
-    void registerType(string key_s, string key_f, function<T*()> func);
+    void registerType(string key_s, string key_f, function<ICommand*()> func);
 private:
     class RegisterCommandP* imp;
 };
