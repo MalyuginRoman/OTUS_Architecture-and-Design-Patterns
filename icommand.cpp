@@ -36,33 +36,37 @@ void MacroCommand::execute()
     }
 }
 
-template<class T>
 class RegisterCommandP
 {
 public:
+    template<class T>
     using FuncType = function<T*()>;
-    map<string, FuncType> *m_map;
+    map<string, FuncType<ICommand>> *m_map;
     map<string, string> *m_scope;
 
-    RegisterCommandP(map<string, FuncType> *m_map, map<string, string> *m_scope) :
-        m_map(m_map);
+    RegisterCommandP(map<string, FuncType<ICommand>> *m_map, map<string, string> *m_scope) :
+        m_map(m_map),
         m_scope(m_scope)
-    { 
+    {
     }
 };
 
-RegisterCommand::RegisterCommand(map<string, FuncType> *m_map, map<string, string> *m_scope) :
+template<class T>
+RegisterCommand<T>::RegisterCommand(map<string, function<T*()>> *m_map, map<string, string> *m_scope) :
     imp(new RegisterCommandP(m_map, m_scope))
 {
 }
 
-RegisterCommand::~RegisterCommand() { delete imp;}
+template<class T>
+RegisterCommand<T>::~RegisterCommand() { delete imp;}
 
-void RegisterCommand::execute()
+template<class T>
+void RegisterCommand<T>::execute()
 {
 }
 
-void RegisterCommand::registerType(string key_s, string key_f, FuncType func)
+template<class T>
+void RegisterCommand<T>::registerType(string key_s, string key_f, function<T*()> func)
 {
         m_scope.emplace(key_s, key_f);
         m_map.emplace(key_f, func);
