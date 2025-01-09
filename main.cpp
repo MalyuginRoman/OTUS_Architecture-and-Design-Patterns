@@ -78,7 +78,7 @@ int main(int ac, char **av)
                 "MacroCommand2",
                 [&cmd_list]() { return new MacroCommand(cmd_list); });
 
-    ioc.resolved("MacroCommand2", m_map, m_scope, vector.at(0), vector.at(1))->execute();
+    ioc.resolve("MacroCommand2", m_map, m_scope, vector.at(0), vector.at(1))->execute();
 
     return 0;
 }
