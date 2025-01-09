@@ -1,6 +1,7 @@
 #pragma once
 #include <list>
 #include <map>
+#include <functional>
 using namespace std;
 
 class ICommand
