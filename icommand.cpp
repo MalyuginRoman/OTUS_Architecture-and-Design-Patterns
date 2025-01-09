@@ -40,17 +40,18 @@ template<class T>
 class RegisterCommandP
 {
 public:
-    map<string, function<T*()>> *m_map;
+    using FuncType = function<T*()>;
+    map<string, FuncType> *m_map;
     map<string, string> *m_scope;
 
-    RegisterCommandP(map<string, function<T*()>> *m_map, map<string, string> *m_scope) :
+    RegisterCommandP(map<string, FuncType> *m_map, map<string, string> *m_scope) :
         m_map(m_map);
         m_scope(m_scope)
     {
     }
 };
 
-RegisterCommand::RegisterCommand(map<string, function<T*()>> *m_map, map<string, string> *m_scope) :
+RegisterCommand::RegisterCommand(map<string, FuncType> *m_map, map<string, string> *m_scope) :
     imp(new RegisterCommandP(m_map, m_scope))
 {
 }
