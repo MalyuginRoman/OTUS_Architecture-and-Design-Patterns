@@ -7,10 +7,10 @@ class object;
 class Message
 {
 public:
-    int gameId;
-    int objectId;
-    int operationId;
-    object* args;
+    int gameId;        // id игры
+    int objectId;      // id объекта
+    int operationId;   // id операции
+    object* args;      // параметры команды
 
     Message(int gameId, int objectId,
             int operationId, object* args)
