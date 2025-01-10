@@ -10,7 +10,7 @@
 #include <thread>
 using namespace std;
 
-int main(int ac, char **av) 
+int main(int ac, char **av)
 {
     objectVector vector;
     int count = 2;
