@@ -1,8 +1,8 @@
 all:
-	g++ -std=c++17 equation.cpp -o equation
-	g++ -std=c++17 equationTest.cpp -lcppunit -o equationTest
+	g++ -std=c++17 endpoint.cpp icommand.cpp object.cpp eventloop.cpp exceptionhandler.cpp -o endpoint
+	g++ -std=c++17 endpoint_test.cpp icommand.cpp object.cpp eventloop.cpp exceptionhandler.cpp -lcppunit -o endpoint_test
 test:
-	chmod +x equation
-	./equationTest
+	chmod +x endpoint
+	./endpoint_test
 clean:
-	$(RM) equation equationTest
+	$(RM) endpoint endpoint_test
