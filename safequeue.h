@@ -1,5 +1,5 @@
 #pragma once
-#include "ICommand.h"
+#include "icommand.h"
 #include <queue>
 
 class SafeQueue
