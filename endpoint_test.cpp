@@ -7,7 +7,16 @@
 #include <cppunit/extensions/TestFactoryRegistry.h>
 #include <cppunit/extensions/HelperMacros.h>
 
-#include "producer.h"
+#include <iostream>
+#include <thread>
+#include "ioc.h"
+#include "icommand.h"
+#include "object.h"
+#include "safequeue.h"
+#include "exceptionhandler.h"
+#include "eventloop.h"
+#include "imessage.h"
+#include <thread>
 
 class endpoint_test : public CPPUNIT_NS::TestCase
 {
