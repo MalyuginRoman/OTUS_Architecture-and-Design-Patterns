@@ -79,9 +79,14 @@ void eventloop::start(SafeQueue<ICommand *> *cmds, StateStatus *status, int vari
                   }
                   if(cmds->empty())
                       stop = true;
-                  if(ic == 2) cmds->push(cmd_empty);
-                  if(variant == 1 && ic == 3) cmds->push(cmd_soft);
-                  if(variant == 2 && ic == 4) cmds->push(cmd_hard);
+                  if(ic == 2)
+                  {
+                      cmds->push(cmd_empty);
+                      cmds->push(cmd_empty);
+                      cmds->push(cmd_empty);
+                  }
+                  if(variant == 1 && ic == 1) cmds->push(cmd_soft);
+                  if(variant == 2 && ic == 1) cmds->push(cmd_hard);
               }
         } catch( std::exception ex) {
             handler->executeRepeat(handler, cmds, ex);
