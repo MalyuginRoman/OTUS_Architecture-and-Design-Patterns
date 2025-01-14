@@ -59,6 +59,7 @@ protected:
     MoveCommand *cmd_move = new MoveCommand();
     RotateCommand *cmd_rotate = new RotateCommand();
     BurnCommand *cmd_burn = new BurnCommand();
+    EmptyCommand *cmd_empty = new EmptyCommand();
   
     queueCmds.push(cmd_check);
     queueCmds.push(cmd_move);
@@ -69,7 +70,7 @@ protected:
 
     StateStatus *sc = new StateStatus(new DefaultState(), cmd_empty);
     
-    eventloop* producer = new eventloop(&queueCmds);
+    eventloop* producer = new eventloop(&queueCmds, sc);
     producer->start(&queueCmds, sc, 1);
     delete sc;
 }
@@ -112,6 +113,7 @@ protected:
     MoveCommand *cmd_move = new MoveCommand();
     RotateCommand *cmd_rotate = new RotateCommand();
     BurnCommand *cmd_burn = new BurnCommand();
+    EmptyCommand *cmd_empty = new EmptyCommand();
   
     queueCmds.push(cmd_check);
     queueCmds.push(cmd_move);
@@ -122,7 +124,7 @@ protected:
 
     StateStatus *sc = new StateStatus(new DefaultState(), cmd_empty);
     
-    eventloop* producer = new eventloop(&queueCmds);
+    eventloop* producer = new eventloop(&queueCmds, sc);
     producer->start(&queueCmds, sc, 2);
     delete sc;
 }
