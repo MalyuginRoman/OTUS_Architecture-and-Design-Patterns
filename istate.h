@@ -38,7 +38,7 @@ public:
 
     void execute(ICommand* cur_cmd)
     {
-        std::cout << "Using " << state->GetStatus() << "... " << cur_cmd->get_Id_cmd() << std::endl;
+        std::cout << "Using " << state->GetStatus() << " state" << std::endl;
         state->execute(this, cur_cmd);
     }
     void SetState(State* s)
