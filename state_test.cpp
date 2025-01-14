@@ -66,9 +66,12 @@ protected:
     queueCmds.push(cmd_check);
     queueCmds.push(cmd_rotate);
     queueCmds.push(cmd_burn);
+
+    StateStatus *sc = new StateStatus(new DefaultState(), cmd_empty);
     
     eventloop* producer = new eventloop(&queueCmds);
-    producer->start(&queueCmds, 1);
+    producer->start(&queueCmds, sc, 1);
+    delete sc;
 }
 
   void test2(void)
@@ -116,9 +119,12 @@ protected:
     queueCmds.push(cmd_check);
     queueCmds.push(cmd_rotate);
     queueCmds.push(cmd_burn);
+
+    StateStatus *sc = new StateStatus(new DefaultState(), cmd_empty);
     
     eventloop* producer = new eventloop(&queueCmds);
-    producer->start(&queueCmds, 2);
+    producer->start(&queueCmds, sc, 2);
+    delete sc;
 }
 };
 
