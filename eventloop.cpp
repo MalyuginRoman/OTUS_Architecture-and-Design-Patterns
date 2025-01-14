@@ -34,13 +34,16 @@ void eventloop::start(SafeQueue<ICommand *> *cmds, StateStatus *status, int vari
     ExceptionHandler* handler = new ExceptionHandler(0, ex);
     
     std::thread t1(
-                [&cmds, &stop, &ic, &variant, &cmd_empty, &cmd_hard, &cmd_soft, &ex, &handler](){
+                [&cmds, &stop, &ic, &variant, &cmd_empty, &cmd_hard, &cmd_soft, &ex, &handler, &status, &cmds_1](){
         try {
               while(!stop)
               {
                   ic += 1;
                   ICommand* cmd = cmds->front();
-                  execute(cmd);
+                  //execute(cmd);
+                  std::cout << "Start execute ";
+                  cmd->execute();
+                  std::cout << std::endl;
                   cmds->pop();
                   if(cmd == cmd_hard)
                   {
