@@ -1,4 +1,5 @@
 #include "eventloop.h"
+#include "exceptionhandler.h"
 
 class eventloopP
 {
@@ -30,7 +31,7 @@ void eventloop::start(SafeQueue<ICommand *> *cmds, StateStatus *status, int vari
     SoftStopCommand *cmd_soft = new SoftStopCommand();
     
     std::exception ex;
-    ExceptionHandler* handler = new ExceptionHandler(0, ex);
+    exceptionhandler* handler = new exceptionhandler(0, ex);
     
     std::thread t1(
                 [&cmds, &stop, &ic, &variant, &cmd_empty, &cmd_hard, &cmd_soft, &ex, &handler](){
