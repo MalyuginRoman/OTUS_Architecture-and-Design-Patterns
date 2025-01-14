@@ -1,6 +1,6 @@
 #pragma once
-
 #include <vector>
+
 using namespace std;
 
 enum CommandCodes
@@ -18,14 +18,12 @@ enum CommandCodes
     CommandRun = 11,
     CommandMacro = 100
 };
-
 class ICommand
 {
 public:
     virtual int get_Id_cmd() = 0;
     virtual void execute() = 0;
 };
-
 class MoveCommand : public ICommand
 {
 public:
@@ -38,7 +36,6 @@ public:
         cout << "MoveCommand";
     }
 };
-
 class RotateCommand : public ICommand
 {
 public:
@@ -51,7 +48,6 @@ public:
         cout << "RotateCommand";
     }
 };
-
 class CheckCommand : public ICommand
 {
 public:
@@ -64,7 +60,6 @@ public:
         cout << "CheckCommand";
     }
 };
-
 class BurnCommand : public ICommand
 {
 public:
@@ -77,7 +72,6 @@ public:
         cout << "BurnCommand";
     }
 };
-
 class LogerCommand : public ICommand
 {
 public:
@@ -90,7 +84,6 @@ public:
         cout << "LogerCommand";
     }
 };
-
 class EmptyCommand : public ICommand
 {
 public:
@@ -103,7 +96,6 @@ public:
         cout << "EmptyCommand";
     }
 };
-
 class HardStopCommand : public ICommand
 {
 public:
@@ -116,7 +108,6 @@ public:
         cout << "HardStopCommand";
     }
 };
-
 class SoftStopCommand : public ICommand
 {
 public:
@@ -129,7 +120,6 @@ public:
         cout << "SoftStopCommand";
     }
 };
-
 class InternetCommand : public ICommand
 {
 public:
@@ -142,7 +132,6 @@ public:
         cout << "InternetCommand";
     }
 };
-
 class MoveToCommand : public ICommand
 {
 public:
@@ -155,7 +144,6 @@ public:
         cout << "MoveToCommand";
     }
 };
-
 class RunCommand : public ICommand
 {
 public:
@@ -168,7 +156,6 @@ public:
         cout << "RunCommand";
     }
 };
-
 class MacroCommand : public ICommand
 {
 public:
