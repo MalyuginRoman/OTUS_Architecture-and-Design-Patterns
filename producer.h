@@ -47,6 +47,7 @@ void test_thread1()
     MoveCommand *cmd_move = new MoveCommand();
     RotateCommand *cmd_rotate = new RotateCommand();
     BurnCommand *cmd_burn = new BurnCommand();
+    EmptyCommand *cmd_empty = new EmptyCommand();
   
     queueCmds.push(cmd_check);
     queueCmds.push(cmd_move);
@@ -54,7 +55,9 @@ void test_thread1()
     queueCmds.push(cmd_check);
     queueCmds.push(cmd_rotate);
     queueCmds.push(cmd_burn);
+
+    StateStatus *sc = new StateStatus(new DefaultState(), cmd_empty);
     
-    eventloop* producer = new eventloop(&queueCmds);
-    producer->start(&queueCmds, 1);
+    eventloop* producer = new eventloop(&queueCmds, sc);
+    producer->start(&queueCmds, sc, 1);
 }
