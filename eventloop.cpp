@@ -67,7 +67,7 @@ void eventloop::start(SafeQueue<ICommand *> *cmds, StateStatus *status, int vari
                       status->execute(cmd);
                       while(!cmds->empty())
                       {
-                          std::cout << cmds->size() << " -> " << cmds_1.size() << std::endl;
+                          //std::cout << cmds->size() << " -> " << cmds_1.size() << std::endl;
                           ICommand* cmdss = cmds->front();
                           cmds_1.push(cmdss);
                           cmds->pop();
@@ -77,7 +77,10 @@ void eventloop::start(SafeQueue<ICommand *> *cmds, StateStatus *status, int vari
                           ICommand* cmds = cmds_1.front();
                           cmds->execute();
                           cmds_1.pop();
+                          if(cmds->size() > 0)
+                              std::cout << ", ";
                       }
+                      std::cout << std::endl;
                   }
                   if(cmds->empty())
                       stop = true;
