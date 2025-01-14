@@ -1,9 +1,9 @@
-#include "SafeQueue.h"
 #include <iostream>
 #include "ioc.h"
 #include "icommand.h"
 #include "object.h"
 #include "producer.h"
+#include "safequeue.h"
 
 int main(int ac, char **av)
 {
