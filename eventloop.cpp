@@ -63,6 +63,8 @@ void eventloop::start(SafeQueue<ICommand *> *cmds, StateStatus *status, int vari
                   if(cmd == cmd_soft)
                   {
                       stop = true;
+                      std::cout << "in queue after SoftStop : " << std::endl;
+                      status->execute(cmd);
                       while(!cmds->empty())
                       {
                           std::cout << cmds->size() << " -> " << cmds_1.size() << std::endl;
