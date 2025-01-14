@@ -1,4 +1,3 @@
-#include <QCoreApplication>
 #include "SafeQueue.h"
 #include <iostream>
 #include "ioc.h"
