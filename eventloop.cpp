@@ -77,7 +77,7 @@ void eventloop::start(SafeQueue<ICommand *> *cmds, StateStatus *status, int vari
                           ICommand* cmds = cmds_1.front();
                           cmds->execute();
                           cmds_1.pop();
-                          if(cmds->size() > 0)
+                          if(cmds_1->size() > 0)
                               std::cout << ", ";
                       }
                       std::cout << std::endl;
