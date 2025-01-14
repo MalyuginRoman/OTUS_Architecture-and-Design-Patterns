@@ -1,7 +1,6 @@
 #pragma once
 
 #include <vector>
-//#include "istate.h"
 using namespace std;
 
 enum CommandCodes
