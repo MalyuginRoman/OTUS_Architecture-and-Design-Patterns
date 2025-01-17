@@ -181,7 +181,7 @@ public:
                                 f << "{" << endl;
                                     if(list4.front() == "getAngular")
                                     {
-                                        f << "  ioc.resolve(\"Spaceship.Operations.IRotateble:angular.get\", m_map, m_scope, obj);" << endl;
+                                        f << "  //ioc.resolve(\"Spaceship.Operations.IRotateble:angular.get\", m_map, m_scope, obj);" << endl;
                                         f << "  return 0;" << endl;
                                     }
                                     else if(list4.front() == "getAngularVelocity")
