@@ -103,7 +103,7 @@ public:
                   object *obj);
     void execute()
     {
-        cout << "Start execute CreateAdaptor" << endl;
+        std::cout << "Start execute CreateAdaptor" << std::endl;
         Adapter *adapt;
         adapt->generate();
         new MovingAdapter(ioc, m_map, m_scope, obj);
@@ -118,7 +118,7 @@ public:
     list<ICommand*> cmds;
     void execute();
 /*    {
-        cout << "Start execute MacroCommand" << endl;
+        std::cout << "Start execute MacroCommand" << std::endl;
     }*/
 private:
     class MacroCommandP* imp; /**/
@@ -127,12 +127,12 @@ private:
 class RegisterCommand : public ICommand
 {
 public:
-    RegisterCommand(map<string, function<ICommand*()>> *m_map, map<string, string> *m_scope);
+    RegisterCommand(std::map<std::string, std::function<ICommand*()>> *m_map, std::map<std::string, std::string> *m_scope);
     ~RegisterCommand();
-    map<string, function<ICommand*()>>* m_map;
-    map<string, string>* m_scope;
+    std::map<std::string, std::function<ICommand*()>>* m_map;
+    std::map<std::string, std::string>* m_scope;
     void execute();
-    void registerType(string key_s, string key_f, function<ICommand*()> func);
+    void registerType(std::string key_s, std::string key_f, std::function<ICommand*()> func);
 private:
     class RegisterCommandP* imp;
 };
