@@ -1,5 +1,13 @@
 #pragma once
+#include <iostream>
+#include <string>
 #include <list>
+#include <map>
+#include <functional>
+#include <memory>
+#include "object.h"
+#include "adapter.h"
+
 using namespace std;
 
 class ICommand
@@ -10,33 +18,95 @@ public:
 
 class MoveCommand : public ICommand
 {
+private:
+    object* obj;
+public:
+    MoveCommand(object* obj)
+        : obj(obj) {}
     void execute()
     {
         cout << "Start execute MoveCommand" << endl;
+        if(obj->place().placeX < 0 && obj->place().placeY < 0)
+            throw std::runtime_error ("Object not found");
+        if(!obj->getVelocity(obj, 0))
+            throw std::runtime_error ("Unknown velocity");
+        std::cout << obj->place().placeX << "," << obj->place().placeY << std::endl;
+        if(!obj->getPosition(obj, dt))
+            throw std::runtime_error ("Unknown position");
+        std::cout << obj->place().placeX << "," << obj->place().placeY << std::endl;
     }
 };
 
 class RotateCommand : public ICommand
 {
+private:
+    object* obj;
+public:
+    RotateCommand(object* obj)
+        : obj(obj) {}
     void execute()
     {
         cout << "Start execute RotateCommand" << endl;
+        if(obj->place().placeX < 0 && obj->place().placeY < 0)
+            throw std::runtime_error ("Object not found");
+        if(!obj->getAngularVelocity(obj, 0))
+            throw std::runtime_error ("Unknown angular velocity");
+        std::cout << obj->place().angular << std::endl;
+        if(!obj->getAngular(obj, dt))
+            throw std::runtime_error ("Unknown position");
+        std::cout << obj->place().angular << std::endl;
     }
 };
 
 class CheckCommand : public ICommand
 {
+private:
+    object* obj;
+public:
+    CheckCommand(object* obj)
+        : obj(obj) {}
     void execute()
     {
         cout << "Start execute CheckCommand" << endl;
+        if(obj->state().fuel < 0)
+            throw std::runtime_error ("Object has not fuel");
     }
 };
 
 class BurnCommand : public ICommand
 {
+private:
+    object* obj;
+public:
+    BurnCommand(object* obj)
+        : obj(obj) {}
     void execute()
     {
         cout << "Start execute BurnCommand" << endl;
+        std::cout << obj->state().fuel << std::endl;
+        if(obj->getFuel(obj, dF) < 0)
+            throw std::runtime_error ("Not enough fuel");
+        std::cout << obj->state().fuel << std::endl;
+    }
+};
+
+class CreateAdaptor : public ICommand
+{
+    IocContainer<ICommand> ioc;
+    std::map<std::string, std::function<ICommand*()>> m_map;
+    std::map<std::string, std::string> m_scope;
+    object* obj;
+public:
+    CreateAdaptor(IocContainer<ICommand> ioc,
+                  std::map<std::string, std::function<ICommand*()>> m_map,
+                  std::map<std::string, std::string> m_scope,
+                  object *obj);
+    void execute()
+    {
+        cout << "Start execute CreateAdaptor" << endl;
+        Adapter *adapt;
+        adapt->generate();
+        new MovingAdapter(ioc, m_map, m_scope, obj);
     }
 };
 
@@ -52,4 +122,17 @@ public:
     }*/
 private:
     class MacroCommandP* imp; /**/
+};
+
+class RegisterCommand : public ICommand
+{
+public:
+    RegisterCommand(map<string, function<ICommand*()>> *m_map, map<string, string> *m_scope);
+    ~RegisterCommand();
+    map<string, function<ICommand*()>>* m_map;
+    map<string, string>* m_scope;
+    void execute();
+    void registerType(string key_s, string key_f, function<ICommand*()> func);
+private:
+    class RegisterCommandP* imp;
 };
