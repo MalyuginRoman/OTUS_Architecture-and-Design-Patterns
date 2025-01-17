@@ -27,7 +27,7 @@ public:
         : obj(obj) {}
     void execute()
     {
-        cout << "Start execute MoveCommand" << endl;
+        std::cout << "Start execute MoveCommand" << std::endl;
         if(obj->place().placeX < 0 && obj->place().placeY < 0)
             throw std::runtime_error ("Object not found");
         if(!obj->getVelocity(obj, 0))
@@ -69,7 +69,7 @@ public:
         : obj(obj) {}
     void execute()
     {
-        cout << "Start execute CheckCommand" << endl;
+        std::cout << "Start execute CheckCommand" << std::endl;
         if(obj->state().fuel < 0)
             throw std::runtime_error ("Object has not fuel");
     }
@@ -84,7 +84,7 @@ public:
         : obj(obj) {}
     void execute()
     {
-        cout << "Start execute BurnCommand" << endl;
+        std::cout << "Start execute BurnCommand" << std::endl;
         std::cout << obj->state().fuel << std::endl;
         if(obj->getFuel(obj, dF) < 0)
             throw std::runtime_error ("Not enough fuel");
