@@ -1,11 +1,9 @@
 all:
-	g++ -std=c++17 adapter.cpp -o adapter
 	g++ -std=c++17 main.cpp icommand.cpp object.cpp imoving.cpp irotateble.cpp -o main_adapter
 	g++ -std=c++17 test_adapter.cpp icommand.cpp object.cpp imoving.cpp irotateble.cpp -lcppunit -o test_adapter
 
 test:
-	chmod +x adapter
-	./main_adapter
+	chmod +x main_adapter
 	./test_adapter
 clean:
-	$(RM) adapter main_adapter test_adapter
+	$(RM) main_adapter test_adapter
