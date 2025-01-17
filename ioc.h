@@ -8,6 +8,8 @@
 
 using namespace std;
 
+class ICommand;
+
 template<class T>
 class IocContainer
 {
