@@ -8,7 +8,7 @@ RotatingAdapter::RotatingAdapter(IocContainer<ICommand> ioc,
         ioc(ioc), m_map(m_map), m_scope(m_scope), obj(obj) {}
 bool RotatingAdapter::getAngular(object *obj, int dt)
 {
-  ioc.resolve("Spaceship.Operations.IRotateble:angular.get", m_map, m_scope, obj);
+  //ioc.resolve("Spaceship.Operations.IRotateble:angular.get", m_map, m_scope, obj);
   return 0;
 }
 bool RotatingAdapter::setAngular(object *obj)
