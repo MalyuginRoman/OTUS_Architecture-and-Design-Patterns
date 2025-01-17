@@ -2,6 +2,7 @@
 #include "ioc.h"
 
 class object;
+class ICommand;
 
 class IMoving
 {
