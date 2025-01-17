@@ -10,6 +10,8 @@
 
 using namespace std;
 
+class object;
+
 class ICommand
 {
 public:
