@@ -36,7 +36,7 @@ public:
     };
     void generate()
     {
-        fs::path current_path = "D:/Models/OTUS/HW5/hw5_2/hw5_2/hw5_2/"; // fs::current_path();
+        fs::path current_path = fs::current_path();
         fs::path file_path(current_path);
         list<string> list1, list2, list11, list12, list13, list14,
                      list3, list4, list41, list42, list43, list44;
