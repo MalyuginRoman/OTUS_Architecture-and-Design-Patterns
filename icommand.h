@@ -104,7 +104,7 @@ public:
     void execute()
     {
         std::cout << "Start execute CreateAdaptor" << std::endl;
-        //Adapter *adapt;
+        Adapter *adapt;
         //adapt->generate();
         //new MovingAdapter(ioc, m_map, m_scope, obj);
     }
