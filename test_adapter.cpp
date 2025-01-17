@@ -9,7 +9,7 @@
 
 #include "ioc.h"
 #include "icommand.h"
-#include "object.h
+#include "object.h"
 #include <thread>
 
 class test_adapter : public CPPUNIT_NS::TestCase
