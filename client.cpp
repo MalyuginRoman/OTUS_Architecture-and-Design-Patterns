@@ -38,10 +38,9 @@ int main(void)
     in_addr ip_to_num;
     inet_pton(AF_INET, SERVER_IP, &ip_to_num);
 
+#ifdef _WIN32
     WSADATA wsData;
     erStat = WSAStartup(MAKEWORD(2,2), &wsData);
-
-#ifdef _WIN32
     if (erStat != 0)
     {
         cout << "Error WinSock version initializaion #";
@@ -63,7 +62,7 @@ int main(void)
     sockaddr_in servInfo;
     ZeroMemory(&servInfo, sizeof(servInfo));
 #else
-    int ServSock = socket(AF_INET, SOCK_STREAM, 0);
+    int ClientSock = socket(AF_INET, SOCK_STREAM, 0);
     struct sockaddr_in servInfo;
     memset(&servInfo, '0', sizeof(servInfo));
 #endif
