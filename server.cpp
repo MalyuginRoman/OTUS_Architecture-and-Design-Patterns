@@ -9,6 +9,8 @@
 #include <arpa/inet.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <stdlib.h> 
+#include <sys/types.h> 
 #endif
 #include <vector>
 
@@ -28,6 +30,8 @@ int main(void)
         cout << "Error in IP translation to special numeric format" << endl;
         return 1;
     }
+
+#ifdef _WIN32
     WSADATA wsData;
     erStat = WSAStartup(MAKEWORD(2,2), &wsData);
     if ( erStat != 0 )
@@ -38,8 +42,6 @@ int main(void)
     }
     else
         cout << "WinSock initialization is OK" << endl;
-
-#ifdef _WIN32
     SOCKET ServSock = socket(AF_INET, SOCK_STREAM, 0);
 #else
     int ServSock = socket(AF_INET, SOCK_STREAM, 0);
@@ -173,19 +175,23 @@ int main(void)
 
         packet_size = send(ClientConn, clientBuff.data(), clientBuff.size(), 0);
 
+#ifdef _WIN32
         if (packet_size == SOCKET_ERROR)
         {
-#ifdef _WIN32
             cout << "Can't send message to Client. Error # " << WSAGetLastError() << endl;
             closesocket(ServSock);
             closesocket(ClientConn);
             WSACleanup();
-#else
-            close(ServSock);
-            close(ClientConn);
-#endif
             return 1;
         }
+#else
+        if (packet_size == SO_ERROR)
+        {
+            close(ServSock);
+            close(ClientConn);
+            return 1;
+        }
+#endif
     }
 
 #ifdef _WIN32
