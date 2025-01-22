@@ -1,19 +1,16 @@
 #pragma once
 #include <iostream>
-#include "object.h"
-
-class object;
 
 class Message
 {
 public:
-    int gameId;
-    int objectId;
-    int operationId;
-    object* args;
+    std::string gameId;
+    std::string objectId;
+    std::string operationId;
+    std::string args;
 
-    Message(int gameId, int objectId,
-            int operationId, object* args)
+    Message(std::string gameId, std::string objectId,
+            std::string operationId, std::string args)
     {
         this->gameId = gameId;
         this->objectId = objectId;
@@ -21,19 +18,19 @@ public:
         this->args = args;
     }
 
-    int getGameId()
+    std::string getGameId()
     {
         return gameId;
     }
-    int getObjectId()
+    std::string getObjectId()
     {
         return objectId;
     }
-    int getOperationId()
+    std::string getOperationId()
     {
         return operationId;
     }
-    object* getArgs()
+    std::string getArgs()
     {
         return args;
     }
@@ -42,27 +39,27 @@ public:
 class Builder
 {
 public:
-    int gameId;
-    int objectId;
-    int operationId;
-    object* args;
+    std::string gameId;
+    std::string objectId;
+    std::string operationId;
+    std::string args;
 
-    Builder* setGameId(int gameId)
+    Builder* setGameId(std::string gameId)
     {
         this->gameId = gameId;
         return this;
     }
-    Builder* setObjectId(int objectId)
+    Builder* setObjectId(std::string objectId)
     {
         this->objectId = objectId;
         return this;
     }
-    Builder* setOperationId(int operationId)
+    Builder* setOperationId(std::string operationId)
     {
         this->operationId = operationId;
         return this;
     }
-    Builder* setArgs(object* args)
+    Builder* setArgs(std::string args)
     {
         this->args = args;
         return this;
