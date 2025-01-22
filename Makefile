@@ -1,8 +1,8 @@
 all:
-	g++ -std=c++17 client.cpp -o client
-	g++ -std=c++17 server.cpp -lcppunit -o server
+	g++ -std=c++17 server.cpp -o server
+	g++ -std=c++17 client.cpp -lcppunit -o client
 test:
-	chmod +x client
-	./server
+	chmod +x server
+	./client
 clean:
-	$(RM) client server
+	$(RM) server client
