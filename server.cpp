@@ -3,6 +3,7 @@
 #include <WinSock2.h>
 #include <WS2tcpip.h>
 #include <stdio.h>
+#pragma comment(lib, "Ws2_32.lib")
 #else
 #include <unistd.h>
 #include <arpa/inet.h>
@@ -11,10 +12,7 @@
 #endif
 #include <vector>
 
-#pragma comment(lib, "Ws2_32.lib")
-
 using namespace std;
-
 
 int main(void)
 {
@@ -50,7 +48,11 @@ int main(void)
     if (ServSock == INVALID_SOCKET)
     {
         cout << "Error initialization socket # " << WSAGetLastError() << endl;
+#ifdef _WIN32
         closesocket(ServSock);
+#else
+        close(ServSock);
+#endif
         WSACleanup();
         return 1;
     }
@@ -69,7 +71,11 @@ int main(void)
     if ( erStat != 0 )
     {
         cout << "Error Socket binding to server info. Error # " << WSAGetLastError() << endl;
+#ifdef _WIN32
         closesocket(ServSock);
+#else
+        close(ServSock);
+#endif
         WSACleanup();
         return 1;
     }
@@ -80,7 +86,11 @@ int main(void)
 
     if ( erStat != 0 ) {
         cout << "Can't start to listen to. Error # " << WSAGetLastError() << endl;
+#ifdef _WIN32
         closesocket(ServSock);
+#else
+        close(ServSock);
+#endif
         WSACleanup();
         return 1;
     }
@@ -96,8 +106,13 @@ int main(void)
 
     if (ClientConn == INVALID_SOCKET) {
         cout << "Client detected, but can't connect to a client. Error # " << WSAGetLastError() << endl;
+#ifdef _WIN32
         closesocket(ServSock);
         closesocket(ClientConn);
+#else
+        close(ServSock);
+        close(ClientConn);
+#endif
         WSACleanup();
         return 1;
     }
@@ -127,8 +142,13 @@ int main(void)
         if (clientBuff[0] == 'o' && clientBuff[1] == 'u' && clientBuff[2] == 't')
         {
             shutdown(ClientConn, SD_BOTH);
-            closesocket(ServSock);
-            closesocket(ClientConn);
+#ifdef _WIN32
+        closesocket(ServSock);
+        closesocket(ClientConn);
+#else
+        close(ServSock);
+        close(ClientConn);
+#endif
             WSACleanup();
             return 0;
         }
@@ -138,15 +158,25 @@ int main(void)
         if (packet_size == SOCKET_ERROR)
         {
             cout << "Can't send message to Client. Error # " << WSAGetLastError() << endl;
-            closesocket(ServSock);
-            closesocket(ClientConn);
+#ifdef _WIN32
+        closesocket(ServSock);
+        closesocket(ClientConn);
+#else
+        close(ServSock);
+        close(ClientConn);
+#endif
             WSACleanup();
             return 1;
         }
     }
 
-    closesocket(ServSock);
-    closesocket(ClientConn);
+#ifdef _WIN32
+        closesocket(ServSock);
+        closesocket(ClientConn);
+#else
+        close(ServSock);
+        close(ClientConn);
+#endif
     WSACleanup();
 
     return 0;
