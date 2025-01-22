@@ -9,6 +9,9 @@
 #include <arpa/inet.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <stdlib.h> 
+#include <sys/types.h>
+#include <cstring>
 #endif
 #include <vector>
 #include "imessage.h"
