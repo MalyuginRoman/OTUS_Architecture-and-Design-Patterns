@@ -47,19 +47,17 @@ int main(void)
     int ServSock = socket(AF_INET, SOCK_STREAM, 0);
 #endif
 
+#ifdef _WIN32
     if (ServSock == INVALID_SOCKET)
     {
-#ifdef _WIN32
         cout << "Error initialization socket # " << WSAGetLastError() << endl;
         closesocket(ServSock);
         WSACleanup();
-#else
-        close(ServSock);
-#endif
         return 1;
     }
     else
         cout << "Server socket initialization is OK" << endl;
+#endif
 
 #ifdef _WIN32
     sockaddr_in servInfo;
@@ -124,16 +122,13 @@ int main(void)
     int ClientConn = accept(ServSock, (sockaddr*)&clientInfo, &clientInfo_size);
 #endif
 
-    if (ClientConn == INVALID_SOCKET) {
 #ifdef _WIN32
+    if (ClientConn == INVALID_SOCKET)
+    {
         cout << "Client detected, but can't connect to a client. Error # " << WSAGetLastError() << endl;
         closesocket(ServSock);
         closesocket(ClientConn);
         WSACleanup();
-#else
-        close(ServSock);
-        close(ClientConn);
-#endif
         return 1;
     }
     else
@@ -144,8 +139,8 @@ int main(void)
         inet_ntop(AF_INET, &clientInfo.sin_addr, clientIP, INET_ADDRSTRLEN);
 
         cout << "Client connected with IP address " << clientIP << endl;
-
     }
+#endif
 
     vector <char> servBuff(BUFF_SIZE), clientBuff(BUFF_SIZE);
     short packet_size = 0;
@@ -161,8 +156,8 @@ int main(void)
 
         if (clientBuff[0] == 'o' && clientBuff[1] == 'u' && clientBuff[2] == 't')
         {
-            shutdown(ClientConn, SD_BOTH);
 #ifdef _WIN32
+            shutdown(ClientConn, SD_BOTH);
             closesocket(ServSock);
             closesocket(ClientConn);
             WSACleanup();
