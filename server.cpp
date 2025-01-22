@@ -103,9 +103,8 @@ int main(void)
     memset(&clientInfo, '0', sizeof(clientInfo));
 #endif
 
-    int clientInfo_size = sizeof(clientInfo);
-
 #ifdef _WIN32
+    int clientInfo_size = sizeof(clientInfo);
     SOCKET ClientConn = accept(ServSock, (sockaddr*)&clientInfo, &clientInfo_size);
     if (ClientConn == INVALID_SOCKET)
     {
@@ -125,6 +124,7 @@ int main(void)
         cout << "Client connected with IP address " << clientIP << endl;
     }
 #else
+    socklen_t clientInfo_size = sizeof(clientInfo);
     int ClientConn = accept(ServSock, (sockaddr*)&clientInfo, &clientInfo_size);
 #endif
 
