@@ -21,21 +21,17 @@ int main(void)
     const short BUFF_SIZE = 1024;
 
     int erStat;
-
     in_addr ip_to_num;
     erStat = inet_pton(AF_INET, IP_SERV, &ip_to_num);
-
     if (erStat <= 0)
     {
         cout << "Error in IP translation to special numeric format" << endl;
         return 1;
     }
-
     WSADATA wsData;
-
     erStat = WSAStartup(MAKEWORD(2,2), &wsData);
-
-    if ( erStat != 0 ) {
+    if ( erStat != 0 )
+    {
         cout << "Error WinSock version initializaion #";
         cout << WSAGetLastError();
         return 1;
@@ -44,43 +40,52 @@ int main(void)
         cout << "WinSock initialization is OK" << endl;
 
 #ifdef _WIN32
-    SOCKET ServSock = socket(AF_INET, SOCK_STREAM, 0)
+    SOCKET ServSock = socket(AF_INET, SOCK_STREAM, 0);
 #else
-    int ServSock = socket(AF_INET, SOCK_STREAM, 0)
+    int ServSock = socket(AF_INET, SOCK_STREAM, 0);
 #endif
 
     if (ServSock == INVALID_SOCKET)
     {
-        cout << "Error initialization socket # " << WSAGetLastError() << endl;
 #ifdef _WIN32
+        cout << "Error initialization socket # " << WSAGetLastError() << endl;
         closesocket(ServSock);
+        WSACleanup();
 #else
         close(ServSock);
 #endif
-        WSACleanup();
         return 1;
     }
     else
         cout << "Server socket initialization is OK" << endl;
 
+#ifdef _WIN32
     sockaddr_in servInfo;
     ZeroMemory(&servInfo, sizeof(servInfo));
+#else
+    struct sockaddr_in servInfo;
+    memset(&servInfo, '0', sizeof(servInfo));
+#endif
 
     servInfo.sin_family = AF_INET;
     servInfo.sin_addr = ip_to_num;
     servInfo.sin_port = htons(PORT_NUM);
 
+#ifdef _WIN32
     erStat = bind(ServSock, (sockaddr*)&servInfo, sizeof(servInfo));
+#else
+    bind(ServSock, (struct sockaddr*)&servInfo, sizeof(servInfo)); 
+#endif
 
     if ( erStat != 0 )
     {
-        cout << "Error Socket binding to server info. Error # " << WSAGetLastError() << endl;
 #ifdef _WIN32
+        cout << "Error Socket binding to server info. Error # " << WSAGetLastError() << endl;
         closesocket(ServSock);
+        WSACleanup();
 #else
         close(ServSock);
 #endif
-        WSACleanup();
         return 1;
     }
     else
@@ -89,8 +94,8 @@ int main(void)
     erStat = listen(ServSock, SOMAXCONN);
 
     if ( erStat != 0 ) {
-        cout << "Can't start to listen to. Error # " << WSAGetLastError() << endl;
 #ifdef _WIN32
+        cout << "Can't start to listen to. Error # " << WSAGetLastError() << endl;
         closesocket(ServSock);
         WSACleanup();
 #else
@@ -118,8 +123,8 @@ int main(void)
 #endif
 
     if (ClientConn == INVALID_SOCKET) {
-        cout << "Client detected, but can't connect to a client. Error # " << WSAGetLastError() << endl;
 #ifdef _WIN32
+        cout << "Client detected, but can't connect to a client. Error # " << WSAGetLastError() << endl;
         closesocket(ServSock);
         closesocket(ClientConn);
         WSACleanup();
@@ -156,12 +161,12 @@ int main(void)
         {
             shutdown(ClientConn, SD_BOTH);
 #ifdef _WIN32
-        closesocket(ServSock);
-        closesocket(ClientConn);
-        WSACleanup();
+            closesocket(ServSock);
+            closesocket(ClientConn);
+            WSACleanup();
 #else
-        close(ServSock);
-        close(ClientConn);
+            close(ServSock);
+            close(ClientConn);
 #endif
             return 0;
         }
@@ -170,14 +175,14 @@ int main(void)
 
         if (packet_size == SOCKET_ERROR)
         {
-            cout << "Can't send message to Client. Error # " << WSAGetLastError() << endl;
 #ifdef _WIN32
-        closesocket(ServSock);
-        closesocket(ClientConn);
-        WSACleanup();
+            cout << "Can't send message to Client. Error # " << WSAGetLastError() << endl;
+            closesocket(ServSock);
+            closesocket(ClientConn);
+            WSACleanup();
 #else
-        close(ServSock);
-        close(ClientConn);
+            close(ServSock);
+            close(ClientConn);
 #endif
             return 1;
         }
