@@ -1,8 +1,8 @@
 #include <iostream>
+#include <stdio.h>
 #ifdef _WIN32
 #include <WinSock2.h>
 #include <WS2tcpip.h>
-#include <stdio.h>
 #pragma comment(lib, "Ws2_32.lib")
 #else
 #include <unistd.h>
@@ -47,7 +47,7 @@ int main(void)
     SOCKET ServSock = socket(AF_INET, SOCK_STREAM, 0)
 #else
     int ServSock = socket(AF_INET, SOCK_STREAM, 0)
-#endif;
+#endif
 
     if (ServSock == INVALID_SOCKET)
     {
@@ -92,17 +92,22 @@ int main(void)
         cout << "Can't start to listen to. Error # " << WSAGetLastError() << endl;
 #ifdef _WIN32
         closesocket(ServSock);
+        WSACleanup();
 #else
         close(ServSock);
 #endif
-        WSACleanup();
         return 1;
     }
     else
         cout << "Listening..." << endl;
 
+#ifdef _WIN32
     sockaddr_in clientInfo;
     ZeroMemory(&clientInfo, sizeof(clientInfo));
+#else
+    struct sockaddr_in clientInfo;
+    memset(&clientInfo, '0', sizeof(clientInfo));
+#endif
 
     int clientInfo_size = sizeof(clientInfo);
 
@@ -110,18 +115,18 @@ int main(void)
     SOCKET ClientConn = accept(ServSock, (sockaddr*)&clientInfo, &clientInfo_size);
 #else
     int ClientConn = accept(ServSock, (sockaddr*)&clientInfo, &clientInfo_size);
-#endif;
+#endif
 
     if (ClientConn == INVALID_SOCKET) {
         cout << "Client detected, but can't connect to a client. Error # " << WSAGetLastError() << endl;
 #ifdef _WIN32
         closesocket(ServSock);
         closesocket(ClientConn);
+        WSACleanup();
 #else
         close(ServSock);
         close(ClientConn);
 #endif
-        WSACleanup();
         return 1;
     }
     else
@@ -153,11 +158,11 @@ int main(void)
 #ifdef _WIN32
         closesocket(ServSock);
         closesocket(ClientConn);
+        WSACleanup();
 #else
         close(ServSock);
         close(ClientConn);
 #endif
-            WSACleanup();
             return 0;
         }
 
@@ -169,11 +174,11 @@ int main(void)
 #ifdef _WIN32
         closesocket(ServSock);
         closesocket(ClientConn);
+        WSACleanup();
 #else
         close(ServSock);
         close(ClientConn);
 #endif
-            WSACleanup();
             return 1;
         }
     }
@@ -181,11 +186,11 @@ int main(void)
 #ifdef _WIN32
         closesocket(ServSock);
         closesocket(ClientConn);
+        WSACleanup();
 #else
         close(ServSock);
         close(ClientConn);
 #endif
-    WSACleanup();
 
     return 0;
 }
