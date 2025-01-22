@@ -1,7 +1,14 @@
 #include <iostream>
+#ifdef _WIN32
 #include <WinSock2.h>
 #include <WS2tcpip.h>
 #include <stdio.h>
+#else
+#include <unistd.h> //contains various constants
+#include <arpa/inet.h> // defines in_addr structure
+#include <sys/socket.h> // for socket creation
+#include <netinet/in.h> //contains constants and structures needed for internet domain addresses
+#endif
 #include <vector>
 
 #pragma comment(lib, "Ws2_32.lib")
