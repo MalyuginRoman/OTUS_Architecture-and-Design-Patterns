@@ -146,8 +146,8 @@ int main(void)
         }
         else
             cout << "Server message: " << servBuff.data() << endl;
-    }
 #endif
+    }
 
 #ifdef _WIN32
     closesocket(ClientSock);
