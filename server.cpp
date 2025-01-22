@@ -92,7 +92,7 @@ int main(void)
     else
         cout << "Listening..." << endl;
 #else
-    listen(clintListn , SOMAXCONN);
+    listen(ServSock , SOMAXCONN);
 #endif
 
 #ifdef _WIN32
