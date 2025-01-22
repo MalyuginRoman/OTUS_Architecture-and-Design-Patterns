@@ -43,7 +43,11 @@ int main(void)
     else
         cout << "WinSock initialization is OK" << endl;
 
-    SOCKET ServSock = socket(AF_INET, SOCK_STREAM, 0);
+#ifdef _WIN32
+    SOCKET ServSock = socket(AF_INET, SOCK_STREAM, 0)
+#else
+    int ServSock = socket(AF_INET, SOCK_STREAM, 0)
+#endif;
 
     if (ServSock == INVALID_SOCKET)
     {
@@ -102,7 +106,11 @@ int main(void)
 
     int clientInfo_size = sizeof(clientInfo);
 
+#ifdef _WIN32
     SOCKET ClientConn = accept(ServSock, (sockaddr*)&clientInfo, &clientInfo_size);
+#else
+    int ClientConn = accept(ServSock, (sockaddr*)&clientInfo, &clientInfo_size);
+#endif;
 
     if (ClientConn == INVALID_SOCKET) {
         cout << "Client detected, but can't connect to a client. Error # " << WSAGetLastError() << endl;
