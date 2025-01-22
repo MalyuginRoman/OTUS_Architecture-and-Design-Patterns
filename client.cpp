@@ -1,8 +1,15 @@
 #include <iostream>
+#ifdef _WIN32
 #include <WinSock2.h>
 #include <WS2tcpip.h>
 #include <inaddr.h>
 #include <stdio.h>
+#else
+#include <unistd.h>
+#include <arpa/inet.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#endif
 #include <vector>
 #include "imessage.h"
 
