@@ -1,8 +1,8 @@
 all:
-	g++ -std=c++17 main.cpp icommand.cpp object.cpp eventloop.cpp exceptionhandler.cpp istate.cpp -o state
-	g++ -std=c++17 state_test.cpp icommand.cpp object.cpp eventloop.cpp exceptionhandler.cpp istate.cpp -lcppunit -o state_test
+	g++ -std=c++17 client.cpp -o client
+	g++ -std=c++17 server.cpp -lcppunit -o server
 test:
-	chmod +x state
-	./state_test
+	chmod +x client
+	./server
 clean:
-	$(RM) state state_test
+	$(RM) client server
