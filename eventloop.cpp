@@ -19,7 +19,7 @@ eventloop::eventloop(SafeQueue<ICommand *> *cmds) :
 
 eventloop::~eventloop() { delete imp; }
 
-void eventloop::start(SafeQueue<ICommand *> *cmds, StateStatus *status, int variant)
+void eventloop::start(SafeQueue<ICommand *> *cmds)
 {
     bool stop = false;
     int ic = 0;
