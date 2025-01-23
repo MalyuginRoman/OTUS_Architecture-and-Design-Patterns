@@ -5,16 +5,14 @@ class eventloopP
 {
 public:
     SafeQueue<ICommand *> *cmds;
-    StateStatus *status;
-    eventloopP(SafeQueue<ICommand *> *cmds, StateStatus *status) :
-        cmds(cmds),
-        status(status)
+    eventloopP(SafeQueue<ICommand *> *cmds) :
+        cmds(cmds)
     {
     }
 };
 
-eventloop::eventloop(SafeQueue<ICommand *> *cmds, StateStatus *status) :
-    imp(new eventloopP(cmds, status))
+eventloop::eventloop(SafeQueue<ICommand *> *cmds) :
+    imp(new eventloopP(cmds))
 {
 }
 
@@ -34,13 +32,12 @@ void eventloop::start(SafeQueue<ICommand *> *cmds, StateStatus *status, int vari
     ExceptionHandler* handler = new ExceptionHandler(0, ex);
     
     std::thread t1(
-                [&cmds, &stop, &ic, &variant, &cmd_empty, &cmd_hard, &cmd_soft, &ex, &handler, &status, &cmds_1](){
+                [&cmds, &stop, &ic, &cmd_empty, &cmd_hard, &cmd_soft, &ex, &handler, &cmds_1](){
         try {
               while(!stop)
               {
                   ic += 1;
                   ICommand* cmd = cmds->front();
-                  //execute(cmd);
                   std::cout << "Start execute ";
                   cmd->execute();
                   std::cout << std::endl;
@@ -49,7 +46,6 @@ void eventloop::start(SafeQueue<ICommand *> *cmds, StateStatus *status, int vari
                   {
                       stop = true;
                       std::cout << "in queue after HardStop : " << std::endl;
-                      status->execute(cmd);
                       while(!cmds->empty())
                       {
                           ICommand* cmdh = cmds->front();
@@ -64,10 +60,8 @@ void eventloop::start(SafeQueue<ICommand *> *cmds, StateStatus *status, int vari
                   {
                       stop = true;
                       std::cout << "in queue after SoftStop : " << std::endl;
-                      status->execute(cmd);
                       while(!cmds->empty())
                       {
-                          //std::cout << cmds->size() << " -> " << cmds_1.size() << std::endl;
                           ICommand* cmdss = cmds->front();
                           cmds_1.push(cmdss);
                           cmds->pop();
@@ -84,14 +78,6 @@ void eventloop::start(SafeQueue<ICommand *> *cmds, StateStatus *status, int vari
                   }
                   if(cmds->empty())
                       stop = true;
-                  if(ic == 2)
-                  {
-                      cmds->push(cmd_empty);
-                      cmds->push(cmd_empty);
-                      cmds->push(cmd_empty);
-                  }
-                  if(variant == 1 && ic == 1) cmds->push(cmd_soft);
-                  if(variant == 2 && ic == 1) cmds->push(cmd_hard);
               }
         } catch( std::exception ex) {
             handler->executeRepeat(handler, cmds, ex);
@@ -105,4 +91,9 @@ void eventloop::execute(ICommand *cmd)
     std::cout << "Start execute ";
     cmd->execute();
     std::cout << std::endl;
+}
+
+void eventloop::addCommand(ICommand *cmd)
+{
+    this->imp->cmds->push(cmd);
 }
