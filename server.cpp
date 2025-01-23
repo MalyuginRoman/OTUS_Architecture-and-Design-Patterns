@@ -15,7 +15,29 @@
 #endif
 #include <vector>
 
+#include "producer.h"
+
 using namespace std;
+
+vector <char> convert(vector <char> result, string s)
+{
+    size_t l = s.length();
+    for(int i = l - 1; i > -1; i--)
+    {
+        result.emplace(result.begin(), s.at(i));
+        result.erase(result.end() - 1);
+    }
+    return result;
+}
+
+vector <char> clearBuf(vector <char> result)
+{
+    result.erase(result.begin(), result.end());
+    const short BUFF_SIZE = 1024;
+    for(int i = BUFF_SIZE - 1; i > -1; i--)
+        result.emplace(result.begin(), '\0');
+    return result;
+}
 
 int main(void)
 {
@@ -131,14 +153,21 @@ int main(void)
     vector <char> servBuff(BUFF_SIZE), clientBuff(BUFF_SIZE);
     short packet_size = 0;
 
+    producer a1;
+    a1.start_game();
+
     while (true)
     {
         packet_size = recv(ClientConn, servBuff.data(), servBuff.size(), 0);
         cout << "Client's message: " << servBuff.data() << endl;
+        std::cout << "Testing server methods..." << std::endl;
+        a1.test_game(servBuff);
 
         cout << "Your (host) message: ";
-        fgets(clientBuff.data(), clientBuff.size(), stdin);
-        // обработка клиентского пакета
+        string anser = "ok!";
+        clientBuff = convert(clientBuff, anser);
+        cout << clientBuff.data() << endl;
+        std::cout << std::endl;
 
         if (clientBuff[0] == 'o' && clientBuff[1] == 'u' && clientBuff[2] == 't')
         {
