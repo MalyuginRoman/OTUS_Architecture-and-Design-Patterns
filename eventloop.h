@@ -13,6 +13,7 @@ public:
 
     void start(SafeQueue<ICommand *> *cmds);
     void execute(ICommand *cmd);
+    void addCommand(ICommand *cmd);
 private:
     class eventloopP* imp;
 };
