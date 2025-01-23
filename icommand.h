@@ -79,6 +79,18 @@ public:
         cout << "BurnCommand";
     }
 };
+class AddLastCommand : public ICommand
+{
+public:
+    int get_Id_cmd()
+    {
+        return CommandAddLast;
+    }
+    void execute()
+    {
+        cout << "Start execute AddLastCommand" << endl;
+    }
+};
 class LogerCommand : public ICommand
 {
 public:
