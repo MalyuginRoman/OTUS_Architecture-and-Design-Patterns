@@ -64,6 +64,14 @@ public:
         this->args = args;
         return this;
     }
+    Builder* clear()
+    {
+        this->gameId.clear();
+        this->objectId.clear();
+        this->operationId.clear();
+        this->args.clear();
+        return this;
+    }
     Message* build()
     {
         return new Message(gameId, objectId, operationId, args);
