@@ -9,6 +9,6 @@ public:
     void read_message(std::vector <char> message);
 
     objectVector vector_obj;
-    string gameId_s, objectId_s, operationId_s, args;
+    std::string gameId_s, objectId_s, operationId_s, args;
     int gameId_i, objectId_i, operationId_i;
 };
