@@ -24,7 +24,26 @@ vector <char> convert(vector <char> result, string s)
 {
     size_t l = s.length();
     for(int i = l - 1; i > -1; i--)
+    {
         result.emplace(result.begin(), s.at(i));
+        result.erase(result.end() - 1);
+    }
+    return result;
+}
+
+vector <char> space(vector <char> result)
+{
+    result.emplace(result.begin(), ' ');
+    result.erase(result.end() - 1);
+    return result;
+}
+
+vector <char> clearBuf(vector <char> result)
+{
+    result.erase(result.begin(), result.end());
+    const short BUFF_SIZE = 1024;
+    for(int i = BUFF_SIZE - 1; i > -1; i--)
+        result.emplace(result.begin(), '\0');
     return result;
 }
 
@@ -92,6 +111,9 @@ int main(void)
 
     vector <char> servBuff(BUFF_SIZE), clientBuff(BUFF_SIZE);
     short packet_size = 0;
+    // счетчик отправленных сообщений
+    int mes_count = 0;
+    Builder* b1 = new Builder;
 
     while (true)
     {
@@ -99,20 +121,66 @@ int main(void)
 
 // формирование клиентского пакета
 //-----------------------------------------------------------------------------------------
-        Builder* b1 = new Builder;
-        b1->setGameId("1");
-        b1->setObjectId("1");
-        b1->setOperationId("1");
-        b1->setArgs("vector.at(0)");
+        b1->clear();
+        clientBuff = clearBuf(clientBuff);
 
-        clientBuff = convert(clientBuff, b1->args);
-        clientBuff.emplace(clientBuff.begin(), ' ');
-        clientBuff = convert(clientBuff, b1->operationId);
-        clientBuff.emplace(clientBuff.begin(), ' ');
-        clientBuff = convert(clientBuff, b1->objectId);
-        clientBuff.emplace(clientBuff.begin(), ' ');
-        clientBuff = convert(clientBuff, b1->gameId);
-        cout << clientBuff.data() << endl;
+        if(mes_count == 0)
+        {
+            b1->setGameId("548");
+            b1->setObjectId("11");
+            b1->setOperationId("1");
+            b1->setArgs("vector.at(0)");
+
+            clientBuff = convert(clientBuff, b1->args);
+            clientBuff = space(clientBuff);
+            clientBuff = convert(clientBuff, b1->operationId);
+            clientBuff = space(clientBuff);
+            clientBuff = convert(clientBuff, b1->objectId);
+            clientBuff = space(clientBuff);
+            clientBuff = convert(clientBuff, b1->gameId);
+            cout << clientBuff.data() << endl;
+            mes_count ++;
+        }
+        else if(mes_count == 1)
+        {
+            b1->setGameId("548");
+            b1->setObjectId("12");
+            b1->setOperationId("2");
+            b1->setArgs("vector.at(1)");
+
+            clientBuff = convert(clientBuff, b1->args);
+            clientBuff = space(clientBuff);
+            clientBuff = convert(clientBuff, b1->operationId);
+            clientBuff = space(clientBuff);
+            clientBuff = convert(clientBuff, b1->objectId);
+            clientBuff = space(clientBuff);
+            clientBuff = convert(clientBuff, b1->gameId);
+            cout << clientBuff.data() << endl;
+            mes_count ++;
+        }
+        else if(mes_count == 2)
+        {
+            b1->setGameId("7");
+            b1->setObjectId("11");
+            b1->setOperationId("7");
+            b1->setArgs("vector.at(0)");
+
+            clientBuff = convert(clientBuff, b1->args);
+            clientBuff = space(clientBuff);
+            clientBuff = convert(clientBuff, b1->operationId);
+            clientBuff = space(clientBuff);
+            clientBuff = convert(clientBuff, b1->objectId);
+            clientBuff = space(clientBuff);
+            clientBuff = convert(clientBuff, b1->gameId);
+            cout << clientBuff.data() << endl;
+            mes_count ++;
+        }
+        else if(mes_count == 3)
+        {
+            b1->setArgs("out");
+            clientBuff = convert(clientBuff, b1->args);
+            cout << clientBuff.data() << endl;
+        }
 //-----------------------------------------------------------------------------------------
 
 #ifdef _WIN32
