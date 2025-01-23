@@ -1,5 +1,11 @@
 #pragma once
 #include <vector>
+#include <iostream>
+#include <string>
+#include <list>
+#include <map>
+#include <functional>
+#include <memory>
 
 using namespace std;
 
@@ -13,9 +19,10 @@ enum CommandCodes
     CommandEmpty = 6,
     CommandHardStop = 7,
     CommandSoftStop = 8,
-    CommandInternet = 9,
+    //CommandInternet = 9,
     CommandMoveTo = 10,
     CommandRun = 11,
+    CommandAddLast = 12,
     CommandMacro = 100
 };
 class ICommand
@@ -120,18 +127,6 @@ public:
         cout << "SoftStopCommand";
     }
 };
-class InternetCommand : public ICommand
-{
-public:
-    int get_Id_cmd()
-    {
-        return CommandInternet;
-    }
-    void execute()
-    {
-        cout << "InternetCommand";
-    }
-};
 class MoveToCommand : public ICommand
 {
 public:
@@ -169,4 +164,57 @@ public:
     void execute();
 private:
     class MacroCommandP* imp;
+};
+
+template<class T>
+class InternetCommand
+{
+public:
+    T resolve(int operatinID)
+    {
+        switch (operatinID)
+        {
+        case CommandMove:
+            return new MoveCommand();
+            break;
+        case CommandRotate:
+            return new RotateCommand();
+            break;
+        case CommandCheck:
+            return new CheckCommand();
+            break;
+        case CommandBurn:
+            return new BurnCommand();
+            break;
+        case CommandLoger:
+            return new LogerCommand();
+            break;
+        case CommandEmpty:
+            return new EmptyCommand();
+            break;
+        case CommandHardStop:
+            return new HardStopCommand();
+            break;
+        case CommandSoftStop:
+            return new SoftStopCommand();
+            break;
+        case CommandMoveTo:
+            return new MoveToCommand();
+            break;
+        case CommandRun:
+            return new RunCommand();
+            break;
+        case CommandAddLast:
+            return new AddLastCommand();
+            break;
+        /*case CommandMacro:
+            return new MacroCommand();
+            break;*/
+        default:
+            throw std::runtime_error("unknown command");
+            break;
+        }
+    }
+private:
+    int operationID;
 };
