@@ -4,6 +4,7 @@
 #include <map>
 #include <functional>
 #include <memory>
+#include "icommand.h"
 
 template<class T>
 class IocContainer
