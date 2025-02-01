@@ -20,9 +20,14 @@ jobs:
     - name: make test
       run: make test
 
+    - name: Use Node.js 16.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16.x
+
     - name: npm install, make test-coverage
       run: |
-        npm install
+        npm install coveralls --save-dev
         make test-coverage
 
     - name: Coveralls
