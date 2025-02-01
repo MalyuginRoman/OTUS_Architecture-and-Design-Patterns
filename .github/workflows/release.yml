@@ -19,3 +19,11 @@ jobs:
       run: make
     - name: make test
       run: make test
+
+    - name: npm install, make test-coverage
+      run: |
+        npm install
+        make test-coverage
+
+    - name: Coveralls
+      uses: coverallsapp/github-action@v2
