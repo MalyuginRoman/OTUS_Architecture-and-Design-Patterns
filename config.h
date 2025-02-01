@@ -2,8 +2,8 @@ const double e = 1E-07;
 
 struct root
 {
-    double x1;
-    double x2;
+        double x1;
+        double x2;
 };
 
 double discr(double a, double b, double c)
