@@ -32,3 +32,6 @@ jobs:
 
     - name: Coveralls
       uses: coverallsapp/github-action@v2
+      
+    - name: Test ${{ matrix.test_number }}
+      run: make test-coverage-${{ matrix.test_number }}
