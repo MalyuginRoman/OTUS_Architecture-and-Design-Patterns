@@ -30,6 +30,7 @@ protected:
     p_map_c_b = func_name(2);
 // формируем объекты
     int count = 1;
+    objectVector vector;
     std::cout << "Start create " << count << " objects." << std::endl;
 
     for(int i = 0; i < count; i++)
