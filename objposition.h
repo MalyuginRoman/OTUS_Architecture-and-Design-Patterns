@@ -92,5 +92,6 @@ std::cout << "object id: " << p_map_c.at(j).obj_id.front() << " write in " << p_
         }
       }
     }
+  std::cout << "end func_obj" << std::endl;
     return p_map_c;
 }
