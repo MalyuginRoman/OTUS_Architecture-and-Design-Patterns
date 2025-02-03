@@ -67,8 +67,7 @@ std::map<int, system_okr> func_obj(std::map<int, system_okr> p_map, objectVector
   std::cout << "start func_obj" << std::endl;
     int countObj = vector->count();
     std::map<int, system_okr> p_map_c = p_map;
-    int count1 = p_map_c.size();
-    for(int i = 0; i < count1; i++)
+    for(int i = 0; i < countObj; i++)
     {
       double current_X = vector->at(i)->place().placeX;
       double current_Y = vector->at(i)->place().placeY;
