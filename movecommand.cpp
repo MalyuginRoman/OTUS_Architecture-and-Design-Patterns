@@ -92,18 +92,22 @@ void CheckPositionCommand::execute(std::map<int, system_okr>* p_map, object*obj)
 
   bool change_place = false;
   int count_map_chize = p_map->size();
+  std::cout << "count_map_chize " << count_map_chize << std::endl;
   for(int i = 0; i < count_map_chize; i++)
   {
+  std::cout << i << " " << isEmpty << std::endl;
     if(!p_map->at(i).isEmpty)
     {
       double x1 = p_map->at(i).XY.Xmin;
       double x2 = p_map->at(i).XY.Xmax;
       double y1 = p_map->at(i).XY.Ymin;
       double y2 = p_map->at(i).XY.Ymax;
+  std::cout << x1 << "-" << x2 << " : " << y1 << "-" << y2 << std::endl;
       double current_X = obj->place().placeX;
       double current_Y = obj->place().placeY;
       bool isX = ((x1 - current_X) < eps) && ((current_X - x2) < eps);
       bool isY = ((y1 - current_Y) < eps) && ((current_Y - y2) < eps);
+  std::cout << isX << " : " << isY << std::endl;
       if(isX && isY)
       {
         p_map->at(i).countObject--;
