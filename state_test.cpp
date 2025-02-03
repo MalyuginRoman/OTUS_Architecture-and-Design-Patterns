@@ -12,6 +12,7 @@
 #include "object.h"
 #include "producer.h"
 #include "safequeue.h"
+#include "objposition.h"
 
 class state_test : public CPPUNIT_NS::TestCase
 {
