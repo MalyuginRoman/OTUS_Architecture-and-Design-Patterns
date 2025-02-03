@@ -23,6 +23,7 @@ eventloop::~eventloop() { delete imp; }
 
 void eventloop::start(SafeQueue<ICommand *> *cmds, StateStatus *status, int variant)
 {
+    std::cout << "Start eventloop" << std::endl;
     bool stop = false;
     int ic = 0;
     SafeQueue<ICommand*> cmds_1;
