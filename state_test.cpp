@@ -31,7 +31,7 @@ protected:
     p_map_c_b = func_name(2);
 // формируем объекты
     int count = 1;
-    objectVector vector;
+    objectVector vector_obj;
     std::cout << "Start create " << count << " objects." << std::endl;
 
     for(int i = 0; i < count; i++)
@@ -68,7 +68,7 @@ protected:
     SafeQueue<ICommand*> queueCmds;
 
     CheckCommand *cmd_check = new CheckCommand();
-    MoveCommand *cmd_move = new MoveCommand(&p_map_c_a, &p_map_c_b, vector.at(0));
+    MoveCommand *cmd_move = new MoveCommand(&p_map_c_a, &p_map_c_b, vector_obj.at(0));
     RotateCommand *cmd_rotate = new RotateCommand();
     BurnCommand *cmd_burn = new BurnCommand();
     EmptyCommand *cmd_empty = new EmptyCommand();
