@@ -33,7 +33,9 @@ public:
   MoveCommandP(std::map<int, system_okr>* p_map_a,
                std::map<int, system_okr>* p_map_b,
                object* obj) :
-        p_map_a(p_map_a), p_map_b(p_map_b), obj(obj) {}
+        p_map_a(p_map_a), p_map_b(p_map_b), obj(obj)
+  {
+  }
 };
 
 MoveCommand::MoveCommand(std::map<int, system_okr>* p_map_a,
