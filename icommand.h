@@ -44,7 +44,7 @@ public:
 
     object* obj() const;
     std::map<int, system_okr>* p_map_a() const;
-    std::map<int, system_okr>* p_map_a() const;
+    std::map<int, system_okr>* p_map_b() const;
 
     int get_Id_cmd();
     void execute();
