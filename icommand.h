@@ -192,7 +192,7 @@ private:
     class MacroCommandP* imp;
 };
 
-class RegisterCommand : public ICommand
+/*class RegisterCommand : public ICommand
 {
 public:
     RegisterCommand(map<string, function<ICommand*()>> *m_map, map<string, string> *m_scope);
@@ -203,9 +203,9 @@ public:
     void registerType(string key_s, string key_f, function<ICommand*()> func);
 private:
     class RegisterCommandP* imp;
-};
+};*/
 
-template<class T>
+/*template<class T>
 class InternetCommand
 {
 public:
@@ -246,9 +246,9 @@ public:
         case CommandAddLast:
             return new AddLastCommand();
             break;
-        /*case CommandMacro:
+        case CommandMacro:
             return new MacroCommand();
-            break;*/
+            break;
         default:
             throw std::runtime_error("unknown command");
             break;
@@ -256,4 +256,4 @@ public:
     }
 private:
     int operationID;
-};
+};*/
