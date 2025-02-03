@@ -109,7 +109,7 @@ void CheckPositionCommand::execute(std::map<int, system_okr>* p_map, object*obj)
       bool isX = ((x1 - current_X) < eps) && ((current_X - x2) < eps);
       bool isY = ((y1 - current_Y) < eps) && ((current_Y - y2) < eps);
   std::cout << "isX = " << isX << " : " << "isY = " << isY << std::endl;
-      if(isX && isY)
+      if((isX == 0) && (isY == 0))
       {
   std::cout << "go " << std::endl;
         p_map->at(i).countObject--;
