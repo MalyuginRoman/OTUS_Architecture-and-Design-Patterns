@@ -22,7 +22,7 @@ enum CommandCodes
     CommandEmpty = 6,
     CommandHardStop = 7,
     CommandSoftStop = 8,
-    //CommandInternet = 9,
+    CommandInternet = 9,
     CommandMoveTo = 10,
     CommandRun = 11,
     CommandAddLast = 12,
@@ -163,6 +163,18 @@ public:
     void execute()
     {
         cout << "MoveToCommand";
+    }
+};
+class InternetCommand : public ICommand
+{
+public:
+    int get_Id_cmd()
+    {
+        return CommandInternet;
+    }
+    void execute()
+    {
+        cout << "InternetCommand";
     }
 };
 class RunCommand : public ICommand
