@@ -108,7 +108,7 @@ void CheckPositionCommand::execute(std::map<int, system_okr>* p_map, object*obj)
       double current_Y = obj->place().placeY;
       bool isX = ((x1 - current_X) < eps) && ((current_X - x2) < eps);
       bool isY = ((y1 - current_Y) < eps) && ((current_Y - y2) < eps);
-  std::cout << isX << " : " << isY << std::endl;
+  std::cout << "isX = " << isX << " : " << "isY = " << isY << std::endl;
       if(isX && isY)
       {
         p_map->at(i).countObject--;
@@ -119,7 +119,7 @@ void CheckPositionCommand::execute(std::map<int, system_okr>* p_map, object*obj)
         change_place = true;
       }
     }
-  std::cout << "change_place " << change_place << std::endl;
+  //std::cout << "change_place " << change_place << std::endl;
     if(change_place)
     {
       double current_X = obj->place().placeX;
