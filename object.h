@@ -3,6 +3,7 @@
 #include "minor.h"
 #include "imoving.h"
 #include "irotateble.h"
+#include "objposition.h"
 
 class object : public IMoving, IRotatable
 {
