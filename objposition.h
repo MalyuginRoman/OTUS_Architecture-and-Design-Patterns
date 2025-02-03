@@ -57,7 +57,7 @@ std::map<int, system_okr> func_name(int number)          // формируем �
       a1.isEmpty = true;
       a1.countObject = 0;
       p_map_c_a.emplace(sizeXY, a1);
-      size += 1;
+      sizeXY ++;
     } 
   return p_map_c_a;
 }
@@ -67,10 +67,10 @@ std::map<int, system_okr> func_obj(std::map<int, system_okr> p_map, objectVector
     int countObj = vector->count();
     std::map<int, system_okr> p_map_c = p_map;
     int count1 = p_map_c.size();
-    for(int j = 0; j < count1; ++j)
+    for(int i = 0; i < count1; ++j)
     {
-      double current_X = vector->at(j)->place().placeX;
-      double current_Y = vector->at(j)->place().placeY;
+      double current_X = vector->at(i)->place().placeX;
+      double current_Y = vector->at(i)->place().placeY;
       int count1 = p_map_c.size();
       for(int j = 0; j < count1; ++j)
       {
