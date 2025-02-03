@@ -9,7 +9,7 @@ const int count_system_1 = 4;
 const int count_system_2 = 5;
 const double eps = 10E-6;
 
-struct coord_unterval
+struct coord_interval
 {
 public:
   double Xmax;
