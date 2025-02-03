@@ -88,7 +88,7 @@ protected:
 
     StateStatus *sc = new StateStatus(new DefaultState(), cmd_empty);
 
-    eventloop* producer = new eventloop(&queue, sc);
+    eventloop* producer = new eventloop(&queueCmds, sc);
     producer->start(&queueCmds, sc, 1);
 
     delete sc;
