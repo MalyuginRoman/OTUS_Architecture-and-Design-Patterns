@@ -90,7 +90,9 @@ protected:
 
     StateStatus *sc = new StateStatus(new DefaultState(), cmd_empty);
 
+    std::cout << "create status" << std::endl;
     eventloop* producer = new eventloop(&queueCmds, sc);
+    std::cout << "create eventloop" << std::endl;
     producer->start(&queueCmds, sc, 1);
 
     delete sc;
