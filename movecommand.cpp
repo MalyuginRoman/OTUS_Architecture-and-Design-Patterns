@@ -91,11 +91,12 @@ void CheckPositionCommand::execute(std::map<int, system_okr>* p_map, object*obj)
   std::cout << "Finish position [" << obj->place().placeX << ", " << obj->place().placeY << "]" << std::endl;
 
   bool change_place = false;
+  std::cout << "change_place " << change_place << std::endl;
   int count_map_chize = p_map->size();
   std::cout << "count_map_chize " << count_map_chize << std::endl;
   for(int i = 0; i < count_map_chize; i++)
   {
-  std::cout << i << " " << p_map->at(i).isEmpty << std::endl;
+  std::cout << "i " << i << " isEmpty " << p_map->at(i).isEmpty << std::endl;
     if(!p_map->at(i).isEmpty)
     {
       double x1 = p_map->at(i).XY.Xmin;
@@ -118,6 +119,7 @@ void CheckPositionCommand::execute(std::map<int, system_okr>* p_map, object*obj)
         change_place = true;
       }
     }
+  std::cout << "change_place " << change_place << std::endl;
     if(change_place)
     {
       double current_X = obj->place().placeX;
