@@ -9,6 +9,11 @@
 
 #include "producer.h"
 #include "objposition.h"
+#include "ioc.h"
+#include "icommand.h"
+#include "object.h"
+#include "producer.h"
+#include "safequeue.h"
 
 class state_test : public CPPUNIT_NS::TestCase
 {
@@ -61,8 +66,8 @@ protected:
                        << "," << vector_obj.at(i)->place().placeX << "," << vector_obj.at(i)->place().placeY << "," << vector_obj.at(i)->place().angular << std::endl;
     }
 // помещаем объекты в системы окрестностей
-    p_map_c_a = func_obj(p_map_c_a, &vector);
-    p_map_c_b = func_obj(p_map_c_b, &vector);
+    p_map_c_a = func_obj(p_map_c_a, &vector_obj);
+    p_map_c_b = func_obj(p_map_c_b, &vector_obj);
 
     IocContainer<ICommand> ioc;
     SafeQueue<ICommand*> queueCmds;
