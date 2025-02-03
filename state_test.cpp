@@ -14,6 +14,7 @@
 #include "safequeue.h"
 #include "objposition.h"
 #include "istate.h"
+#include "eventloop.h"
 
 class state_test : public CPPUNIT_NS::TestCase
 {
