@@ -4,7 +4,7 @@
 #include "object.h"
 const double eps = 10E-6;
 
-struct coord_unterval
+struct coord_interval
 {
 public:
   double Xmax;
