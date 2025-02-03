@@ -109,7 +109,7 @@ void CheckPositionCommand::execute(std::map<int, system_okr>* p_map, object*obj)
         p_map->at(i).countObject--;
         if(p_map->at(i).countObject == 0)
           p_map->at(i).isEmpty = true;
-        std::cout << "object id:" << p_map->at(i).obj_id.front() << " delete from Map_Position ID№" << i << " with Xmin " << x1 << " Xmax " << x2 << " Ymin " << y1 << " Ymax " << y2 << std::endl;
+        std::cout << "object id:" << p_map->at(i).obj_id.front() << " delete from Map_Position ID№ " << i << " with Xmin " << x1 << " Xmax " << x2 << " Ymin " << y1 << " Ymax " << y2 << std::endl;
         p_map->at(i).obj_id.pop_back();
         change_place = true;
       }
@@ -133,7 +133,7 @@ void CheckPositionCommand::execute(std::map<int, system_okr>* p_map, object*obj)
           p_map->at(j).isEmpty = false;
           int id_obj = obj->id();
           p_map->at(j).obj_id.push_back(id_obj);
-          std::cout << "object id:" << p_map->at(j).obj_id.front() << " rewrite from Map_Position ID№" << i << " with Xmin " << x1 << " Xmax " << x2 << " Ymin " << y1 << " Ymax " << y2 << std::endl;
+          std::cout << "object id:" << p_map->at(j).obj_id.front() << " rewrite from Map_Position ID№ " << j << " with Xmin " << x1 << " Xmax " << x2 << " Ymin " << y1 << " Ymax " << y2 << std::endl;
           change_place = false;
           break;
         }
