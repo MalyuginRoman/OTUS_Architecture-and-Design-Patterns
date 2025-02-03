@@ -16,6 +16,7 @@
 #include "imessage.h"
 #include "istate.h"
 #include "objposition.h"
+#include "producer.h"
 
 class state_test : public CPPUNIT_NS::TestCase
 {
@@ -30,7 +31,6 @@ void tearDown(void){}
 protected:
   void test1(void)
 {
-    
 // формируем системы окрестностей
     std::map<int, system_okr> p_map_c_a;
     std::map<int, system_okr> p_map_c_b;
@@ -39,11 +39,12 @@ protected:
 // формируем объекты
     int count = 1;
     objectVector vector_obj;
+    std::cout << std::endl;
     std::cout << "Start create " << count << " objects." << std::endl;
 
     for(int i = 0; i < count; i++)
     {
-        int id = i;
+        int id = (i + 100);
         coord place;
         react state;
 
