@@ -157,21 +157,21 @@ void producer::test_game(vector <char> message)
     // Scope2 with fuel
     // формируем макрокоманды
 
-    InternetCommand<ICommand*> cmd_net;
+    //InternetCommand<ICommand*> cmd_net;
 
-    std::exception ex;
-    ExceptionHandler* handler = new ExceptionHandler(0, ex);
+    //std::exception ex;
+    //ExceptionHandler* handler = new ExceptionHandler(0, ex);
 
-    queueCmds.push(cmd_net.resolve(operationId_i));
-    eventloop* gamequeue = new eventloop(&queueCmds);
+    //queueCmds.push(cmd_net.resolve(operationId_i));
+    //eventloop* gamequeue = new eventloop(&queueCmds);
 
-    std::thread t1(
-                [&ioc, &gamequeue, &queueCmds, &handler, &ex, &cmd_net](){
-        try {
-            gamequeue->start(&queueCmds);
-        } catch( std::exception ex) {
-            handler->executeRepeat(handler, &queueCmds, ex);
-        }
-    });
-    t1.join();
+    //std::thread t1(
+    //            [&ioc, &gamequeue, &queueCmds, &handler, &ex, &cmd_net](){
+    //    try {
+    //        gamequeue->start(&queueCmds);
+    //    } catch( std::exception ex) {
+    //        handler->executeRepeat(handler, &queueCmds, ex);
+    //    }
+    //});
+    //t1.join();
 }
