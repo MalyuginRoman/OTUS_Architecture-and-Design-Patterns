@@ -8,6 +8,9 @@
 #include <memory>
 
 using namespace std;
+class objectVector;
+class object;
+struct system_okr;
 
 enum CommandCodes
 {
@@ -34,14 +37,25 @@ public:
 class MoveCommand : public ICommand
 {
 public:
-    int get_Id_cmd()
-    {
-        return CommandMove;
-    }
-    void execute()
-    {
-        cout << "MoveCommand";
-    }
+    MoveCommand(std::map<int, system_okr>* p_map_a,
+                std::map<int, system_okr>* p_map_b,
+                object obj);
+    ~MoveCommand();
+
+    object* obj() const;
+    std::map<int, system_okr>* p_map_a() const;
+    std::map<int, system_okr>* p_map_a() const;
+
+    int get_Id_cmd();
+    void execute();
+
+private:
+    class MoveCommandP* imp;
+};
+class CheckPositionCommand
+{
+public:
+    void execute(std::map<int, system_okr>* p_map, object* obj);
 };
 class RotateCommand : public ICommand
 {

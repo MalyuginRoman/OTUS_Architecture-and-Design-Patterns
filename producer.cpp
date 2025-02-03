@@ -9,10 +9,17 @@
 #include "exceptionhandler.h"
 #include "eventloop.h"
 #include "imessage.h"
+#include "objposition.h"
 
 void producer::start_game()
 {
-    int count = 2;
+// формируем системы окрестностей
+    std::map<int, system_okr> p_map_c_a;
+    std::map<int, system_okr> p_map_c_b;
+    p_map_c_a = func_name(1);
+    p_map_c_b = func_name(2);
+// формируем объекты
+    int count = 1;
     std::cout << "Start create " << count << " objects." << std::endl;
 
     for(int i = 0; i < count; i++)
@@ -21,11 +28,15 @@ void producer::start_game()
         coord place;
         react state;
 
-        place.placeX = 0.;
-        place.placeY = 0.;
-        place.angular = 45 * i;
+        place.placeX = 1. + 20. * i;
+        if(place.placeX > 100.)
+            place.placeX = 100. - (place.placeX - 100.);
+        place.placeY = 1. + 25. * i;
+        if(place.placeY > 100.)
+            place.placeY = 100. - (place.placeY - 100.);
+        place.angular = 45 * (i + 1);
 
-        state.velocity = 100;
+        state.velocity = 40;
         state.angularVelocity = 20;
         state.fuel = 10;
 
@@ -37,6 +48,9 @@ void producer::start_game()
         std::cout << vector_obj.at(i)->id() << ":" << vector_obj.at(i)->state().velocity << "," << vector_obj.at(i)->state().angularVelocity << "," << vector_obj.at(i)->state().fuel
                        << "," << vector_obj.at(i)->place().placeX << "," << vector_obj.at(i)->place().placeY << "," << vector_obj.at(i)->place().angular << std::endl;
     }
+// помещаем объекты в системы окрестностей
+    p_map_c_a = func_obj(p_map_c_a, &vector);
+    p_map_c_b = func_obj(p_map_c_b, &vector);
 }
 
 void producer::read_message(vector<char> message)
