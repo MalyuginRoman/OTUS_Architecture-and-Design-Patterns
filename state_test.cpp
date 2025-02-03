@@ -13,7 +13,6 @@ class state_test : public CPPUNIT_NS::TestCase
 {
 CPPUNIT_TEST_SUITE(state_test);
   CPPUNIT_TEST(test1);
-  CPPUNIT_TEST(test2);
 CPPUNIT_TEST_SUITE_END();
 
 public:
@@ -23,44 +22,55 @@ void tearDown(void){}
 protected:
   void test1(void)
 {
-    /*std::cout << "Start test_thread1" << std::endl;
-    objectVector vector;
-    int count = 2;
+    
+// формируем системы окрестностей
+    std::map<int, system_okr> p_map_c_a;
+    std::map<int, system_okr> p_map_c_b;
+    p_map_c_a = func_name(1);
+    p_map_c_b = func_name(2);
+// формируем объекты
+    int count = 1;
+    std::cout << "Start create " << count << " objects." << std::endl;
+
     for(int i = 0; i < count; i++)
     {
         int id = i;
         coord place;
         react state;
 
-        place.placeX = 0.;
-        place.placeY = 0.;
-        place.angular = 45 * i;
+        place.placeX = 1. + 20. * i;
+        if(place.placeX > 100.)
+            place.placeX = 100. - (place.placeX - 100.);
+        place.placeY = 1. + 25. * i;
+        if(place.placeY > 100.)
+            place.placeY = 100. - (place.placeY - 100.);
+        place.angular = 45 * (i + 1);
 
-        state.velocity = 100;
+        state.velocity = 40;
         state.angularVelocity = 20;
         state.fuel = 10;
 
-        vector.add(id, state, place);
+        vector_obj.add(id, state, place);
     }
 
     for(int i = 0; i < count; i++)
     {
-        std::cout << vector.at(i)->id() << ":" << vector.at(i)->state().velocity << "," << vector.at(i)->state().angularVelocity << "," << vector.at(i)->state().fuel
-                       << "," << vector.at(i)->place().placeX << "," << vector.at(i)->place().placeY << "," << vector.at(i)->place().angular << std::endl;
+        std::cout << vector_obj.at(i)->id() << ":" << vector_obj.at(i)->state().velocity << "," << vector_obj.at(i)->state().angularVelocity << "," << vector_obj.at(i)->state().fuel
+                       << "," << vector_obj.at(i)->place().placeX << "," << vector_obj.at(i)->place().placeY << "," << vector_obj.at(i)->place().angular << std::endl;
     }
+// помещаем объекты в системы окрестностей
+    p_map_c_a = func_obj(p_map_c_a, &vector);
+    p_map_c_b = func_obj(p_map_c_b, &vector);
 
     IocContainer<ICommand> ioc;
     SafeQueue<ICommand*> queueCmds;
-    SafeQueue<ICommand*> queueCmds_1;
 
-    // Scope2 with fuel
-    // формируем макрокоманды
     CheckCommand *cmd_check = new CheckCommand();
-    MoveCommand *cmd_move = new MoveCommand();
+    MoveCommand *cmd_move = new MoveCommand(&p_map_c_a, &p_map_c_b, vector.at(0));
     RotateCommand *cmd_rotate = new RotateCommand();
     BurnCommand *cmd_burn = new BurnCommand();
     EmptyCommand *cmd_empty = new EmptyCommand();
-  
+
     queueCmds.push(cmd_check);
     queueCmds.push(cmd_move);
     queueCmds.push(cmd_burn);
@@ -69,64 +79,11 @@ protected:
     queueCmds.push(cmd_burn);
 
     StateStatus *sc = new StateStatus(new DefaultState(), cmd_empty);
-    
-    eventloop* producer = new eventloop(&queueCmds, sc);
+
+    eventloop* producer = new eventloop(&queue, sc);
     producer->start(&queueCmds, sc, 1);
-    delete sc;*/
-}
 
-  void test2(void)
-{
-    /*std::cout << "Start test_thread2" << std::endl;
-    objectVector vector;
-    int count = 2;
-    for(int i = 0; i < count; i++)
-    {
-        int id = i;
-        coord place;
-        react state;
-
-        place.placeX = 0.;
-        place.placeY = 0.;
-        place.angular = 45 * i;
-
-        state.velocity = 100;
-        state.angularVelocity = 20;
-        state.fuel = 10;
-
-        vector.add(id, state, place);
-    }
-
-    for(int i = 0; i < count; i++)
-    {
-        std::cout << vector.at(i)->id() << ":" << vector.at(i)->state().velocity << "," << vector.at(i)->state().angularVelocity << "," << vector.at(i)->state().fuel
-                       << "," << vector.at(i)->place().placeX << "," << vector.at(i)->place().placeY << "," << vector.at(i)->place().angular << std::endl;
-    }
-
-    IocContainer<ICommand> ioc;
-    SafeQueue<ICommand*> queueCmds;
-    SafeQueue<ICommand*> queueCmds_1;
-
-    // Scope2 with fuel
-    // формируем макрокоманды
-    CheckCommand *cmd_check = new CheckCommand();
-    MoveCommand *cmd_move = new MoveCommand();
-    RotateCommand *cmd_rotate = new RotateCommand();
-    BurnCommand *cmd_burn = new BurnCommand();
-    EmptyCommand *cmd_empty = new EmptyCommand();
-  
-    queueCmds.push(cmd_check);
-    queueCmds.push(cmd_move);
-    queueCmds.push(cmd_burn);
-    queueCmds.push(cmd_check);
-    queueCmds.push(cmd_rotate);
-    queueCmds.push(cmd_burn);
-
-    StateStatus *sc = new StateStatus(new DefaultState(), cmd_empty);
-    
-    eventloop* producer = new eventloop(&queueCmds, sc);
-    producer->start(&queueCmds, sc, 2);
-    delete sc;*/
+    delete sc;
 }
 };
 
