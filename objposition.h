@@ -53,11 +53,11 @@ std::map<int, system_okr> func_name(int number)          // формируем �
       a1.XY.Xmax = Xstart +(i + 1)* Xmax/count_system;
       a1.XY.Ymin = Xstart + j     * Ymax/count_system;
       a1.XY.Ymax = Xstart +(j + 1)* Ymax/count_system;
-      a1.id_syst_okr = sixeXY;
+      a1.id_syst_okr = sizeXY;
       a1.isEmpty = true;
       a1.countObject = 0;
       p_map_c_a.emplace(sizeXY, a1);
-      size++;
+      size += 1;
     } 
   return p_map_c_a;
 }
@@ -69,8 +69,8 @@ std::map<int, system_okr> func_obj(std::map<int, system_okr> p_map, objectVector
     int count1 = p_map_c.size();
     for(int j = 0; j < count1; ++j)
     {
-      double current_X = vector->at(i)->place().placeX;
-      double current_Y = vector->at(i)->place().placeY;
+      double current_X = vector->at(j)->place().placeX;
+      double current_Y = vector->at(j)->place().placeY;
       int count1 = p_map_c.size();
       for(int j = 0; j < count1; ++j)
       {
@@ -78,8 +78,8 @@ std::map<int, system_okr> func_obj(std::map<int, system_okr> p_map, objectVector
         double x2 = p_map_c.at(j).XY.Xmax;
         double y1 = p_map_c.at(j).XY.Ymin;
         double y2 = p_map_c.at(j).XY.Ymax;
-        bool isX = ((x1 - current_X) < eps) && (current_X - x2) < eps));
-        bool isY = ((y1 - current_Y) < eps) && (current_Y - y2) < eps));
+        bool isX = ((x1 - current_X) < eps) && ((current_X - x2) < eps);
+        bool isY = ((y1 - current_Y) < eps) && ((current_Y - y2) < eps);
         if(isX && isY)
         {
           p_map_c.at(j).countObject++;
