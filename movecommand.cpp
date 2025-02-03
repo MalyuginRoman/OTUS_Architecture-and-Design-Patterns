@@ -101,8 +101,8 @@ void CheckPositionCommand::execute(std::map<int, system_okr>* p_map, object*obj)
       double y2 = p_map->at(i).XY.Ymax;
       double current_X = obj->place().placeX;
       double current_Y = obj->place().placeY;
-      bool isX = ((x1 - current_X) < eps) && (current_X - x2) < eps));
-      bool isY = ((y1 - current_Y) < eps) && (current_Y - y2) < eps));
+      bool isX = ((x1 - current_X) < eps) && ((current_X - x2) < eps);
+      bool isY = ((y1 - current_Y) < eps) && ((current_Y - y2) < eps);
       if(isX && isY)
       {
         p_map->at(j).countObject--;
@@ -124,8 +124,8 @@ void CheckPositionCommand::execute(std::map<int, system_okr>* p_map, object*obj)
         double x2 = p_map->at(j).XY.Xmax;
         double y1 = p_map->at(j).XY.Ymin;
         double y2 = p_map->at(j).XY.Ymax;
-        bool isX = ((x1 - current_X) < eps) && (current_X - x2) < eps));
-        bool isY = ((y1 - current_Y) < eps) && (current_Y - y2) < eps));
+        bool isX = ((x1 - current_X) < eps) && ((current_X - x2) < eps);
+        bool isY = ((y1 - current_Y) < eps) && ((current_Y - y2) < eps);
         if(isX && isY)
         {
           p_map->at(j).countObject++;
