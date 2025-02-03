@@ -140,7 +140,7 @@ void CheckPositionCommand::execute(std::map<int, system_okr>* p_map, object*obj)
           int id_obj = obj->id();
           p_map->at(j).obj_id.push_back(id_obj);
           std::cout << "object id:" << p_map->at(j).obj_id.front() << " rewrite from " << p_map->at(j).id_syst_okr << " in p_map_c_a " << std::endl;
-          bool change_place = false;
+          change_place = false;
           break;
         }
       }
