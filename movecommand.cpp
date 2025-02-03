@@ -105,11 +105,11 @@ void CheckPositionCommand::execute(std::map<int, system_okr>* p_map, object*obj)
       bool isY = ((y1 - current_Y) < eps) && (current_Y - y2) < eps));
       if(isX && isY)
       {
-        p_map.at(j).countObject--;
+        p_map->at(j).countObject--;
         if(p_map->at(i)countObject == 0)
-          p_map.at(j).isEmpty = true;
+          p_map->at(j).isEmpty = true;
         std::cout << "object id:" << p_map->at(i).obj_id.front() << " delete from " << p_map->at(i).id_syst_okr << " in p_map_c_a " << std::endl;
-        p_map_c.at(j).obj_id.pop_back(id_obj);
+        p_map->at(j).obj_id.pop_back(id_obj);
         change_place = true;
       }
     }
@@ -120,18 +120,18 @@ void CheckPositionCommand::execute(std::map<int, system_okr>* p_map, object*obj)
       int count1 = p_map.size();
       for(int j = 0; j < count1; ++j)
       {
-        double x1 = p_map.at(j).XY.Xmin;
-        double x2 = p_map.at(j).XY.Xmax;
-        double y1 = p_map.at(j).XY.Ymin;
-        double y2 = p_map.at(j).XY.Ymax;
+        double x1 = p_map->at(j).XY.Xmin;
+        double x2 = p_map->at(j).XY.Xmax;
+        double y1 = p_map->at(j).XY.Ymin;
+        double y2 = p_map->at(j).XY.Ymax;
         bool isX = ((x1 - current_X) < eps) && (current_X - x2) < eps));
         bool isY = ((y1 - current_Y) < eps) && (current_Y - y2) < eps));
         if(isX && isY)
         {
-          p_map.at(j).countObject++;
-          p_map.at(j).isEmpty = false;
+          p_map->at(j).countObject++;
+          p_map->at(j).isEmpty = false;
           int id_obj = obj->id();
-          p_map.at(j).obj_id.push_back(id_obj);
+          p_map->at(j).obj_id.push_back(id_obj);
           std::cout << "object id:" << p_map->at(j).obj_id.front() << " rewrite from " << p_map->at(j).id_syst_okr << " in p_map_c_a " << std::endl;
           bool change_place = false;
           break;
