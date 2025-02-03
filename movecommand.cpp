@@ -56,8 +56,8 @@ void MoveCommand::execute()
     throw std::runtime_error ("Unknown position");
   else
   {
-    cmd_search->excute(imp->p_map_a, imp->obj);
-    cmd_search->excute(imp->p_map_b, imp->obj);
+    cmd_search->execute(imp->p_map_a, imp->obj);
+    cmd_search->execute(imp->p_map_b, imp->obj);
   }
   std::cout << "Finish position [" << imp->obj->place().placeX << ", " << imp->obj->place().placeY << "]" << std::endl;
 }
@@ -107,7 +107,7 @@ void CheckPositionCommand::execute(std::map<int, system_okr>* p_map, object*obj)
         if(p_map->at(i).countObject == 0)
           p_map->at(i).isEmpty = true;
         std::cout << "object id:" << p_map->at(i).obj_id.front() << " delete from " << p_map->at(i).id_syst_okr << " in p_map_c_a " << std::endl;
-        p_map->at(i).obj_id.pop_back(id_obj);
+        p_map->at(i).obj_id.pop_back();
         change_place = true;
       }
     }
