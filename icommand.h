@@ -39,7 +39,7 @@ class MoveCommand : public ICommand
 public:
     MoveCommand(std::map<int, system_okr>* p_map_a,
                 std::map<int, system_okr>* p_map_b,
-                object obj);
+                object* obj);
     ~MoveCommand();
 
     object* obj() const;
