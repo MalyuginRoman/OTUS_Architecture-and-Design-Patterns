@@ -89,7 +89,6 @@ std::map<int, system_okr> func_obj(std::map<int, system_okr> p_map, objectVector
           int id_obj = vector->at(i)->id();
           p_map_c.at(j).obj_id.push_back(id_obj);
 std::cout << "object id: " << p_map_c.at(j).obj_id.front() << " write in " << p_map_c.at(j).id_syst_okr << " in p_map_c_c" << std::endl;
-          break;
         }
       }
     }
