@@ -75,6 +75,7 @@ std::map<int, system_okr> func_obj(std::map<int, system_okr> p_map, objectVector
       int count1 = p_map_c.size();
       for(int j = 0; j < count1; ++j)
       {
+  std::cout << i << "-" << j << std::endl;
         double x1 = p_map_c.at(j).XY.Xmin;
         double x2 = p_map_c.at(j).XY.Xmax;
         double y1 = p_map_c.at(j).XY.Ymin;
