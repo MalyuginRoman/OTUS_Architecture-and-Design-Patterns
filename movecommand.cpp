@@ -95,7 +95,7 @@ void CheckPositionCommand::execute(std::map<int, system_okr>* p_map, object*obj)
   std::cout << "count_map_chize " << count_map_chize << std::endl;
   for(int i = 0; i < count_map_chize; i++)
   {
-  std::cout << i << " " << isEmpty << std::endl;
+  std::cout << i << " " << p_map->at(i).isEmpty << std::endl;
     if(!p_map->at(i).isEmpty)
     {
       double x1 = p_map->at(i).XY.Xmin;
