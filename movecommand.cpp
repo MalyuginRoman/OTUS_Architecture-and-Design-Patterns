@@ -96,31 +96,26 @@ void CheckPositionCommand::execute(std::map<int, system_okr>* p_map, object*obj)
   std::cout << "count_map_chize " << count_map_chize << std::endl;
   for(int i = 0; i < count_map_chize; i++)
   {
-  std::cout << "i " << i << " isEmpty " << p_map->at(i).isEmpty << std::endl;
     if(!p_map->at(i).isEmpty)
     {
       double x1 = p_map->at(i).XY.Xmin;
       double x2 = p_map->at(i).XY.Xmax;
       double y1 = p_map->at(i).XY.Ymin;
       double y2 = p_map->at(i).XY.Ymax;
-  std::cout << x1 << "-" << x2 << " : " << y1 << "-" << y2 << std::endl;
       double current_X = obj->place().placeX;
       double current_Y = obj->place().placeY;
       bool isX = ((x1 - current_X) < eps) && ((current_X - x2) < eps);
       bool isY = ((y1 - current_Y) < eps) && ((current_Y - y2) < eps);
-  std::cout << "isX = " << isX << " : " << "isY = " << isY << std::endl;
       if((isX == 0) && (isY == 0))
       {
-  std::cout << "go " << std::endl;
         p_map->at(i).countObject--;
         if(p_map->at(i).countObject == 0)
           p_map->at(i).isEmpty = true;
-        std::cout << "object id:" << p_map->at(i).obj_id.front() << " delete from " << p_map->at(i).id_syst_okr << " in p_map_c_a " << std::endl;
+        std::cout << "object id:" << p_map->at(i).obj_id.front() << " delete from Map_Position with Xmin " << x1 << " Xmax " << x2 << " Ymin " << y1 << " Ymax " << y2 << std::endl;
         p_map->at(i).obj_id.pop_back();
         change_place = true;
       }
     }
-  //std::cout << "change_place " << change_place << std::endl;
     if(change_place)
     {
       double current_X = obj->place().placeX;
@@ -140,7 +135,7 @@ void CheckPositionCommand::execute(std::map<int, system_okr>* p_map, object*obj)
           p_map->at(j).isEmpty = false;
           int id_obj = obj->id();
           p_map->at(j).obj_id.push_back(id_obj);
-          std::cout << "object id:" << p_map->at(j).obj_id.front() << " rewrite from " << p_map->at(j).id_syst_okr << " in p_map_c_a " << std::endl;
+          std::cout << "object id:" << p_map->at(j).obj_id.front() << " rewrite from Map_Position with Xmin " << x1 << " Xmax " << x2 << " Ymin " << y1 << " Ymax " << y2 << std::endl;
           change_place = false;
           break;
         }
