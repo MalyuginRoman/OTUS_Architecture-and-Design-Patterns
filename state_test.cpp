@@ -12,7 +12,6 @@
 #include "ioc.h"
 #include "icommand.h"
 #include "object.h"
-#include "producer.h"
 #include "safequeue.h"
 
 class state_test : public CPPUNIT_NS::TestCase
