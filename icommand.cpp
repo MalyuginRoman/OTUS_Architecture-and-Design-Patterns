@@ -65,3 +65,22 @@ void RegisterCommand::registerType(string key_s, string key_f, function<ICommand
     imp->m_map->emplace(key_f, func);
     cout << "Registre " << key_f << " in " << key_s << endl;
 }
+
+class CheckPositionCommandP
+{
+public:
+    std::map<int, std::list<objectVector>> *p_map_o_a;
+    std::map<int, std::pair<double, double>> *p_map_c_a;
+    std::map<int, std::list<objectVector>> *p_map_o_b;
+    std::map<int, std::pair<double, double>> *p_map_c_b;
+
+    CheckPointCommandP(std::map<int, std::list<objectVector>> *p_map_o_a,
+                       std::map<int, std::pair<double, double>> *p_map_c_a,
+                       std::map<int, std::list<objectVector>> *p_map_o_b,
+                       std::map<int, std::pair<double, double>> *p_map_c_b) :
+            p_map_o_a(p_map_o_a),
+            p_map_c_a(p_map_c_a),
+            p_map_o_b(p_map_o_b),
+            p_map_c_b(p_map_c_b)
+    {}
+};
