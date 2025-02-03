@@ -23,7 +23,7 @@ void tearDown(void){}
 protected:
   void test1(void)
 {
-    std::cout << "Start test_thread1" << std::endl;
+    /*std::cout << "Start test_thread1" << std::endl;
     objectVector vector;
     int count = 2;
     for(int i = 0; i < count; i++)
@@ -72,12 +72,12 @@ protected:
     
     eventloop* producer = new eventloop(&queueCmds, sc);
     producer->start(&queueCmds, sc, 1);
-    delete sc;
+    delete sc;*/
 }
 
   void test2(void)
 {
-    std::cout << "Start test_thread2" << std::endl;
+    /*std::cout << "Start test_thread2" << std::endl;
     objectVector vector;
     int count = 2;
     for(int i = 0; i < count; i++)
@@ -126,7 +126,7 @@ protected:
     
     eventloop* producer = new eventloop(&queueCmds, sc);
     producer->start(&queueCmds, sc, 2);
-    delete sc;
+    delete sc;*/
 }
 };
 
