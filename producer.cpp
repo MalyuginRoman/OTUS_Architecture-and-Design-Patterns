@@ -9,7 +9,6 @@
 #include "exceptionhandler.h"
 #include "eventloop.h"
 #include "imessage.h"
-#include "objposition.h"
 #include "istate.h"
 
 void producer::test_thread1()
