@@ -7,14 +7,11 @@
 #include <cppunit/extensions/TestFactoryRegistry.h>
 #include <cppunit/extensions/HelperMacros.h>
 
-#include "producer.h"
-#include "objposition.h"
 #include "ioc.h"
 #include "icommand.h"
 #include "object.h"
+#include "producer.h"
 #include "safequeue.h"
-#include "istate.h"
-#include "eventloop.h"
 
 class state_test : public CPPUNIT_NS::TestCase
 {
