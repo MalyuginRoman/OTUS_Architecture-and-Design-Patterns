@@ -3,7 +3,6 @@
 #include "icommand.h"
 #include "minor.h"
 #include "object.h"
-
 const double eps = 10E-6;
 
 struct coord_unterval
@@ -87,7 +86,7 @@ std::map<int, system_okr>* MoveCommand::p_map_b() const
 void CheckPositionCommand::execute(std::map<int, system_okr>* p_map, object*obj)
 {
   std::cout << "I am here!" << std::endl;
-  std::cout << "Finish position [" << imp->obj->place().placeX << ", " << imp->obj->place().placeY << "]" << std::endl;
+  std::cout << "Finish position [" << obj->place().placeX << ", " << obj->place().placeY << "]" << std::endl;
 
   bool change_place = false;
   int count_map_chize = p_map->size();
@@ -105,19 +104,19 @@ void CheckPositionCommand::execute(std::map<int, system_okr>* p_map, object*obj)
       bool isY = ((y1 - current_Y) < eps) && ((current_Y - y2) < eps);
       if(isX && isY)
       {
-        p_map->at(j).countObject--;
-        if(p_map->at(i)countObject == 0)
-          p_map->at(j).isEmpty = true;
+        p_map->at(i).countObject--;
+        if(p_map->at(i).countObject == 0)
+          p_map->at(i).isEmpty = true;
         std::cout << "object id:" << p_map->at(i).obj_id.front() << " delete from " << p_map->at(i).id_syst_okr << " in p_map_c_a " << std::endl;
-        p_map->at(j).obj_id.pop_back(id_obj);
+        p_map->at(i).obj_id.pop_back(id_obj);
         change_place = true;
       }
     }
     if(change_place)
     {
-      double current_X = vector->at(i)->place().placeX;
-      double current_Y = vector->at(i)->place().placeY;
-      int count1 = p_map.size();
+      double current_X = obj->place().placeX;
+      double current_Y = obj->place().placeY;
+      int count1 = p_map->size();
       for(int j = 0; j < count1; ++j)
       {
         double x1 = p_map->at(j).XY.Xmin;
