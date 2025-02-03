@@ -64,6 +64,7 @@ std::map<int, system_okr> func_name(int number)          // формируем �
 
 std::map<int, system_okr> func_obj(std::map<int, system_okr> p_map, objectVector *vector)    // помещаем объекты в системы окрестностей
 {
+  std::cout << "start func_obj" << std::endl;
     int countObj = vector->count();
     std::map<int, system_okr> p_map_c = p_map;
     int count1 = p_map_c.size();
