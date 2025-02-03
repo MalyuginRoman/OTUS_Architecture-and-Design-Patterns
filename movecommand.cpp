@@ -111,6 +111,7 @@ void CheckPositionCommand::execute(std::map<int, system_okr>* p_map, object*obj)
   std::cout << "isX = " << isX << " : " << "isY = " << isY << std::endl;
       if(isX && isY)
       {
+  std::cout << "go " << std::endl;
         p_map->at(i).countObject--;
         if(p_map->at(i).countObject == 0)
           p_map->at(i).isEmpty = true;
