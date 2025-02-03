@@ -74,10 +74,10 @@ public:
     std::map<int, std::list<objectVector>> *p_map_o_b;
     std::map<int, std::pair<double, double>> *p_map_c_b;
 
-    CheckPointCommandP(std::map<int, std::list<objectVector>> *p_map_o_a,
-                       std::map<int, std::pair<double, double>> *p_map_c_a,
-                       std::map<int, std::list<objectVector>> *p_map_o_b,
-                       std::map<int, std::pair<double, double>> *p_map_c_b) :
+    CheckPositionCommandP(std::map<int, std::list<objectVector>> *p_map_o_a,
+                          std::map<int, std::pair<double, double>> *p_map_c_a,
+                          std::map<int, std::list<objectVector>> *p_map_o_b,
+                          std::map<int, std::pair<double, double>> *p_map_c_b) :
             p_map_o_a(p_map_o_a),
             p_map_c_a(p_map_c_a),
             p_map_o_b(p_map_o_b),
