@@ -78,12 +78,7 @@ void producer::test_thread1()
 
 void producer::start_game()
 {
-// формируем системы окрестностей
-    std::map<int, system_okr> p_map_c_a;
-    std::map<int, system_okr> p_map_c_b;
-    p_map_c_a = func_name(1);
-    p_map_c_b = func_name(2);
-// формируем объекты
+    objectVector vector;
     int count = 1;
     std::cout << "Start create " << count << " objects." << std::endl;
 
@@ -113,9 +108,6 @@ void producer::start_game()
         std::cout << vector_obj.at(i)->id() << ":" << vector_obj.at(i)->state().velocity << "," << vector_obj.at(i)->state().angularVelocity << "," << vector_obj.at(i)->state().fuel
                        << "," << vector_obj.at(i)->place().placeX << "," << vector_obj.at(i)->place().placeY << "," << vector_obj.at(i)->place().angular << std::endl;
     }
-// помещаем объекты в системы окрестностей
-    p_map_c_a = func_obj(p_map_c_a, &vector);
-    p_map_c_b = func_obj(p_map_c_b, &vector);
 }
 
 void producer::read_message(vector<char> message)
