@@ -12,7 +12,7 @@
 #include "objposition.h"
 #include "istate.h"
 
-void test_thread1()
+void producer::test_thread1()
 {
 // формируем системы окрестностей
     std::map<int, system_okr> p_map_c_a;
