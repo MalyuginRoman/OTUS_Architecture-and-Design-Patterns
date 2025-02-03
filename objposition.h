@@ -64,7 +64,6 @@ std::map<int, system_okr> func_name(int number)          // формируем �
 
 std::map<int, system_okr> func_obj(std::map<int, system_okr> p_map, objectVector *vector)    // помещаем объекты в системы окрестностей
 {
-  std::cout << "start func_obj" << std::endl;
     int countObj = vector->count();
     std::map<int, system_okr> p_map_c = p_map;
     for(int i = 0; i < countObj; i++)
@@ -74,7 +73,6 @@ std::map<int, system_okr> func_obj(std::map<int, system_okr> p_map, objectVector
       int count1 = p_map_c.size();
       for(int j = 0; j < count1; ++j)
       {
-  std::cout << i << "-" << j << std::endl;
         double x1 = p_map_c.at(j).XY.Xmin;
         double x2 = p_map_c.at(j).XY.Xmax;
         double y1 = p_map_c.at(j).XY.Ymin;
@@ -87,11 +85,9 @@ std::map<int, system_okr> func_obj(std::map<int, system_okr> p_map, objectVector
           p_map_c.at(j).isEmpty = false;
           int id_obj = vector->at(i)->id();
           p_map_c.at(j).obj_id.push_back(id_obj);
-std::cout << "object id: " << p_map_c.at(j).obj_id.front() << " write in " << p_map_c.at(j).id_syst_okr << " in p_map_c_c" << std::endl;
           break;
         }
       }
     }
-  std::cout << "end func_obj" << std::endl;
     return p_map_c;
 }
