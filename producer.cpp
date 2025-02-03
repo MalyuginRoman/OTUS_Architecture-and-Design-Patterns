@@ -10,6 +10,7 @@
 #include "eventloop.h"
 #include "imessage.h"
 #include "istate.h"
+#include "objposition.h"
 
 void producer::test_thread1()
 {
