@@ -2,7 +2,7 @@
 #include <iostream>
 #include <thread>
 #include "com/icommand.h"
-#include "safequeue.h"
+#include "sec/safequeue.h"
 #include "istate.h"
 
 class eventloop
