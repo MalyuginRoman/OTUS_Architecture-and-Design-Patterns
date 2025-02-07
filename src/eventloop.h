@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <thread>
-#include "icommand.h"
+#include "com/icommand.h"
 #include "safequeue.h"
 #include "istate.h"
 
