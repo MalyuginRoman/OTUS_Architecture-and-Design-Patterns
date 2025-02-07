@@ -1,9 +1,9 @@
 #include <iostream>
-#include "src/ioc.h"
-#include "src/icommand.h"
-#include "src/object.h"
-#include "src/producer.h"
-#include "src/safequeue.h"
+#include <ioc.h>
+#include <icommand.h>
+#include <object.h>
+#include <producer.h>
+#include <safequeue.h>
 
 int main(int ac, char **av)
 {
