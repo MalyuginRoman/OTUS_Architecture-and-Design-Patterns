@@ -1,5 +1,5 @@
 #include "exceptionhandler.h"
-#include "icommand.h"
+#include "com/icommand.h"
 
 class ExceptionHandlerP
 {
