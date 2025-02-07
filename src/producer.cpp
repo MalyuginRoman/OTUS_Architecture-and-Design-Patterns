@@ -4,7 +4,7 @@
 #include "producer.h"
 #include "object.h"
 #include "ioc.h"
-#include "icommand.h"
+#include "com/icommand.h"
 #include "safequeue.h"
 #include "exceptionhandler.h"
 #include "eventloop.h"
