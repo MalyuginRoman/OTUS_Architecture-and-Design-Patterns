@@ -1,5 +1,5 @@
 #include <iostream>
-#include "src/ioc.h"
+#include "src/spe/ioc.h"
 #include "src/com/icommand.h"
 #include "src/sec/object.h"
 #include "src/sec/producer.h"
