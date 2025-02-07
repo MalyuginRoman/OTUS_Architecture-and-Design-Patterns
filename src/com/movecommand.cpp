@@ -1,7 +1,7 @@
 #include <iostream>
 #include "icommand.h"
-#include "../minor.h"
-#include "../object.h"
+#include "../sec/minor.h"
+#include "../sec/object.h"
 const double eps = 10E-6;
 
 struct coord_interval
