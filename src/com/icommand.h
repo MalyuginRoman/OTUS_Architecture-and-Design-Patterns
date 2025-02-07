@@ -1,6 +1,6 @@
 #pragma once
-#include <vector>
 #include <iostream>
+#include <vector>
 #include <string>
 #include <list>
 #include <map>
@@ -22,7 +22,7 @@ enum CommandCodes
     CommandEmpty = 6,
     CommandHardStop = 7,
     CommandSoftStop = 8,
-    //CommandInternet = 9,
+    CommandInternet = 9,
     CommandMoveTo = 10,
     CommandRun = 11,
     CommandAddLast = 12,
@@ -39,12 +39,12 @@ class MoveCommand : public ICommand
 public:
     MoveCommand(std::map<int, system_okr>* p_map_a,
                 std::map<int, system_okr>* p_map_b,
-                object obj);
+                object* obj);
     ~MoveCommand();
 
     object* obj() const;
     std::map<int, system_okr>* p_map_a() const;
-    std::map<int, system_okr>* p_map_a() const;
+    std::map<int, system_okr>* p_map_b() const;
 
     int get_Id_cmd();
     void execute();
@@ -55,7 +55,7 @@ private:
 class CheckPositionCommand
 {
 public:
-    void execute(std::map<int, system_okr>* p_map, object* obj);
+    void execute(std::map<int, system_okr>* p_map, object* obj, int number);
 };
 class RotateCommand : public ICommand
 {
@@ -165,6 +165,18 @@ public:
         cout << "MoveToCommand";
     }
 };
+class InternetCommand : public ICommand
+{
+public:
+    int get_Id_cmd()
+    {
+        return CommandInternet;
+    }
+    void execute()
+    {
+        cout << "InternetCommand";
+    }
+};
 class RunCommand : public ICommand
 {
 public:
@@ -205,7 +217,7 @@ private:
     class RegisterCommandP* imp;
 };
 
-template<class T>
+/*template<class T>
 class InternetCommand
 {
 public:
@@ -246,9 +258,9 @@ public:
         case CommandAddLast:
             return new AddLastCommand();
             break;
-        /*case CommandMacro:
+        case CommandMacro:
             return new MacroCommand();
-            break;*/
+            break;
         default:
             throw std::runtime_error("unknown command");
             break;
@@ -256,4 +268,4 @@ public:
     }
 private:
     int operationID;
-};
+};*/

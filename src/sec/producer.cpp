@@ -3,15 +3,16 @@
 #include <algorithm>
 #include "producer.h"
 #include "object.h"
-#include "ioc.h"
-#include "icommand.h"
+#include "../spe/ioc.h"
+#include "../com/icommand.h"
 #include "safequeue.h"
-#include "exceptionhandler.h"
-#include "eventloop.h"
-#include "imessage.h"
+#include "../spe/exceptionhandler.h"
+#include "../spe/eventloop.h"
+#include "../spe/imessage.h"
+#include "../spe/istate.h"
 #include "objposition.h"
 
-void producer::start_game()
+void producer::test_thread1()
 {
 // формируем системы окрестностей
     std::map<int, system_okr> p_map_c_a;
@@ -19,6 +20,65 @@ void producer::start_game()
     p_map_c_a = func_name(1);
     p_map_c_b = func_name(2);
 // формируем объекты
+    std::cout << "Start test_thread1" << std::endl;
+    objectVector vector;
+    int count = 1;
+    for(int i = 0; i < count; i++)
+    {
+        int id = i;
+        coord place;
+        react state;
+
+        place.placeX = 1. + 20. * i;
+        if(place.placeX > 100.)
+            place.placeX = 100. - (place.placeX - 100.);
+        place.placeY = 1. + 25. * i;
+        if(place.placeY > 100.)
+            place.placeY = 100. - (place.placeY - 100.);
+        place.angular = 45 * (i + 1);
+
+        state.velocity = 40;
+        state.angularVelocity = 20;
+        state.fuel = 10;
+
+        vector.add(id, state, place);
+    }
+
+    for(int i = 0; i < count; i++)
+    {
+        std::cout << vector.at(i)->id() << ":" << vector.at(i)->state().velocity << "," << vector.at(i)->state().angularVelocity << "," << vector.at(i)->state().fuel
+                       << "," << vector.at(i)->place().placeX << "," << vector.at(i)->place().placeY << "," << vector.at(i)->place().angular << std::endl;
+    }
+
+// помещаем объекты в системы окрестностей
+    p_map_c_a = func_obj(p_map_c_a, &vector);
+    p_map_c_b = func_obj(p_map_c_b, &vector);
+
+    IocContainer<ICommand> ioc;
+    SafeQueue<ICommand*> queueCmds;
+
+    CheckCommand *cmd_check = new CheckCommand();
+    MoveCommand *cmd_move = new MoveCommand(&p_map_c_a, &p_map_c_b, vector.at(0));
+    RotateCommand *cmd_rotate = new RotateCommand();
+    BurnCommand *cmd_burn = new BurnCommand();
+    EmptyCommand *cmd_empty = new EmptyCommand();
+  
+    queueCmds.push(cmd_check);
+    queueCmds.push(cmd_move);
+    queueCmds.push(cmd_burn);
+    queueCmds.push(cmd_check);
+    queueCmds.push(cmd_rotate);
+    queueCmds.push(cmd_burn);
+
+    StateStatus *sc = new StateStatus(new DefaultState(), cmd_empty);
+    
+    eventloop* producer = new eventloop(&queueCmds, sc);
+    producer->start(&queueCmds, sc, 1);
+}
+
+void producer::start_game()
+{
+    objectVector vector;
     int count = 1;
     std::cout << "Start create " << count << " objects." << std::endl;
 
@@ -48,9 +108,6 @@ void producer::start_game()
         std::cout << vector_obj.at(i)->id() << ":" << vector_obj.at(i)->state().velocity << "," << vector_obj.at(i)->state().angularVelocity << "," << vector_obj.at(i)->state().fuel
                        << "," << vector_obj.at(i)->place().placeX << "," << vector_obj.at(i)->place().placeY << "," << vector_obj.at(i)->place().angular << std::endl;
     }
-// помещаем объекты в системы окрестностей
-    p_map_c_a = func_obj(p_map_c_a, &vector);
-    p_map_c_b = func_obj(p_map_c_b, &vector);
 }
 
 void producer::read_message(vector<char> message)
@@ -100,21 +157,21 @@ void producer::test_game(vector <char> message)
     // Scope2 with fuel
     // формируем макрокоманды
 
-    InternetCommand<ICommand*> cmd_net;
+    //InternetCommand<ICommand*> cmd_net;
 
-    std::exception ex;
-    ExceptionHandler* handler = new ExceptionHandler(0, ex);
+    //std::exception ex;
+    //ExceptionHandler* handler = new ExceptionHandler(0, ex);
 
-    queueCmds.push(cmd_net.resolve(operationId_i));
-    eventloop* gamequeue = new eventloop(&queueCmds);
+    //queueCmds.push(cmd_net.resolve(operationId_i));
+    //eventloop* gamequeue = new eventloop(&queueCmds);
 
-    std::thread t1(
-                [&ioc, &gamequeue, &queueCmds, &handler, &ex, &cmd_net](){
-        try {
-            gamequeue->start(&queueCmds);
-        } catch( std::exception ex) {
-            handler->executeRepeat(handler, &queueCmds, ex);
-        }
-    });
-    t1.join();
+    //std::thread t1(
+    //            [&ioc, &gamequeue, &queueCmds, &handler, &ex, &cmd_net](){
+    //    try {
+    //        gamequeue->start(&queueCmds);
+    //    } catch( std::exception ex) {
+    //        handler->executeRepeat(handler, &queueCmds, ex);
+    //    }
+    //});
+    //t1.join();
 }
