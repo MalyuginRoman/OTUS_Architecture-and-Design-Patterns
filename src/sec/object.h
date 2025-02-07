@@ -1,8 +1,8 @@
 #pragma once
 #include <vector>
 #include "minor.h"
-#include "com/imoving.h"
-#include "com/irotateble.h"
+#include "../com/imoving.h"
+#include "../com/irotateble.h"
 
 class object : public IMoving, IRotatable
 {
