@@ -8,13 +8,13 @@
 #include <cppunit/extensions/HelperMacros.h>
 
 #include "src/sec/object.h"
-#include "src/ioc.h"
+#include "src/spe/ioc.h"
 #include "src/com/icommand.h"
 #include "src/sec/safequeue.h"
-#include "src/exceptionhandler.h"
-#include "src/eventloop.h"
-#include "src/imessage.h"
-#include "src/istate.h"
+#include "src/spe/exceptionhandler.h"
+#include "src/spe/eventloop.h"
+#include "src/spe/imessage.h"
+#include "src/spe/istate.h"
 #include "src/sec/objposition.h"
 #include "src/sec/producer.h"
 
