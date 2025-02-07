@@ -10,24 +10,7 @@
 using namespace std;
 class objectVector;
 class object;
-struct coord_unterval
-{
-public:
-  double Xmax;
-  double Xmin;
-  double Ymax;
-  double Ymin;
-};
-
-struct system_okr
-{
-public:
-  int id_syst_okr;
-  bool isEmpty;
-  int countObject;
-  coord_interval XY;
-  std::vector<int> obj_id;
-};
+struct system_okr;
 
 enum CommandCodes
 {
