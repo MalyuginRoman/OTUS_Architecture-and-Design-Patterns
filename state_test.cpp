@@ -9,7 +9,7 @@
 
 #include "src/object.h"
 #include "src/ioc.h"
-#include "src/icommand.h"
+#include "src/com/icommand.h"
 #include "src/safequeue.h"
 #include "src/exceptionhandler.h"
 #include "src/eventloop.h"
