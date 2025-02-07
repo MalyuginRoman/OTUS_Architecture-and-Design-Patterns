@@ -3,13 +3,13 @@
 #include <algorithm>
 #include "producer.h"
 #include "object.h"
-#include "../ioc.h"
+#include "../spe/ioc.h"
 #include "../com/icommand.h"
 #include "safequeue.h"
-#include "../exceptionhandler.h"
-#include "../eventloop.h"
-#include "../imessage.h"
-#include "../istate.h"
+#include "../spe/exceptionhandler.h"
+#include "../spe/eventloop.h"
+#include "../spe/imessage.h"
+#include "../spe/istate.h"
 #include "objposition.h"
 
 void producer::test_thread1()
