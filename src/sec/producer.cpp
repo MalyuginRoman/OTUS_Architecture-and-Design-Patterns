@@ -59,7 +59,7 @@ void producer::test_thread1()
 
     CheckCommand *cmd_check = new CheckCommand();
     MoveCommand *cmd_move = new MoveCommand(&p_map_c_a, &p_map_c_b, vector.at(0));
-    RotateCommand *cmd_rotate = new RotateCommand();
+    RotateCommand *cmd_rotate = new RotateCommand(vector.at(0));
     BurnCommand *cmd_burn = new BurnCommand();
     EmptyCommand *cmd_empty = new EmptyCommand();
   
