@@ -17,7 +17,7 @@
 #include "src/spe/istate.h"
 #include "src/sec/objposition.h"
 #include "src/sec/producer.h"
-#include "src/sec/scope.h"
+#include "src/spe/scope.h"
 
 class state_test : public CPPUNIT_NS::TestCase
 {
