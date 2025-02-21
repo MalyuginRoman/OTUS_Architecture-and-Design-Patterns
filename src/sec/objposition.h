@@ -3,12 +3,6 @@
 #include <list>
 #include "object.h"
 
-const double Xmax = 100.;
-const double Ymax = 100.;
-const int count_system_1 = 4;
-const int count_system_2 = 5;
-const double eps = 10E-6;
-
 struct coord_interval
 {
 public:
