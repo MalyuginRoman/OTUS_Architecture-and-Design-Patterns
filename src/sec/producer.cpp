@@ -42,7 +42,7 @@ void producer::test_thread1()
         state.angularVelocity = 20;
         state.fuel = 10;
 
-        vector.add(id, state, place);
+        vector.add(playerID, objectID, state, place);
     }
 
     for(int i = 0; i < count; i++)
@@ -102,7 +102,7 @@ void producer::start_game()
         state.angularVelocity = 20;
         state.fuel = 10;
 
-        vector_obj.add(id, state, place);
+        vector_obj.add(playerID, objectID, state, place);
     }
 
     for(int i = 0; i < count; i++)
