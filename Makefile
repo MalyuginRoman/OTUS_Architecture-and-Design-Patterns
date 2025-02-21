@@ -1,6 +1,23 @@
 all:
-	g++ -std=c++17 main.cpp icommand.cpp object.cpp eventloop.cpp exceptionhandler.cpp istate.cpp movecommand.cpp producer.cpp -o state
-	g++ -std=c++17 state_test.cpp icommand.cpp object.cpp eventloop.cpp exceptionhandler.cpp istate.cpp movecommand.cpp -lcppunit -o state_test
+	g++ -std=c++17 main.cpp \
+		src/com/icommand.cpp \
+		src/sec/object.cpp \
+		src/spe/eventloop.cpp \
+		src/spe/exceptionhandler.cpp \
+		src/spe/istate.cpp \
+		src/com/movecommand.cpp \
+		src/sec/producer.cpp \
+		src/sec/order.cpp \
+		src/spe/scope.cpp -o state
+	g++ -std=c++17 state_test.cpp \
+		src/com/icommand.cpp \
+		src/sec/object.cpp \
+		src/spe/eventloop.cpp \
+		src/spe/exceptionhandler.cpp \
+		src/spe/istate.cpp \
+		src/com/movecommand.cpp \
+		src/sec/order.cpp \
+		src/spe/scope.cpp -lcppunit -o state_test
 test:
 	chmod +x state
 	./state_test

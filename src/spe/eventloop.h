@@ -1,8 +1,8 @@
 #pragma once
 #include <iostream>
 #include <thread>
-#include "icommand.h"
-#include "safequeue.h"
+#include "../com/icommand.h"
+#include "../sec/safequeue.h"
 #include "istate.h"
 
 class eventloop

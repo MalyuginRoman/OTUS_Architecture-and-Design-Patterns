@@ -13,6 +13,12 @@ class SafeQueue {
             queueOfWorks.push(work);
             cond_variable.notify_one();
         };
+        void push_list(std::list<T> work) {
+            std::unique_lock<std::mutex> lockMutex(queueMutex);
+            for(T i : work)
+                queueOfWorks.push(i);
+            cond_variable.notify_one();
+        };
         T pop() {
             std::unique_lock<std::mutex> lockMutex(queueMutex);
             cond_variable.wait(lockMutex, [this]() { return !queueOfWorks.empty(); });

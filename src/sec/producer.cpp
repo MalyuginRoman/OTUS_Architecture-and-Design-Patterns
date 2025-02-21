@@ -1,15 +1,16 @@
 #include <iostream>
 #include <thread>
 #include <algorithm>
+#include <string>
 #include "producer.h"
 #include "object.h"
-#include "ioc.h"
-#include "icommand.h"
+#include "../spe/ioc.h"
+#include "../com/icommand.h"
 #include "safequeue.h"
-#include "exceptionhandler.h"
-#include "eventloop.h"
-#include "imessage.h"
-#include "istate.h"
+#include "../spe/exceptionhandler.h"
+#include "../spe/eventloop.h"
+#include "../spe/imessage.h"
+#include "../spe/istate.h"
 #include "objposition.h"
 
 void producer::test_thread1()
@@ -25,7 +26,8 @@ void producer::test_thread1()
     int count = 1;
     for(int i = 0; i < count; i++)
     {
-        int id = i;
+        int playerID = i + 1;
+        int objectID = playerID * 10 + 1;
         coord place;
         react state;
 
@@ -41,13 +43,18 @@ void producer::test_thread1()
         state.angularVelocity = 20;
         state.fuel = 10;
 
-        vector.add(id, state, place);
+        vector.add(playerID, objectID, state, place);
     }
 
     for(int i = 0; i < count; i++)
     {
-        std::cout << vector.at(i)->id() << ":" << vector.at(i)->state().velocity << "," << vector.at(i)->state().angularVelocity << "," << vector.at(i)->state().fuel
-                       << "," << vector.at(i)->place().placeX << "," << vector.at(i)->place().placeY << "," << vector.at(i)->place().angular << std::endl;
+        std::cout << vector.at(i)->playerID() << ", " << vector.at(i)->objectID()
+                                          << ": u = " << vector.at(i)->state().velocity
+                                          << ", v = " << vector.at(i)->state().angularVelocity
+                                          << ", f = " << vector.at(i)->state().fuel
+                                          << ", x = " << vector.at(i)->place().placeX
+                                          << ", y = " << vector.at(i)->place().placeY
+                                          << ", a = " << vector.at(i)->place().angular << std::endl;
     }
 
 // помещаем объекты в системы окрестностей
@@ -59,7 +66,7 @@ void producer::test_thread1()
 
     CheckCommand *cmd_check = new CheckCommand();
     MoveCommand *cmd_move = new MoveCommand(&p_map_c_a, &p_map_c_b, vector.at(0));
-    RotateCommand *cmd_rotate = new RotateCommand();
+    RotateCommand *cmd_rotate = new RotateCommand(vector.at(0));
     BurnCommand *cmd_burn = new BurnCommand();
     EmptyCommand *cmd_empty = new EmptyCommand();
   
@@ -84,7 +91,8 @@ void producer::start_game()
 
     for(int i = 0; i < count; i++)
     {
-        int id = i;
+        int playerID = i + 1;
+        int objectID = playerID * 10 + 1;
         coord place;
         react state;
 
@@ -100,19 +108,24 @@ void producer::start_game()
         state.angularVelocity = 20;
         state.fuel = 10;
 
-        vector_obj.add(id, state, place);
+        vector_obj.add(playerID, objectID, state, place);
     }
 
     for(int i = 0; i < count; i++)
     {
-        std::cout << vector_obj.at(i)->id() << ":" << vector_obj.at(i)->state().velocity << "," << vector_obj.at(i)->state().angularVelocity << "," << vector_obj.at(i)->state().fuel
-                       << "," << vector_obj.at(i)->place().placeX << "," << vector_obj.at(i)->place().placeY << "," << vector_obj.at(i)->place().angular << std::endl;
+        std::cout << vector.at(i)->playerID() << ", " << vector.at(i)->objectID()
+                                          << ": u = " << vector.at(i)->state().velocity
+                                          << ", v = " << vector.at(i)->state().angularVelocity
+                                          << ", f = " << vector.at(i)->state().fuel
+                                          << ", x = " << vector.at(i)->place().placeX
+                                          << ", y = " << vector.at(i)->place().placeY
+                                          << ", a = " << vector.at(i)->place().angular << std::endl;
     }
 }
 
-void producer::read_message(vector<char> message)
+void producer::read_message(std::vector<char> message)
 {
-    string am(message.begin(), message.end());
+    std::string am(message.begin(), message.end());
     size_t lm = message.size();
     int cur_num = 0;
     char* endptr;
@@ -145,7 +158,7 @@ void producer::read_message(vector<char> message)
 }
 
 
-void producer::test_game(vector <char> message)
+void producer::test_game(std::vector <char> message)
 {
     std::cout << "Start test internet command" << std::endl;
 

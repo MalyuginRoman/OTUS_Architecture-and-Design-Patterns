@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include "icommand.h"
+#include "../com/icommand.h"
 
 class State;
 class StateStatus;
