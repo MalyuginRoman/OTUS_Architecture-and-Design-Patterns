@@ -7,10 +7,11 @@
 class object : public IMoving, IRotatable
 {
 public:
-    object(int id, react state, coord place);
+    object(int playerID, int objectID, react state, coord place);
     ~object();
 
-    int id() const;
+    int playerID() const;
+    int objectID() const;
     react state() const;
     coord place() const;
 
@@ -19,7 +20,7 @@ public:
 
     bool getPosition(object *obj, int dt);
     bool setPosition(object *obj);
-    bool getVelocity(object *obj, int du);
+    bool getVelocity(object *obj, double du);
     bool setVelocity(object *obj);
 
     bool getAngular(object *obj, int dt);
@@ -40,12 +41,11 @@ public:
     ~objectVector();
     void reset();
 
-    object* add(int id, react state, coord place);
+    object* add(int playerID, int objectID, react state, coord place);
     bool isEmpty() const;
     size_t count() const;
     const std::vector<object *>& vector() const;
     object* at(int i);
-    objectVector returnOneObject();
 private:
     class objectVectorP* imp;
 };
