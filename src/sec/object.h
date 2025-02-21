@@ -4,7 +4,7 @@
 #include "../com/imoving.h"
 #include "../com/irotateble.h"
 
-class object : public IMoving, IRotatable
+class object : public IMoving, public IRotatable
 {
 public:
     object(int playerID, int objectID, react state, coord place);
