@@ -107,10 +107,10 @@ protected:
     HardStopCommand *cmd_hard = new HardStopCommand();
     SoftStopCommand *cmd_soft = new SoftStopCommand();
     StartMotion *cmd_start = new StartMotion(vector_obj.at(0), vector_obj.at(0)->state().velocity);
-    StopMotion *cmd_stop = new StopMotion(vector.at(0));
+    StopMotion *cmd_stop = new StopMotion(vector_obj.at(0));
     ShootCommand *cmd_shoot = new ShootCommand(&vector_obj, vector_obj.at(0));
 //-------------------------------------------------------------
-    list<ICommand*> cmd_list1, cmd_list2;
+    std::list<ICommand*> cmd_list1, cmd_list2;
     cmd_list1.push_back(cmd_check);
     cmd_list1.push_back(cmd_move);
     cmd_list1.push_back(cmd_burn);
