@@ -1,6 +1,6 @@
 #include <iostream>
 #include "icommand.h"
-#include "../object.h"
+#include "../sec/object.h"
 
 bool isXY(std::map<int, system_okr> *p_map, object* obj, int j)
 {
