@@ -4,6 +4,7 @@
 #include "src/sec/object.h"
 #include "src/sec/producer.h"
 #include "src/sec/safequeue.h"
+#include "src/sec/scope.h"
 
 int main(int ac, char **av)
 {
