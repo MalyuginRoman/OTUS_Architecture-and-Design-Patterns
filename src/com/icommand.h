@@ -1,13 +1,10 @@
 #pragma once
 #include <iostream>
-#include <vector>
-#include <string>
 #include <list>
 #include <map>
 #include <functional>
-#include <memory>
+#include "order.h"
 
-using namespace std;
 class objectVector;
 class object;
 struct system_okr;
@@ -26,14 +23,20 @@ enum CommandCodes
     CommandMoveTo = 10,
     CommandRun = 11,
     CommandAddLast = 12,
+    CommandStart = 13,
+    CommandStop = 14,
+    CommandShoot = 15,
     CommandMacro = 100
 };
+
 class ICommand
 {
 public:
     virtual int get_Id_cmd() = 0;
+    virtual int get_Id_parent() = 0;
     virtual void execute() = 0;
 };
+
 class MoveCommand : public ICommand
 {
 public:
@@ -47,28 +50,35 @@ public:
     std::map<int, system_okr>* p_map_b() const;
 
     int get_Id_cmd();
+    int get_Id_parent();
     void execute();
 
 private:
     class MoveCommandP* imp;
 };
+
 class CheckPositionCommand
 {
 public:
-    void execute(std::map<int, system_okr>* p_map, object* obj, int number);
+    void execute(std::map<int, system_okr>* p_map, object* obj);
 };
+
 class RotateCommand : public ICommand
 {
 public:
-    int get_Id_cmd()
-    {
-        return CommandRotate;
-    }
-    void execute()
-    {
-        cout << "RotateCommand";
-    }
+    RotateCommand(object* obj);
+    ~RotateCommand();
+
+    object* obj() const;
+
+    int get_Id_cmd();
+    int get_Id_parent();
+    void execute();
+
+private:
+    class RotateCommandP* imp;
 };
+
 class CheckCommand : public ICommand
 {
 public:
@@ -76,11 +86,16 @@ public:
     {
         return CommandCheck;
     }
+    int get_Id_parent()
+    {
+        return -9999;
+    }
     void execute()
     {
-        cout << "CheckCommand";
+        std::cout << "CheckCommand" << std::endl;
     }
 };
+
 class BurnCommand : public ICommand
 {
 public:
@@ -88,23 +103,16 @@ public:
     {
         return CommandBurn;
     }
-    void execute()
+    int get_Id_parent()
     {
-        cout << "BurnCommand";
-    }
-};
-class AddLastCommand : public ICommand
-{
-public:
-    int get_Id_cmd()
-    {
-        return CommandAddLast;
+        return -9999;
     }
     void execute()
     {
-        cout << "Start execute AddLastCommand" << endl;
+        std::cout << "BurnCommand" << std::endl;
     }
 };
+
 class LogerCommand : public ICommand
 {
 public:
@@ -112,11 +120,16 @@ public:
     {
         return CommandLoger;
     }
+    int get_Id_parent()
+    {
+        return -9999;
+    }
     void execute()
     {
-        cout << "LogerCommand";
+        std::cout << "LogerCommand" << std::endl;
     }
 };
+
 class EmptyCommand : public ICommand
 {
 public:
@@ -124,11 +137,16 @@ public:
     {
         return CommandEmpty;
     }
+    int get_Id_parent()
+    {
+        return -9999;
+    }
     void execute()
     {
-        cout << "EmptyCommand";
+        std::cout << "EmptyCommand" << std::endl;
     }
 };
+
 class HardStopCommand : public ICommand
 {
 public:
@@ -136,11 +154,16 @@ public:
     {
         return CommandHardStop;
     }
+    int get_Id_parent()
+    {
+        return -9999;
+    }
     void execute()
     {
-        cout << "HardStopCommand";
+        std::cout << "HardStopCommand" << std::endl;
     }
 };
+
 class SoftStopCommand : public ICommand
 {
 public:
@@ -148,11 +171,39 @@ public:
     {
         return CommandSoftStop;
     }
+    int get_Id_parent()
+    {
+        return -9999;
+    }
     void execute()
     {
-        cout << "SoftStopCommand";
+        std::cout << "SoftStopCommand" << std::endl;
     }
 };
+
+class InternetCommand : public ICommand
+{
+public:
+    InternetCommand(objectVector* vect, object* obj, order *order_cmd, std::list<ICommand*> cmds);
+    ~InternetCommand();
+
+    objectVector* vect;
+    object* obj;
+    order *order_cmd;
+    std::list<ICommand*> cmds;
+
+    int get_Id_cmd()
+    {
+        return CommandInternet;
+    }
+    void execute();
+    int get_Id_parent();
+
+    bool create();
+private:
+    class InternetCommandP* imp;
+};
+
 class MoveToCommand : public ICommand
 {
 public:
@@ -160,23 +211,16 @@ public:
     {
         return CommandMoveTo;
     }
-    void execute()
+    int get_Id_parent()
     {
-        cout << "MoveToCommand";
-    }
-};
-class InternetCommand : public ICommand
-{
-public:
-    int get_Id_cmd()
-    {
-        return CommandInternet;
+        return -9999;
     }
     void execute()
     {
-        cout << "InternetCommand";
+        std::cout << "MoveToCommand" << std::endl;
     }
 };
+
 class RunCommand : public ICommand
 {
 public:
@@ -184,11 +228,83 @@ public:
     {
         return CommandRun;
     }
+    int get_Id_parent()
+    {
+        return -9999;
+    }
     void execute()
     {
-        cout << "RunCommand";
+        std::cout << "RunCommand" << std::endl;
     }
 };
+
+class AddLastCommand : public ICommand
+{
+public:
+    int get_Id_cmd()
+    {
+        return CommandAddLast;
+    }
+    int get_Id_parent()
+    {
+        return -9999;
+    }
+    void execute()
+    {
+        std::cout << "AddLastCommand" << std::endl;
+    }
+};
+
+class StartMotion : public ICommand
+{
+public:
+    StartMotion(object* obj, double du);
+    ~StartMotion();
+
+    object* obj() const;
+    double du() const;
+
+    int get_Id_cmd();
+    int get_Id_parent();
+    void execute();
+
+private:
+    class StartMotionP* imp;
+};
+
+class StopMotion : public ICommand
+{
+public:
+    StopMotion(object* obj);
+    ~StopMotion();
+
+    object* obj() const;
+
+    int get_Id_cmd();
+    int get_Id_parent();
+    void execute();
+
+private:
+    class StopMotionP* imp;
+};
+
+class ShootCommand : public ICommand
+{
+public:
+    ShootCommand(objectVector* vect, object* obj);
+    ~ShootCommand();
+
+    objectVector* vect() const;
+    object* obj() const;
+
+    int get_Id_cmd();
+    int get_Id_parent();
+    void execute();
+
+private:
+    class ShootCommandP* imp;
+};
+
 class MacroCommand : public ICommand
 {
 public:
@@ -196,76 +312,11 @@ public:
     {
         return CommandMacro;
     }
-    MacroCommand(vector<ICommand*> cmds);
+    int get_Id_parent();
+    MacroCommand(std::list<ICommand*> cmds);
     ~MacroCommand();
-    vector<ICommand*> cmds;
+    std::list<ICommand*> cmds;
     void execute();
 private:
     class MacroCommandP* imp;
 };
-
-class RegisterCommand : public ICommand
-{
-public:
-    RegisterCommand(map<string, function<ICommand*()>> *m_map, map<string, string> *m_scope);
-    ~RegisterCommand();
-    map<string, function<ICommand*()>>* m_map;
-    map<string, string>* m_scope;
-    void execute();
-    void registerType(string key_s, string key_f, function<ICommand*()> func);
-private:
-    class RegisterCommandP* imp;
-};
-
-/*template<class T>
-class InternetCommand
-{
-public:
-    T resolve(int operatinID)
-    {
-        switch (operatinID)
-        {
-        case CommandMove:
-            return new MoveCommand();
-            break;
-        case CommandRotate:
-            return new RotateCommand();
-            break;
-        case CommandCheck:
-            return new CheckCommand();
-            break;
-        case CommandBurn:
-            return new BurnCommand();
-            break;
-        case CommandLoger:
-            return new LogerCommand();
-            break;
-        case CommandEmpty:
-            return new EmptyCommand();
-            break;
-        case CommandHardStop:
-            return new HardStopCommand();
-            break;
-        case CommandSoftStop:
-            return new SoftStopCommand();
-            break;
-        case CommandMoveTo:
-            return new MoveToCommand();
-            break;
-        case CommandRun:
-            return new RunCommand();
-            break;
-        case CommandAddLast:
-            return new AddLastCommand();
-            break;
-        case CommandMacro:
-            return new MacroCommand();
-            break;
-        default:
-            throw std::runtime_error("unknown command");
-            break;
-        }
-    }
-private:
-    int operationID;
-};*/
