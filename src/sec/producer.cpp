@@ -1,6 +1,7 @@
 #include <iostream>
 #include <thread>
 #include <algorithm>
+#include <string>
 #include "producer.h"
 #include "object.h"
 #include "../spe/ioc.h"
@@ -124,7 +125,7 @@ void producer::start_game()
 
 void producer::read_message(std::vector<char> message)
 {
-    string am(message.begin(), message.end());
+    std::string am(message.begin(), message.end());
     size_t lm = message.size();
     int cur_num = 0;
     char* endptr;
