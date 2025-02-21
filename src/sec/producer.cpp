@@ -122,7 +122,7 @@ void producer::start_game()
     }
 }
 
-void producer::read_message(vector<char> message)
+void producer::read_message(std::vector<char> message)
 {
     string am(message.begin(), message.end());
     size_t lm = message.size();
@@ -157,7 +157,7 @@ void producer::read_message(vector<char> message)
 }
 
 
-void producer::test_game(vector <char> message)
+void producer::test_game(std::vector <char> message)
 {
     std::cout << "Start test internet command" << std::endl;
 
