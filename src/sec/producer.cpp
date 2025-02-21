@@ -47,8 +47,13 @@ void producer::test_thread1()
 
     for(int i = 0; i < count; i++)
     {
-        std::cout << vector.at(i)->id() << ":" << vector.at(i)->state().velocity << "," << vector.at(i)->state().angularVelocity << "," << vector.at(i)->state().fuel
-                       << "," << vector.at(i)->place().placeX << "," << vector.at(i)->place().placeY << "," << vector.at(i)->place().angular << std::endl;
+        std::cout << vector.at(i)->playerID() << ", " << vector.at(i)->objectID()
+                                          << ": u = " << vector.at(i)->state().velocity
+                                          << ", v = " << vector.at(i)->state().angularVelocity
+                                          << ", f = " << vector.at(i)->state().fuel
+                                          << ", x = " << vector.at(i)->place().placeX
+                                          << ", y = " << vector.at(i)->place().placeY
+                                          << ", a = " << vector.at(i)->place().angular << std::endl;
     }
 
 // помещаем объекты в системы окрестностей
@@ -107,8 +112,13 @@ void producer::start_game()
 
     for(int i = 0; i < count; i++)
     {
-        std::cout << vector_obj.at(i)->id() << ":" << vector_obj.at(i)->state().velocity << "," << vector_obj.at(i)->state().angularVelocity << "," << vector_obj.at(i)->state().fuel
-                       << "," << vector_obj.at(i)->place().placeX << "," << vector_obj.at(i)->place().placeY << "," << vector_obj.at(i)->place().angular << std::endl;
+        std::cout << vector.at(i)->playerID() << ", " << vector.at(i)->objectID()
+                                          << ": u = " << vector.at(i)->state().velocity
+                                          << ", v = " << vector.at(i)->state().angularVelocity
+                                          << ", f = " << vector.at(i)->state().fuel
+                                          << ", x = " << vector.at(i)->place().placeX
+                                          << ", y = " << vector.at(i)->place().placeY
+                                          << ", a = " << vector.at(i)->place().angular << std::endl;
     }
 }
 
