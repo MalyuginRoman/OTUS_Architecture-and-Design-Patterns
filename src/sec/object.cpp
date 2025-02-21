@@ -8,12 +8,14 @@ const double TR = 0.01745329252;
 class objectP
 {
 public:
-    int id;
+    int playerID;
+    int objectID;
     react state;
     coord place;
 
-    objectP(int id, react state, coord place) :
-        id(id),
+    objectP(int playerID, int objectID, react state, coord place) :
+        playerID(playerID),
+        objectID(objectID),
         state(state),
         place(place)
     { }
@@ -21,17 +23,21 @@ public:
     { }
 };
 
-object::object(int id, react state, coord place) :
-    imp(new objectP(id, state, place))
+object::object(int playerID, int objectID, react state, coord place) :
+    imp(new objectP(playerID, objectID, state, place))
 {
 }
 object::~object()
 {
     delete imp;
 }
-int object::id() const
+int object::playerID() const
 {
-    return imp->id;
+    return imp->playerID;
+}
+int object::objectID() const
+{
+    return imp->objectID;
 }
 react object::state() const
 {
@@ -63,13 +69,17 @@ bool object::getPosition(object *obj, int dt)
             double valueX = valueV * cos(valueA * TR) * dt;
             double valueY = valueV * sin(valueA * TR) * dt;
             place.placeX += valueX;
+            if(place.placeX > Xmax)
+                place.placeX = Xmax;
             place.placeY += valueY;
+            if(place.placeY > Ymax)
+                place.placeY = Ymax;
             obj->setPlace(place);
             return true;
         }
         else
         {
-            std::cerr << "It is impossible to move the object with id: " << obj->id() << std::endl;
+            std::cerr << "It is impossible to move the object with id: " << obj->playerID() << std::endl;
             throw std::runtime_error ("UnknownTimeStep");
             return false;
         }
@@ -84,7 +94,7 @@ bool object::setPosition(object *obj)
     obj->place().placeY;
     return true;
 }
-bool object::getVelocity(object *obj, int du)
+bool object::getVelocity(object *obj, double du)
 {
     try
     {
@@ -106,21 +116,12 @@ bool object::getAngular(object *obj, int dt)
 {
     try
     {
-        if(dt > 0)
-        {
-            coord place = obj->place();
-            double valueA = place.angular;
-            react state = obj->state();
-            place.angular = valueA + state.angularVelocity * dt;
-            obj->setPlace(place);
-            return true;
-        }
-        else
-        {
-            std::cerr << "It is impossible to rotate the object with id: " << obj->id() << std::endl;
-            throw std::runtime_error ("UnknownTimeStep");
-            return false;
-        }
+        coord place = obj->place();
+        double valueA = place.angular;
+        react state = obj->state();
+        place.angular = valueA + state.angularVelocity * dt;
+        obj->setPlace(place);
+        return true;
     } catch(...) {
         return false;
     }
@@ -157,7 +158,7 @@ bool object::getFuel(object *obj, int dF)
         }
         else
         {
-            std::cerr << "It is impossible to burn fuel the object with id: " << obj->id() << std::endl;
+            std::cerr << "It is impossible to burn fuel the object with id: " << obj->playerID() << std::endl;
             throw std::runtime_error ("UnknownTimeStep");
             return false;
         }
@@ -166,7 +167,7 @@ bool object::getFuel(object *obj, int dF)
     }
 }
 
-//****************************** objectList ***************************
+//****************************** objectVector ***************************
 class objectVectorP
 {
 public:
@@ -180,9 +181,9 @@ public:
     {
         vector.clear();
     }
-    object *add(int id, react state, coord place)
+    object *add(int playerID, int objectID, react state, coord place)
     {
-        object* spaceship = new object(id, state, place);
+        object* spaceship = new object(playerID, objectID, state, place);
         vector.push_back(spaceship);
         return spaceship;
     }
@@ -202,9 +203,9 @@ void objectVector::reset()
 {
     imp->reset();
 }
-object *objectVector::add(int id, react state, coord place)
+object *objectVector::add(int playerID, int objectID, react state, coord place)
 {
-    return imp->add(id, state, place);
+    return imp->add(playerID, objectID, state, place);
 }
 bool objectVector::isEmpty() const
 {

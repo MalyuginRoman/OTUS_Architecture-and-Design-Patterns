@@ -1,10 +1,25 @@
 all:
-	g++ -std=c++17 game_server.cpp eventloop.cpp exceptionhandler.cpp icommand.cpp object.cpp producer.cpp -o game_server
-	g++ -std=c++17 auto_server.cpp -o auto_server
-	g++ -std=c++17 client.cpp -lcppunit -o client
+	g++ -std=c++17 main.cpp \
+		src/com/icommand.cpp \
+		src/sec/object.cpp \
+		src/spe/eventloop.cpp \
+		src/spe/exceptionhandler.cpp \
+		src/spe/istate.cpp \
+		src/com/movecommand.cpp \
+		src/sec/producer.cpp \
+		src/sec/order.cpp \
+		src/spe/scope.cpp -o state
+	g++ -std=c++17 state_test.cpp \
+		src/com/icommand.cpp \
+		src/sec/object.cpp \
+		src/spe/eventloop.cpp \
+		src/spe/exceptionhandler.cpp \
+		src/spe/istate.cpp \
+		src/com/movecommand.cpp \
+		src/sec/order.cpp \
+		src/spe/scope.cpp -lcppunit -o state_test
 test:
-	chmod +x game_server
-	./auto_server
-	./client
+	chmod +x state
+	./state_test
 clean:
-	$(RM) game_server auto_server client
+	$(RM) state state_test
