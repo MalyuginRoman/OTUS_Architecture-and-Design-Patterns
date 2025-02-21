@@ -65,24 +65,24 @@ protected:
         state.angularVelocity = 20;
         state.fuel = 10;
 
-        vector_obj.add(id, state, place);
+        vector_obj.add(playerID, objectID, state, place);
     }
 
     for(int i = 0; i < count; i++)
     {
-        std::cout << vector.at(i)->playerID() << ", " << vector.at(i)->objectID()
-                                          << ": u = " << vector.at(i)->state().velocity
-                                          << ", v = " << vector.at(i)->state().angularVelocity
-                                          << ", f = " << vector.at(i)->state().fuel
-                                          << ", x = " << vector.at(i)->place().placeX
-                                          << ", y = " << vector.at(i)->place().placeY
-                                          << ", a = " << vector.at(i)->place().angular << std::endl;
+        std::cout << vector_obj.at(i)->playerID() << ", " << vector_obj.at(i)->objectID()
+                                              << ": u = " << vector_obj.at(i)->state().velocity
+                                              << ", v = " << vector_obj.at(i)->state().angularVelocity
+                                              << ", f = " << vector_obj.at(i)->state().fuel
+                                              << ", x = " << vector_obj.at(i)->place().placeX
+                                              << ", y = " << vector_obj.at(i)->place().placeY
+                                              << ", a = " << vector_obj.at(i)->place().angular << std::endl;
     }
 //-------------------------------------------------------------
 // помещаем объекты в системы окресностей
 //-------------------------------------------------------------
-    p_map_c_a = func_obj(p_map_c_a, &vector);
-    p_map_c_b = func_obj(p_map_c_b, &vector);
+    p_map_c_a = func_obj(p_map_c_a, &vector_obj);
+    p_map_c_b = func_obj(p_map_c_b, &vector_obj);
 //-------------------------------------------------------------
 //   Общие переменные
 //-------------------------------------------------------------
@@ -92,22 +92,22 @@ protected:
 //-------------------------------------------------------------
 //   Регистрация зависимостей в Скоупе (без учета топлива)
 //-------------------------------------------------------------
-    my_scope = my_scope->fillin(my_scope, p_map_c_a, p_map_c_b, &vector);
+    my_scope = my_scope->fillin(my_scope, p_map_c_a, p_map_c_b, &vector_obj);
 //-------------------------------------------------------------
 //   Регистрация зависимостей в Скоупе (с учетом топлива)
 //-------------------------------------------------------------
     // формируем макрокоманды
     CheckCommand *cmd_check = new CheckCommand();
     BurnCommand *cmd_burn = new BurnCommand();
-    MoveCommand *cmd_move = new MoveCommand(&p_map_c_a, &p_map_c_b, vector.at(0));
-    RotateCommand *cmd_rotate = new RotateCommand(vector.at(0));
+    MoveCommand *cmd_move = new MoveCommand(&p_map_c_a, &p_map_c_b, vector_obj.at(0));
+    RotateCommand *cmd_rotate = new RotateCommand(vector_obj.at(0));
     LogerCommand *cmd_loger = new LogerCommand();
     EmptyCommand *cmd_empty = new EmptyCommand();
     HardStopCommand *cmd_hard = new HardStopCommand();
     SoftStopCommand *cmd_soft = new SoftStopCommand();
-    StartMotion *cmd_start = new StartMotion(vector.at(0), vector.at(0)->state().velocity);
+    StartMotion *cmd_start = new StartMotion(vector_obj.at(0), vector_obj.at(0)->state().velocity);
     StopMotion *cmd_stop = new StopMotion(vector.at(0));
-    ShootCommand *cmd_shoot = new ShootCommand(&vector, vector.at(0));
+    ShootCommand *cmd_shoot = new ShootCommand(&vector_obj, vector_obj.at(0));
 //-------------------------------------------------------------
     list<ICommand*> cmd_list1, cmd_list2;
     cmd_list1.push_back(cmd_check);
@@ -163,9 +163,9 @@ std::cout << "==================================================================
               << message.at(count)->actionName() << " " << message.at(count)->specParam() << std::endl;
 //-------------------------------------------------------------
     int current_obj = -1;
-    for(int i = 0; i < vector.count(); i++)
+    for(int i = 0; i < vector_obj.count(); i++)
     {
-        if(message.at(count)->objectID() == vector.at(i)->objectID())
+        if(message.at(count)->objectID() == vector_obj.at(i)->objectID())
         {
             current_obj = i;
             break;
@@ -173,12 +173,12 @@ std::cout << "==================================================================
     }
     if(current_obj != -1)
     {
-        InternetCommand* int_cmd = new InternetCommand(&vector, vector.at(current_obj),
+        InternetCommand* int_cmd = new InternetCommand(&vector_obj, vector_obj.at(current_obj),
                                                         message.at(count), cmds);
 //        my_scope->resolve("Scope2",
 //                        "StartMove",
-//                        [&vector, &current_obj, &message, &count, &cmds]()
-//                        { return new InternetCommand(&vector, vector.at(current_obj),
+//                        [&vector_obj, &current_obj, &message, &count, &cmds]()
+//                        { return new InternetCommand(&vector_obj, vector_obj.at(current_obj),
 //                                                            message.at(count), cmds); });
         if(int_cmd->create())
             int_cmd->execute();
@@ -196,9 +196,9 @@ std::cout << "==================================================================
               << message.at(count)->actionName() << " " << message.at(count)->specParam() << std::endl;
 //-------------------------------------------------------------
     current_obj = -1;
-    for(int i = 0; i < vector.count(); i++)
+    for(int i = 0; i < vector_obj.count(); i++)
     {
-        if(message.at(count)->objectID() == vector.at(i)->objectID())
+        if(message.at(count)->objectID() == vector_obj.at(i)->objectID())
         {
             current_obj = i;
             break;
@@ -206,7 +206,7 @@ std::cout << "==================================================================
     }
     if(current_obj != -1)
     {
-        InternetCommand* int_cmd = new InternetCommand(&vector, vector.at(current_obj),
+        InternetCommand* int_cmd = new InternetCommand(&vector_obj, vector_obj.at(current_obj),
                                                         message.at(count), cmds);
         if(int_cmd->create())
             int_cmd->execute();
@@ -222,9 +222,9 @@ std::cout << "==================================================================
               << message.at(count)->actionName() << " " << message.at(count)->specParam() << std::endl;
 //-------------------------------------------------------------
     current_obj = -1;
-    for(int i = 0; i < vector.count(); i++)
+    for(int i = 0; i < vector_obj.count(); i++)
     {
-        if(message.at(count)->objectID() == vector.at(i)->objectID())
+        if(message.at(count)->objectID() == vector_obj.at(i)->objectID())
         {
             current_obj = i;
             break;
@@ -232,7 +232,7 @@ std::cout << "==================================================================
     }
     if(current_obj != -1)
     {
-        InternetCommand* int_cmd = new InternetCommand(&vector, vector.at(current_obj),
+        InternetCommand* int_cmd = new InternetCommand(&vector_obj, vector_obj.at(current_obj),
                                                         message.at(count), cmds);
         if(int_cmd->create())
             int_cmd->execute();
