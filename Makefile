@@ -8,7 +8,7 @@ all:
 		src/com/movecommand.cpp \
 		src/sec/producer.cpp \
 		src/sec/order.cpp \
-		src/sec/scope.cpp -o state
+		src/spe/scope.cpp -o state
 	g++ -std=c++17 state_test.cpp \
 		src/com/icommand.cpp \
 		src/sec/object.cpp \
@@ -17,7 +17,7 @@ all:
 		src/spe/istate.cpp \
 		src/com/movecommand.cpp \
 		src/sec/order.cpp \
-		src/sec/scope.cpp -lcppunit -o state_test
+		src/spe/scope.cpp -lcppunit -o state_test
 test:
 	chmod +x state
 	./state_test
