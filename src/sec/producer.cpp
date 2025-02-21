@@ -25,7 +25,8 @@ void producer::test_thread1()
     int count = 1;
     for(int i = 0; i < count; i++)
     {
-        int id = i;
+        int playerID = i + 1;
+        int objectID = playerID * 10 + 1;
         coord place;
         react state;
 
@@ -84,7 +85,8 @@ void producer::start_game()
 
     for(int i = 0; i < count; i++)
     {
-        int id = i;
+        int playerID = i + 1;
+        int objectID = playerID * 10 + 1;
         coord place;
         react state;
 
