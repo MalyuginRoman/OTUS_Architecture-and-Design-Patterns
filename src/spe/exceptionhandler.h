@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
-#include "icommand.h"
-#include "safequeue.h"
+#include "../com/icommand.h"
+#include "../sec/safequeue.h"
 
 class ExceptionHandler
 {
