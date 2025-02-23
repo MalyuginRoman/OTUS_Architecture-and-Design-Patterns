@@ -335,7 +335,7 @@ public:
     std::list<ICommand*> *cmds;
 
     InternetCommandP(objectVector* vect, object* obj, order *order_cmd,
-                     std::list<ICommand*> cmds) :
+                     std::list<ICommand*> *cmds) :
         vect(vect),
         obj(obj),
         order_cmd(order_cmd),
