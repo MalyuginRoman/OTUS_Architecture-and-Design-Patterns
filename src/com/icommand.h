@@ -184,7 +184,7 @@ public:
 class InternetCommand : public ICommand
 {
 public:
-    InternetCommand(objectVector* vect, object* obj, order *order_cmd, std::list<ICommand*> cmds);
+    InternetCommand(objectVector* vect, object* obj, order *order_cmd, std::list<ICommand*> *cmds);
     ~InternetCommand();
 
     objectVector* vect;
