@@ -332,7 +332,7 @@ public:
     objectVector* vect;
     object* obj;
     order *order_cmd;
-    std::list<ICommand*> cmds;
+    std::list<ICommand*> *cmds;
 
     InternetCommandP(objectVector* vect, object* obj, order *order_cmd,
                      std::list<ICommand*> cmds) :
@@ -344,15 +344,15 @@ public:
     }
 };
 
-InternetCommand::InternetCommand(objectVector* vect, object* obj, order *order_cmd, std::list<ICommand*> cmds) :
+InternetCommand::InternetCommand(objectVector* vect, object* obj, order *order_cmd, std::list<ICommand*> *cmds) :
     imp(new InternetCommandP(vect, obj, order_cmd, cmds))
 {
-//    this->create();
-//    for(int i = 0; i < imp->cmds.size(); i++)
-//    {
-//        cmds.push_back(imp->cmds.front());
-//        imp->cmds.pop_front();
-//    }
+    create();
+    for(int i = 0; i < imp->cmds->size(); i++)
+    {
+        cmds->push_back(imp->cmds->front());
+        imp->cmds->pop_front();
+    }
 }
 
 InternetCommand::~InternetCommand() { delete imp;}
@@ -367,17 +367,17 @@ bool InternetCommand::create()
         if(imp->order_cmd->actionName() == "StartMove")
         {
             StartMotion *cmd_start = new StartMotion(imp->obj, imp->obj->state().velocity);
-            imp->cmds.push_back(cmd_start);
+            imp->cmds->push_back(cmd_start);
         }
         else if(imp->order_cmd->actionName() == "StopMove")
         {
             StopMotion *cmd_stop = new StopMotion(imp->obj);
-            imp->cmds.push_back(cmd_stop);
+            imp->cmds->push_back(cmd_stop);
         }
         else if(imp->order_cmd->actionName() == "Shoot")
         {
             ShootCommand *cmd_shoot = new ShootCommand(imp->vect, imp->obj);
-            imp->cmds.push_back(cmd_shoot);
+            imp->cmds->push_back(cmd_shoot);
         }
         return true;
     }
@@ -391,16 +391,17 @@ bool InternetCommand::create()
 void InternetCommand::execute()
 {
     std::cout << "InternetCommand" << std::endl;
-    if(imp->cmds.empty())
-        throw std::runtime_error ("Сommand list is empty");
-    for(ICommand* i : imp->cmds)
+    if(imp->cmds->empty())
+        throw std::runtime_error ("РЎommand list is empty");
+    for(int i = 0; i < imp->cmds->size(); i++)
     {
         try
         {
-            i->execute();
+            imp->cmds->front()->execute();
         } catch (...) {
             throw std::runtime_error ("Pass the error up");
         }
+        imp->cmds->pop_front();
     }
 }
 
