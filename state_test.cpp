@@ -174,17 +174,14 @@ std::cout << "==================================================================
     }
     if(current_obj != -1)
     {
-        InternetCommand* int_cmd = new InternetCommand(&vector_obj, vector_obj.at(current_obj),
-                                                        message.at(count), cmds);
-//        my_scope->resolve("Scope2",
-//                        "StartMove",
-//                        [&vector_obj, &current_obj, &message, &count, &cmds]()
-//                        { return new InternetCommand(&vector_obj, vector_obj.at(current_obj),
-//                                                            message.at(count), cmds); });
-        if(int_cmd->create())
-            int_cmd->execute();
-//        queueCmds3.push_list(int_cmd->cmds);
-//        game3->start(&queueCmds3, sc, 1);
+        InternetCommand* int_cmd = new InternetCommand(&vector, vector.at(current_obj),
+                                                        message.at(count), &cmds);
+        my_scope->resolve("Scope2",
+                        "StartMove",
+                        [&vector, &current_obj, &message, &count, &cmds]()
+                        { return new MacroCommand(cmds); });
+        queueCmds3.push_list(cmds);
+        game3->start(&queueCmds3, sc, 1);
     }
     else
     {
@@ -207,10 +204,14 @@ std::cout << "==================================================================
     }
     if(current_obj != -1)
     {
-        InternetCommand* int_cmd = new InternetCommand(&vector_obj, vector_obj.at(current_obj),
-                                                        message.at(count), cmds);
-        if(int_cmd->create())
-            int_cmd->execute();
+        InternetCommand* int_cmd = new InternetCommand(&vector, vector.at(current_obj),
+                                                        message.at(count), &cmds);
+        my_scope->resolve("Scope2",
+                        "StopMove",
+                        [&vector, &current_obj, &message, &count, &cmds]()
+                        { return new MacroCommand(cmds); });
+        queueCmds4.push_list(cmds);
+        game4->start(&queueCmds4, sc, 1);
     }
     else
     {
@@ -233,10 +234,14 @@ std::cout << "==================================================================
     }
     if(current_obj != -1)
     {
-        InternetCommand* int_cmd = new InternetCommand(&vector_obj, vector_obj.at(current_obj),
-                                                        message.at(count), cmds);
-        if(int_cmd->create())
-            int_cmd->execute();
+        InternetCommand* int_cmd = new InternetCommand(&vector, vector.at(current_obj),
+                                                        message.at(count), &cmds);
+        my_scope->resolve("Scope2",
+                        "Shoot",
+                        [&vector, &current_obj, &message, &count, &cmds]()
+                        { return new MacroCommand(cmds); });
+        queueCmds5.push_list(cmds);
+        game5->start(&queueCmds5, sc, 1);
     }
     else
     {
