@@ -174,11 +174,11 @@ std::cout << "==================================================================
     }
     if(current_obj != -1)
     {
-        InternetCommand* int_cmd = new InternetCommand(&vector, vector.at(current_obj),
+        InternetCommand* int_cmd = new InternetCommand(&vector_obj, vector_obj.at(current_obj),
                                                         message.at(count), &cmds);
         my_scope->resolve("Scope2",
                         "StartMove",
-                        [&vector, &current_obj, &message, &count, &cmds]()
+                        [&vector_obj, &current_obj, &message, &count, &cmds]()
                         { return new MacroCommand(cmds); });
         queueCmds3.push_list(cmds);
         game3->start(&queueCmds3, sc, 1);
@@ -204,11 +204,11 @@ std::cout << "==================================================================
     }
     if(current_obj != -1)
     {
-        InternetCommand* int_cmd = new InternetCommand(&vector, vector.at(current_obj),
+        InternetCommand* int_cmd = new InternetCommand(&vector_obj, vector_obj.at(current_obj),
                                                         message.at(count), &cmds);
         my_scope->resolve("Scope2",
                         "StopMove",
-                        [&vector, &current_obj, &message, &count, &cmds]()
+                        [&vector_obj, &current_obj, &message, &count, &cmds]()
                         { return new MacroCommand(cmds); });
         queueCmds4.push_list(cmds);
         game4->start(&queueCmds4, sc, 1);
@@ -234,11 +234,11 @@ std::cout << "==================================================================
     }
     if(current_obj != -1)
     {
-        InternetCommand* int_cmd = new InternetCommand(&vector, vector.at(current_obj),
+        InternetCommand* int_cmd = new InternetCommand(&vector_obj, vector_obj.at(current_obj),
                                                         message.at(count), &cmds);
         my_scope->resolve("Scope2",
                         "Shoot",
-                        [&vector, &current_obj, &message, &count, &cmds]()
+                        [&vector_obj, &current_obj, &message, &count, &cmds]()
                         { return new MacroCommand(cmds); });
         queueCmds5.push_list(cmds);
         game5->start(&queueCmds5, sc, 1);
